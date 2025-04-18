@@ -1,0 +1,53 @@
+@telegram-blue: #2AABEE;
+@bg: #f4f7fa;
+@text: #222;
+@radius: 14px;
+
+.app-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: @bg;
+  padding: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: @radius;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+
+  h1 {
+    margin-bottom: 0.5rem;
+    color: @text;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+    color: #555;
+    line-height: 1.4;
+  }
+
+  .btn {
+    background: @telegram-blue;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: @radius;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: darken(@telegram-blue, 10%);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
