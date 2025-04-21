@@ -1,0 +1,87 @@
+// Theme-Variablen
+@persian-indigo: #27187e;
+@cornflower-blue: #758bfd;
+@periwinkle: #aeb8fe;
+@anti-flash-white: #f1f2f6;
+@ut-orange: #ff8600;
+@radius: 14px;
+
+// Light Theme Variablen
+@light-background: linear-gradient(135deg, #4f46e5, #9333ea) fixed;
+@light-text: #ffffff;
+@light-title-text: #ffffff;
+@light-subtitle-text: rgba(255, 255, 255, 0.92);
+@light-card-background: rgba(255, 255, 255, 0.85);
+@light-card-text: #252160;
+@light-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+@light-border: rgba(255, 255, 255, 0.6);
+@light-separator-border: rgba(151, 149, 198, 0.5);
+@light-item-background: rgba(255, 255, 255, 0.7);
+@light-item-hover: rgba(238, 242, 255, 0.85);
+@light-item-active: rgba(224, 231, 255, 0.9);
+@light-qty-background: rgba(255, 134, 0, 0.15);
+@light-qty-text: #e67200;
+@light-qty-border: rgba(255, 134, 0, 0.4);
+
+// Dark Theme Variablen
+@dark-background: linear-gradient(135deg, #1f2937, #111827) fixed;
+@dark-text: #f1f2f6;
+@dark-title-text: #ffffff;
+@dark-subtitle-text: rgba(255, 255, 255, 0.9);
+@dark-card-background: rgba(31, 41, 55, 0.7);
+@dark-card-text: #f1f2f6;
+@dark-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+@dark-border: rgba(75, 85, 99, 0.5);
+@dark-separator-border: rgba(255, 255, 255, 0.15);
+@dark-item-background: rgba(31, 41, 55, 0.8);
+@dark-item-hover: rgba(75, 85, 99, 0.3);
+@dark-item-active: rgba(75, 85, 99, 0.5);
+@dark-qty-background: rgba(255, 134, 0, 0.2);
+@dark-qty-text: #ffb84d;
+@dark-qty-border: rgba(255, 134, 0, 0.4);
+
+// CSS-Variablen für Theme-Wechsel
+:root {
+  // Farben
+  --persian-indigo: @persian-indigo;
+  --cornflower-blue: @cornflower-blue;
+  --periwinkle: @periwinkle;
+  --anti-flash-white: @anti-flash-white;
+  --ut-orange: @ut-orange;
+
+  // Theme-spezifische Variablen (Light Theme als Standard)
+  --background: @light-background;
+  --text-color: @light-text;
+  --title-color: @light-title-text;
+  --subtitle-color: @light-subtitle-text;
+  --card-background: @light-card-background;
+  --card-text: @light-card-text;
+  --card-shadow: @light-card-shadow;
+  --border-color: @light-border;
+  --separator-border: @light-separator-border;
+  --item-background: @light-item-background;
+  --item-hover: @light-item-hover;
+  --item-active: @light-item-active;
+  --qty-background: @light-qty-background;
+  --qty-text: @light-qty-text;
+  --qty-border: @light-qty-border;
+}
+
+// Dark Theme Klasse
+.dark-theme {
+  --background: @dark-background;
+  --text-color: @dark-text;
+  --title-color: @dark-title-text;
+  --subtitle-color: @dark-subtitle-text;
+  --card-background: @dark-card-background;
+  --card-text: @dark-card-text;
+  --card-shadow: @dark-card-shadow;
+  --border-color: @dark-border;
+  --separator-border: @dark-separator-border;
+  --item-background: @dark-item-background;
+  --item-hover: @dark-item-hover;
+  --item-active: @dark-item-active;
+  --qty-background: @dark-qty-background;
+  --qty-text: @dark-qty-text;
+  --qty-border: @dark-qty-border;
+} 
