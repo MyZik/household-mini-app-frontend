@@ -1,0 +1,45 @@
+<div class="category-detail-container">
+  <div class="back-button-container">
+    <button mat-icon-button (click)="goBack()" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+
+  @if (category) {
+    <div class="category-header">
+      <div class="category-emoji">{{ category.emoji }}</div>
+      <h1 class="category-name">{{ category.name }}</h1>
+    </div>
+
+    <mat-card class="items-card">
+      <mat-card-header>
+        <mat-card-title>Items</mat-card-title>
+        <mat-card-subtitle>{{ category.items.length }} Einträge</mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <div class="items-list">
+          @for (item of category.items; track item.id) {
+            <div class="item-detail">
+              <div class="item-info">
+                <div class="item-emoji">{{ item.emoji }}</div>
+                <div class="item-text">
+                  <div class="item-name">{{ item.name }}</div>
+                  <div class="item-quantity">Menge: {{ item.quantity }}</div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  @if (!category) {
+    <div class="not-found">
+      <mat-icon>error_outline</mat-icon>
+      <p>Kategorie nicht gefunden</p>
+      <button mat-stroked-button (click)="goBack()">Zurück zur Übersicht</button>
+    </div>
+  }
+</div>

@@ -1,19 +1,60 @@
-@telegram-blue: #2AABEE;
-@bg: #f4f7fa;
-@text: #222;
+@persian-indigo: #27187e;
+@cornflower-blue: #758bfd;
+@periwinkle: #aeb8fe;
+@anti-flash-white: #f1f2f6;
+@ut-orange: #ff8600;
 @radius: 14px;
+
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, @cornflower-blue, @persian-indigo);
+}
 
 .app-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: @bg;
-  padding: 2rem;
+  flex-direction: column;
+  height: 100%;
+  background: transparent;
+}
+
+.app-header {
+  .header-content {
+    max-width: 800px;
+    margin: 0 auto;
+    color: white;
+    text-align: center;
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-subtitle {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  }
+}
+
+.app-content {
+  background-color: transparent;
+  margin-top: 10px;
+  padding: 20px 0;
 }
 
 .card {
-  background: white;
+  background: @anti-flash-white;
   border-radius: @radius;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   padding: 2rem;
@@ -23,7 +64,7 @@
 
   h1 {
     margin-bottom: 0.5rem;
-    color: @text;
+    color: @persian-indigo;
   }
 
   p {
@@ -33,7 +74,7 @@
   }
 
   .btn {
-    background: @telegram-blue;
+    background: @ut-orange;
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -43,11 +84,22 @@
     transition: background 0.2s ease;
 
     &:hover {
-      background: darken(@telegram-blue, 10%);
+      background: #e67800;
     }
 
     &:active {
       transform: scale(0.98);
+    }
+  }
+}
+
+// Responsive-Anpassungen für mobile Geräte
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0.75rem;
+
+    h1 {
+      font-size: 1.1rem;
     }
   }
 }

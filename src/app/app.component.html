@@ -1,8 +1,12 @@
 <div class="app-container">
-  <div class="card">
-    <h1>👋 Hallo {{ user?.first_name || 'Gast' }}!</h1>
-    <p>Willkommen in deiner <strong>Telegram WebApp</strong> mit Angular + LESS.</p>
+  <header class="app-header">
+    <div class="header-content">
+      <h1>Meine Einkaufsliste</h1>
+      <span class="header-subtitle">Organisiere deine Einkäufe</span>
+    </div>
+  </header>
 
-    <button class="btn" (click)="closeApp()">🚪 App schließen</button>
-  </div>
+  <main class="app-content">
+    <router-outlet></router-outlet>
+  </main>
 </div>
