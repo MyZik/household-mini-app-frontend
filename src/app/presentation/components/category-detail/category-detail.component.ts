@@ -1,22 +1,19 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CategoryService } from '../../../application/services/category.service';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatListModule } from '@angular/material/list';
-import { CategoryDetailResponse } from '../../../domain/models/category.model';
-import { ItemResponse } from '../../../domain/models/item.model';
+import {Component, inject, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ActivatedRoute, RouterModule} from '@angular/router';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
 
 @Component({
   selector: 'app-category-detail',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterModule, 
-    MatCardModule, 
-    MatIconModule, 
+    CommonModule,
+    RouterModule,
+    MatCardModule,
+    MatIconModule,
     MatButtonModule,
     MatListModule
   ],
@@ -25,10 +22,10 @@ import { ItemResponse } from '../../../domain/models/item.model';
 })
 export class CategoryDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
-  public category: CategoryDetailResponse | null = null;
+  public category: any;
 
   // Mock-Daten für die Kategorien
-  private mockCategories: CategoryDetailResponse[] = [
+  private mockCategories = [
     {
       id: 1,
       name: 'Obst',
@@ -61,14 +58,12 @@ export class CategoryDetailComponent implements OnInit {
     }
   ];
 
-  constructor(private readonly categoryService: CategoryService) {}
-
   public ngOnInit(): void {
     const categoryId = Number(this.route.snapshot.paramMap.get('id'));
     if (!isNaN(categoryId)) {
       // In einer realen Anwendung:
       // this.categoryService.loadCategoryById(categoryId);
-      
+
       // Für den Prototyp verwenden wir Mock-Daten
       this.category = this.mockCategories.find(c => c.id === categoryId) || null;
     }

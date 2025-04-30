@@ -3,5 +3,8 @@ import { getCategoryByIdSlice } from '../get-category-by-id.slice';
 
 export const callGetCategoryByIdFailedAction = createAction(
   `[${getCategoryByIdSlice}] call failed`,
-  props<{ error: any }>()
-);
+  props<{
+    id: number,
+    error: any
+  }>()
+); 

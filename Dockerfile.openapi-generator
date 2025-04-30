@@ -1,0 +1,14 @@
+FROM openapitools/openapi-generator-cli:v7.4.0
+
+WORKDIR /app
+
+COPY . /app
+
+RUN mkdir -p /app/src/app/domain/api-client/generated
+
+# Test, ob der openapi-generator-cli-Befehl verfügbar ist
+RUN ls -la /usr/local/bin && \
+    which java && \
+    java -version
+
+ENTRYPOINT ["sh", "./scripts/generate-api-client.sh"] 

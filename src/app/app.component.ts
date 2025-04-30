@@ -1,9 +1,12 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {TelegramWebApp} from "@m1cron-labs/ng-telegram-mini-app";
-import { RouterOutlet } from '@angular/router';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatIconModule } from '@angular/material/icon';
-import { ThemeService } from './presentation/services/theme.service';
+import {RouterOutlet} from '@angular/router';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatIconModule} from '@angular/material/icon';
+import {ThemeService} from './presentation/services/theme.service';
+import {callGetHouseholdCategoriesRequestedAction} from "./domain/get-household-categories";
+import {callGetHouseholdItemsRequestedAction} from "./domain/get-household-items";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-root',
@@ -15,25 +18,26 @@ import { ThemeService } from './presentation/services/theme.service';
 export class AppComponent implements OnInit, OnDestroy {
   private readonly telegram = inject(TelegramWebApp);
   private readonly themeService = inject(ThemeService);
-  
+
   public isDarkTheme = false;
-  
+
   user = this.telegram.initDataUnsafe?.user;
 
-  constructor() {
+  constructor(private store: Store) {
     this.telegram.ready();
   }
 
   ngOnInit() {
-    console.debug('Telegram Web App is ready', this.telegram.initDataUnsafe);
-    
-    // Anpassung der UI für das Telegram Web App
     this.setupTelegramTheme();
-    
-    // Abonniere Theme-Änderungen
+
     this.themeService.darkTheme$.subscribe(isDark => {
       this.isDarkTheme = isDark;
     });
+
+    console.log('here!');
+
+    this.store.dispatch(callGetHouseholdCategoriesRequestedAction({householdId: 1}));
+    this.store.dispatch(callGetHouseholdItemsRequestedAction({householdId: 1}));
   }
 
   ngOnDestroy(): void {
@@ -41,7 +45,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private setupTelegramTheme(): void {
-    // Anpassung der UI basierend auf Telegram-Theme
     if (this.telegram.colorScheme === 'dark') {
       this.themeService.setTheme(true);
     }
@@ -51,9 +54,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.telegram.close();
   }
 
-  /**
-   * Wechselt zwischen Light und Dark Theme
-   */
   public toggleTheme(): void {
     this.themeService.toggleTheme();
   }

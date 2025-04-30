@@ -1,31 +1,43 @@
-<div class="category-list-container">
-  <h1 class="category-list-title">Meine Kategorien</h1>
-  
-  <div class="category-cards">
-    @for (category of categories; track category.id) {
-      <mat-card class="category-card">
-        <div class="category-header" (click)="togglePanel(category.id)">
-          <div class="category-info">
-            <span class="category-emoji">{{ category.emoji }}</span>
-            <span class="category-name">{{ category.name }}</span>
-          </div>
-          <mat-icon class="toggle-button">{{ isPanelExpanded(category.id) ? 'expand_less' : 'expand_more' }}</mat-icon>
-        </div>
-        
-        @if (isPanelExpanded(category.id)) {
-          <mat-card-content class="category-items" (click)="$event.stopPropagation()">
-            <div class="item-list">
-              @for (item of category.items; track item.id) {
-                <div class="item">
-                  <div class="item-emoji">{{ item.emoji }}</div>
-                  <div class="item-name">{{ item.name }}</div>
-                  <div class="item-quantity">{{ item.quantity }}</div>
-                </div>
-              }
+@let categoriesData = categories();
+
+@if (categoriesData === 'loading') {
+  Daten werden geladen...
+} @else {
+  @if (categoriesData && categoriesData.length === 0) {
+    {{ categoriesData | json}}
+    Keine Kategorien gefunden.
+  } @else {
+    <div class="category-list-container">
+      <h1 class="category-list-title">Meine Kategorien</h1>
+
+      <div class="category-cards">
+        @for (category of categoriesData; track category.id) {
+          <mat-card class="category-card">
+            <div class="category-header" (click)="togglePanel(category.id)">
+              <div class="category-info">
+                <span class="category-emoji">{{ category.emoji }}</span>
+                <span class="category-name">{{ category.name }}</span>
+              </div>
+              <mat-icon class="toggle-button">{{ isPanelExpanded(category.id) ? 'expand_less' : 'expand_more' }}
+              </mat-icon>
             </div>
-          </mat-card-content>
+
+            @if (isPanelExpanded(category.id)) {
+              <mat-card-content class="category-items" (click)="$event.stopPropagation()">
+                <div class="item-list">
+                  @for (item of category.items; track item.id) {
+                    <div class="item">
+                      <div class="item-emoji">{{ item.emoji }}</div>
+                      <div class="item-name">{{ item.name }}</div>
+                      <div class="item-quantity">{{ item.quantity }}</div>
+                    </div>
+                  }
+                </div>
+              </mat-card-content>
+            }
+          </mat-card>
         }
-      </mat-card>
-    }
-  </div>
-</div>
+      </div>
+    </div>
+  }
+}

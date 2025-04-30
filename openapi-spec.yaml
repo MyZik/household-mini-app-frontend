@@ -1,0 +1,596 @@
+openapi: 3.0.3
+info:
+  title: API Documentation
+  description: API Documentation for the Telegram Web App Symfony Backend
+  version: 1.0.0
+tags:
+  - name: Users
+    description: User management operations
+  - name: Households
+    description: Household management operations
+  - name: Categories
+    description: Category management operations
+  - name: Items
+    description: Item management operations
+components:
+  schemas:
+    CreateCategoryRequest:
+      type: object
+      properties:
+        householdId:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Obst & Gemüse
+        emoji:
+          type: string
+          example: "\U0001F966"
+      required:
+        - householdId
+        - name
+        - emoji
+    CreateCategoryResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+      required:
+        - id
+    GetCategoryByIdResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        householdId:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Obst & Gemüse
+        emoji:
+          type: string
+          example: "\U0001F966"
+      required:
+        - id
+        - householdId
+        - name
+        - emoji
+    CreateHouseholdRequest:
+      type: object
+      properties:
+        createdBy:
+          type: integer
+          example: 42
+        name:
+          type: string
+          example: Musterhaushalt
+      required:
+        - createdBy
+        - name
+    CreateHouseholdResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+      required:
+        - id
+    GetHouseholdByIdResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        createdBy:
+          type: integer
+          example: 42
+        name:
+          type: string
+          example: Musterhaushalt
+        createdAt:
+          type: string
+          format: date-time
+          example: '2023-05-10T10:00:00+00:00'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2023-05-10T10:00:00+00:00'
+      required:
+        - id
+        - createdBy
+        - name
+        - createdAt
+        - updatedAt
+    GetHouseholdCategoriesResponseBody:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            example: 1
+          householdId:
+            type: integer
+            example: 1
+          name:
+            type: string
+            example: Obst & Gemüse
+          emoji:
+            type: string
+            example: "\U0001F966"
+        required:
+          - id
+          - householdId
+          - name
+          - emoji
+    GetHouseholdItemsResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            example: 42
+          householdId:
+            type: integer
+            example: 1
+          categoryId:
+            type: integer
+            example: 1
+          name:
+            type: string
+            example: Brokkoli
+          emoji:
+            type: string
+            example: "\U0001F966"
+          quantity:
+            type: integer
+            example: 3
+          createdAt:
+            type: string
+            format: date-time
+            example: '2023-05-15T14:30:00+00:00'
+          updatedAt:
+            type: string
+            format: date-time
+            example: '2023-05-15T15:45:00+00:00'
+        required:
+          - id
+          - householdId
+          - categoryId
+          - name
+          - emoji
+          - quantity
+          - createdAt
+          - updatedAt
+    CreateItemRequest:
+      type: object
+      properties:
+        householdId:
+          type: integer
+          example: 1
+        categoryId:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Brokkoli
+        emoji:
+          type: string
+          example: "\U0001F966"
+        quantity:
+          type: integer
+          example: 3
+      required:
+        - householdId
+        - categoryId
+        - name
+        - emoji
+        - quantity
+    CreateItemResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+      required:
+        - id
+    GetItemByIdResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+        householdId:
+          type: integer
+          example: 1
+        categoryId:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Brokkoli
+        emoji:
+          type: string
+          example: "\U0001F966"
+        quantity:
+          type: integer
+          example: 3
+        createdAt:
+          type: string
+          format: date-time
+          example: '2023-05-15T14:30:00+00:00'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2023-05-15T15:45:00+00:00'
+      required:
+        - id
+        - householdId
+        - categoryId
+        - name
+        - emoji
+        - quantity
+        - createdAt
+        - updatedAt
+    GetItemsByCategoryResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            example: 42
+          householdId:
+            type: integer
+            example: 1
+          categoryId:
+            type: integer
+            example: 1
+          name:
+            type: string
+            example: Brokkoli
+          emoji:
+            type: string
+            example: "\U0001F966"
+          quantity:
+            type: integer
+            example: 3
+          createdAt:
+            type: string
+            format: date-time
+            example: '2023-05-15T14:30:00+00:00'
+          updatedAt:
+            type: string
+            format: date-time
+            example: '2023-05-15T15:45:00+00:00'
+        required:
+          - id
+          - householdId
+          - categoryId
+          - name
+          - emoji
+          - quantity
+          - createdAt
+          - updatedAt
+    UpdateItemQuantityRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+        quantity:
+          type: integer
+          example: 5
+      required:
+        - id
+        - quantity
+    CreateUserRequest:
+      type: object
+      properties:
+        telegramUserId:
+          type: integer
+          example: 12345678
+        isBot:
+          type: boolean
+          example: false
+        firstName:
+          type: string
+          example: Max
+        lastName:
+          type: string
+          nullable: true
+          example: Mustermann
+        username:
+          type: string
+          nullable: true
+          example: max_mustermann
+        languageCode:
+          type: string
+          example: de
+        isPremium:
+          type: boolean
+          example: true
+        addedToAttachmentMenu:
+          type: boolean
+          example: false
+        allowsWriteToPm:
+          type: boolean
+          example: true
+        photoUrl:
+          type: string
+          nullable: true
+          example: 'https://t.me/i/userpic/320/max_mustermann.jpg'
+      required:
+        - telegramUserId
+        - isBot
+        - firstName
+        - languageCode
+        - isPremium
+        - addedToAttachmentMenu
+        - allowsWriteToPm
+    CreateUserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+      required:
+        - id
+    UpdateUserSettingsRequest:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 42
+        isDarkMode:
+          type: boolean
+          example: true
+      required:
+        - userId
+        - isDarkMode
+    UpdateUserSettingsResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 123
+      required:
+        - id
+  responses:
+    GetHouseholdCategoriesResponse:
+      description: Returns categories for the specified household
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetHouseholdCategoriesResponseBody'
+paths:
+  /api/categories/create-category:
+    post:
+      summary: Create a new category
+      operationId: createCategory
+      tags:
+        - Categories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCategoryRequest'
+      responses:
+        '201':
+          description: Category created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCategoryResponse'
+  '/api/categories/get-category-by-id/{id}':
+    get:
+      summary: Get category by ID
+      operationId: getCategoryById
+      tags:
+        - Categories
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Returns the category by ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCategoryByIdResponse'
+  /api/households/create-household:
+    post:
+      summary: Create a new household
+      operationId: createHousehold
+      tags:
+        - Households
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateHouseholdRequest'
+      responses:
+        '201':
+          description: Household created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateHouseholdResponse'
+  '/api/households/get-household-by-id/{id}':
+    get:
+      summary: Get household by ID
+      operationId: getHouseholdById
+      tags:
+        - Households
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Returns the household by ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetHouseholdByIdResponse'
+  '/api/households/get-household-categories/{id}':
+    get:
+      summary: Get categories by household ID
+      operationId: getHouseholdCategories
+      tags:
+        - Households
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          $ref: '#/components/responses/GetHouseholdCategoriesResponse'
+  '/api/households/get-household-items/{id}':
+    get:
+      summary: Get all items for a household
+      operationId: getHouseholdItems
+      tags:
+        - Households
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Returns all items for the specified household
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetHouseholdItemsResponse'
+  /api/items/create-item:
+    post:
+      summary: Create a new item
+      operationId: createItem
+      tags:
+        - Items
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateItemRequest'
+      responses:
+        '201':
+          description: Item created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateItemResponse'
+  '/api/items/get-item-by-id/{id}':
+    get:
+      summary: Get item by ID
+      operationId: getItemById
+      tags:
+        - Items
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 42
+      responses:
+        '200':
+          description: Returns the item by ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetItemByIdResponse'
+  '/api/items/get-items-by-category/{categoryId}':
+    get:
+      summary: Get items by category
+      operationId: getItemsByCategory
+      tags:
+        - Items
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Returns items for the specified category
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetItemsByCategoryResponse'
+  /api/items/update-item-quantity:
+    post:
+      summary: Update item quantity
+      operationId: updateItemQuantity
+      tags:
+        - Items
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateItemQuantityRequest'
+      responses:
+        '204':
+          description: Item quantity updated successfully
+  /api/users/create-user:
+    post:
+      summary: Create a new user
+      operationId: createUser
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserResponse'
+  /api/users/update-user-settings:
+    post:
+      summary: Update user settings
+      operationId: updateUserSettings
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserSettingsRequest'
+      responses:
+        '200':
+          description: User settings updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateUserSettingsResponse'

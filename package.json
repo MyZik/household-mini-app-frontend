@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate-api-client": "docker-compose up openapi-generator"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,7 @@
     "@m1cron-labs/ng-telegram-mini-app": "^9.0.0",
     "@ngrx/effects": "^18.1.1",
     "@ngrx/store": "^18.1.1",
+    "@ngrx/store-devtools": "^18.1.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
