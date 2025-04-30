@@ -34,8 +34,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.isDarkTheme = isDark;
     });
 
-    console.log('here!');
-
     this.store.dispatch(callGetHouseholdCategoriesRequestedAction({householdId: 1}));
     this.store.dispatch(callGetHouseholdItemsRequestedAction({householdId: 1}));
   }

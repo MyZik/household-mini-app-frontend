@@ -1,16 +1,13 @@
-import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {Store} from '@ngrx/store';
-import {callGetHouseholdCategoriesRequestedAction} from '../../../domain/get-household-categories';
-import {callGetHouseholdItemsRequestedAction} from '../../../domain/get-household-items';
-import {map, Observable, Subject, takeUntil} from 'rxjs';
 import {
-  CategoryWithItems,
   householdCategoriesWithItemsSelector
 } from '../../../application/households/selectors/household-categories-with-items.selector';
 
@@ -23,7 +20,8 @@ import {
     MatExpansionModule,
     MatCardModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './category-list.component.html',
   styleUrl: './category-list.component.less',
@@ -37,7 +35,6 @@ export class CategoryListComponent {
   constructor(private store: Store) {
   }
 
-  // Kategorie auf- oder zuklappen
   public togglePanel(categoryId: number): void {
     if (this.expandedPanels.has(categoryId)) {
       this.expandedPanels.delete(categoryId);
@@ -46,7 +43,6 @@ export class CategoryListComponent {
     }
   }
 
-  // Prüfen, ob eine Kategorie geöffnet ist
   public isPanelExpanded(categoryId: number): boolean {
     return this.expandedPanels.has(categoryId);
   }

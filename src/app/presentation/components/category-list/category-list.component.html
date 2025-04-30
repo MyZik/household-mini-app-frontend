@@ -1,11 +1,23 @@
 @let categoriesData = categories();
 
-@if (categoriesData === 'loading') {
-  Daten werden geladen...
+@if (categoriesData === 'loading' || categoriesData === 'not-loaded') {
+  <div class="loading-container">
+    <mat-spinner diameter="50" color="accent" class="loading-spinner"></mat-spinner>
+    <div class="duck-emoji">🦆</div>
+    <p class="loading-text">Daten werden geladen...</p>
+  </div>
+} @else if (categoriesData === 'load-failed') {
+  <div class="error-container">
+    <mat-icon class="error-icon">error_outline</mat-icon>
+    <h2 class="error-title">Fehler beim Laden der Daten</h2>
+    <p class="error-text">Die Kategorien konnten nicht geladen werden. Bitte versuche es später erneut.</p>
+  </div>
 } @else {
   @if (categoriesData && categoriesData.length === 0) {
-    {{ categoriesData | json}}
-    Keine Kategorien gefunden.
+    <div class="empty-container">
+      <mat-icon>shopping_basket</mat-icon>
+      <p>Keine Kategorien gefunden.</p>
+    </div>
   } @else {
     <div class="category-list-container">
       <h1 class="category-list-title">Meine Kategorien</h1>

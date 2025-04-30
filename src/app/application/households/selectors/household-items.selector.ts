@@ -4,9 +4,9 @@ import {Item} from "../../models/item";
 
 export const householdItemsSelector = createSelector(
   getHouseholdItemsFeatureSelector,
-  (itemsState): Item[] | null => {
+  (itemsState): 'not-loaded' | 'loading' | 'load-failed' | Item[] => {
     if (itemsState === 'loading' || itemsState === 'load-failed' || itemsState === 'not-loaded') {
-      return null;
+      return itemsState;
     }
 
     return itemsState.items.map(

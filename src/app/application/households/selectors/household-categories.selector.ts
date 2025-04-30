@@ -4,9 +4,9 @@ import {Category} from "../../models/category";
 
 export const householdCategoriesSelector = createSelector(
   getHouseholdCategoriesFeatureSelector,
-  (categoriesState): Category[] | null => {
+  (categoriesState): 'not-loaded' | 'loading' | 'load-failed' | Category[] => {
     if (categoriesState === 'loading' || categoriesState === 'load-failed' || categoriesState === 'not-loaded') {
-      return null;
+      return categoriesState;
     }
 
     return categoriesState.categories.map(

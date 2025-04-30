@@ -20,9 +20,13 @@ export interface ItemModel {
 export const householdCategoriesWithItemsSelector = createSelector(
   householdCategoriesSelector,
   householdItemsSelector,
-  (categories, items): CategoryWithItems[] | 'loading' => {
-    if (categories === null || items === null) {
-      return 'loading';
+  (categories, items): CategoryWithItems[] | 'loading' | 'not-loaded' | 'load-failed' => {
+    if (typeof categories === 'string') {
+      return categories;
+    }
+
+    if (typeof items === 'string') {
+      return items;
     }
 
     const result = [];
