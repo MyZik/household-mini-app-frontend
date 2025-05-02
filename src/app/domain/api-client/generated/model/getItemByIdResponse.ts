@@ -18,6 +18,10 @@ export interface GetItemByIdResponse {
     name: string;
     emoji: string;
     quantity: number;
+    /**
+     * Type of quantity (piece, package, liter, milliliter, gram, kilogram)
+     */
+    quantityType: string;
     createdAt: string;
     updatedAt: string;
 }

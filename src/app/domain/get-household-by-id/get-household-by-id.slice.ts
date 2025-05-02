@@ -1,1 +1,1 @@
-export const getHouseholdByIdSlice = 'get-household-by-id'; 
+export const getHouseholdByIdSlice = 'get-household-by-id';

@@ -1,0 +1,166 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Angular Domain Struktur Guide
+
+Dieser Guide beschreibt die Standard-Struktur für neue Domains im Telegram WebApp Angular Projekt. 
+
+## Dateien-Struktur einer Domain
+
+Eine Domain besteht normalerweise aus:
+
+- `index.ts` - Exportiert Actions und Selectors für externe Nutzung
+- `{domain-name}.slice.ts` - Definiert den Namen des Feature-Slices
+- `{domain-name}.providers.ts` - Konfiguriert State und Effects für DI
+- `/models` - TypeScript Interfaces/Types für den Domain-Status
+- `/actions` - Action-Creators für State-Updates
+- `/reducers` - Reducer für State-Transformationen
+- `/effects` - Side-Effects für API-Calls
+- `/selectors` - State-Selektoren
+
+## Domain anlegen
+
+1. Erstelle zunächst den Slice:
+
+```typescript
+// {domain-name}.slice.ts
+export const {domainName}Slice = '{domain-name}';
+```
+
+2. Definiere den State-Typ:
+
+```typescript
+// models/{domain-name}.state.ts
+import {ResponseBodyType} from "../../api-client";
+
+export type {DomainName}State =
+  | 'not-loaded'
+  | 'loading'
+  | 'load-failed'
+  | ResponseBodyType;
+```
+
+3. Erstelle die Action-Creators:
+
+```typescript
+// actions/call-{domain-name}.requested.action.ts
+import {createAction, props} from '@ngrx/store';
+import {{domainName}Slice} from '../{domain-name}.slice';
+
+export const call{DomainName}RequestedAction = createAction(
+  `[${domainName}Slice] call requested`,
+  props<{
+    // Request properties hier
+  }>()
+);
+```
+
+Ähnliche Dateien für `.succeeded.action.ts` und `.failed.action.ts` erstellen.
+
+4. Implementiere den Reducer:
+
+```typescript
+// reducers/{domain-name}.reducer.ts
+import {createReducer, on} from '@ngrx/store';
+import {call{DomainName}RequestedAction} from '../actions/call-{domain-name}.requested.action';
+import {call{DomainName}SucceededAction} from '../actions/call-{domain-name}.succeeded.action';
+import {call{DomainName}FailedAction} from '../actions/call-{domain-name}.failed.action';
+import {{DomainName}State} from "../models/{domain-name}.state";
+
+export const {domainName}Reducer = createReducer<{DomainName}State>(
+  'not-loaded',
+  on(call{DomainName}RequestedAction, () => 'loading'),
+  on(call{DomainName}SucceededAction, (_state, action) => ({
+    ...action.response,
+  })),
+  on(call{DomainName}FailedAction, () => 'load-failed')
+);
+```
+
+5. Erstelle den Effect:
+
+```typescript
+// effects/{domain-name}.effect.ts
+import {Injectable} from '@angular/core';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {catchError, map, switchMap} from 'rxjs/operators';
+import {call{DomainName}RequestedAction} from '../actions/call-{domain-name}.requested.action';
+import {call{DomainName}SucceededAction} from '../actions/call-{domain-name}.succeeded.action';
+import {call{DomainName}FailedAction} from '../actions/call-{domain-name}.failed.action';
+import {ApiService} from '../../api-client';
+import {of} from "rxjs";
+
+@Injectable()
+export class {DomainName}Effect {
+  constructor(
+    private readonly actions$: Actions,
+    private readonly apiService: ApiService
+  ) {
+  }
+
+  public readonly effect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(call{DomainName}RequestedAction),
+      switchMap((action) =>
+        this.apiService.methodName(
+          // Parameter hier
+        ).pipe(
+          map((response) => {
+            return call{DomainName}SucceededAction({
+              // Parameter hier
+              response: response
+            });
+          }),
+          catchError(error => of(call{DomainName}FailedAction({
+            // Parameter hier
+            error: error
+          })))
+        )
+      )
+    )
+  );
+}
+```
+
+6. Definiere den Selector:
+
+```typescript
+// selectors/{domain-name}.feature-selector.ts
+import {createFeatureSelector} from '@ngrx/store';
+import {{DomainName}State} from '../models/{domain-name}.state';
+import {{domainName}Slice} from "../{domain-name}.slice";
+
+export const {domainName}FeatureSelector = createFeatureSelector<{DomainName}State>({domainName}Slice);
+```
+
+7. Registriere die Providers:
+
+```typescript
+// {domain-name}.providers.ts
+import { provideState } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { {domainName}Slice } from './{domain-name}.slice';
+import { {domainName}Reducer } from './reducers/{domain-name}.reducer';
+import { {DomainName}Effect } from './effects/{domain-name}.effect';
+
+export const {DOMAIN_NAME}_PROVIDERS = [
+  provideState({domainName}Slice, {domainName}Reducer),
+  provideEffects([{DomainName}Effect])
+];
+```
+
+8. Exportiere in index.ts:
+
+```typescript
+// index.ts
+export * from './actions/call-{domain-name}.requested.action';
+export * from './selectors/{domain-name}.feature-selector';
+```
+
+## Beispiele
+
+Hier einige Beispiel-Domains:
+- [get-household-categories](mdc:src/app/domain/get-household-categories/index.ts)
+- [get-user-by-telegram-id](mdc:src/app/domain/get-user-by-telegram-id/index.ts)

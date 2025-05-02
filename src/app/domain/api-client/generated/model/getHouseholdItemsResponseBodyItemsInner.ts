@@ -18,6 +18,14 @@ export interface GetHouseholdItemsResponseBodyItemsInner {
     name: string;
     emoji: string;
     quantity: number;
+    /**
+     * Type of quantity (piece, package, liter, milliliter, gram, kilogram)
+     */
+    quantityType: string;
+    /**
+     * Visibility for current user
+     */
+    isVisibleForCurrentUser: boolean;
     createdAt: string;
     updatedAt: string;
 }

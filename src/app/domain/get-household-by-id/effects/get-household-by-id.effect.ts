@@ -9,28 +9,32 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class GetHouseholdByIdEffect {
-  constructor(
-    private readonly actions$: Actions,
-    private readonly householdService: HouseholdsService
-  ) {}
+    constructor(
+        private readonly actions$: Actions,
+        private readonly householdService: HouseholdsService
+    ) {}
 
-  public readonly effect$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(callGetHouseholdByIdRequestedAction),
-      switchMap((action) =>
-        this.householdService.getHouseholdById(action.id).pipe(
-          map((response: GetHouseholdByIdResponse) => {
-            return callGetHouseholdByIdSucceededAction({
-              id: action.id,
-              response: response
-            });
-          }),
-          catchError(error => of(callGetHouseholdByIdFailedAction({
-            id: action.id,
-            error
-          })))
+    public readonly effect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(callGetHouseholdByIdRequestedAction),
+            switchMap(action =>
+                this.householdService.getHouseholdById(action.id).pipe(
+                    map((response: GetHouseholdByIdResponse) => {
+                        return callGetHouseholdByIdSucceededAction({
+                            id: action.id,
+                            response: response,
+                        });
+                    }),
+                    catchError(error =>
+                        of(
+                            callGetHouseholdByIdFailedAction({
+                                id: action.id,
+                                error,
+                            })
+                        )
+                    )
+                )
+            )
         )
-      )
-    )
-  );
+    );
 }

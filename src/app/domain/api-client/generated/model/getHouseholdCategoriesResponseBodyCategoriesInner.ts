@@ -16,5 +16,9 @@ export interface GetHouseholdCategoriesResponseBodyCategoriesInner {
     householdId: number;
     name: string;
     emoji: string;
+    /**
+     * Visibility for current user
+     */
+    isVisibleForCurrentUser: boolean;
 }
 

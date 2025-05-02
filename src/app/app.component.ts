@@ -1,58 +1,124 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {TelegramWebApp} from "@m1cron-labs/ng-telegram-mini-app";
-import {RouterOutlet} from '@angular/router';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatIconModule} from '@angular/material/icon';
-import {ThemeService} from './presentation/services/theme.service';
-import {callGetHouseholdCategoriesRequestedAction} from "./domain/get-household-categories";
-import {callGetHouseholdItemsRequestedAction} from "./domain/get-household-items";
-import {Store} from "@ngrx/store";
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { TelegramWebApp } from '@m1cron-labs/ng-telegram-mini-app';
+import { RouterOutlet } from '@angular/router';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { ThemeService } from './presentation/services/theme.service';
+import { Store } from '@ngrx/store';
+import {
+    callGetUserByTelegramIdRequestedAction,
+    getUserByTelegramIdFeatureSelector,
+} from './domain/get-user-by-telegram-id';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { userByTelegramIdLoadStatusSelector, userByTelegramIdSelector } from './application/users';
+import { callCreateUserFromTelegramRequestedAction } from './domain/create-user-from-telegram';
+import { createUserFromTelegramSubmitStatusSelector } from './application/users/selectors/create-user-from-telegram-submit-status.selector';
+import { LoadingDuckComponent } from './presentation/shared/components/loading-duck';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, MatSlideToggleModule, MatIconModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.less'
+    selector: 'app-root',
+    standalone: true,
+    imports: [
+        RouterOutlet,
+        MatSlideToggleModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        MatButtonModule,
+        CommonModule,
+        LoadingDuckComponent,
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.less',
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private readonly telegram = inject(TelegramWebApp);
-  private readonly themeService = inject(ThemeService);
+    private readonly telegram = inject(TelegramWebApp);
+    private readonly themeService = inject(ThemeService);
 
-  public isDarkTheme = false;
+    public isDarkTheme = false;
 
-  user = this.telegram.initDataUnsafe?.user;
+    protected backendUserData = this.store.selectSignal(getUserByTelegramIdFeatureSelector);
+    protected userDataLoadStatus = this.store.selectSignal(userByTelegramIdLoadStatusSelector);
+    protected userData = this.store.selectSignal(userByTelegramIdSelector);
+    protected createUserStatus = this.store.selectSignal(
+        createUserFromTelegramSubmitStatusSelector
+    );
 
-  constructor(private store: Store) {
-    this.telegram.ready();
-  }
+    user = this.telegram.initDataUnsafe?.user;
 
-  ngOnInit() {
-    this.setupTelegramTheme();
+    private readonly defaultTelegramUserId = 150142952;
 
-    this.themeService.darkTheme$.subscribe(isDark => {
-      this.isDarkTheme = isDark;
-    });
-
-    this.store.dispatch(callGetHouseholdCategoriesRequestedAction({householdId: 1}));
-    this.store.dispatch(callGetHouseholdItemsRequestedAction({householdId: 1}));
-  }
-
-  ngOnDestroy(): void {
-    this.telegram.close();
-  }
-
-  private setupTelegramTheme(): void {
-    if (this.telegram.colorScheme === 'dark') {
-      this.themeService.setTheme(true);
+    constructor(private store: Store) {
+        this.telegram.ready();
     }
-  }
 
-  closeApp(): void {
-    this.telegram.close();
-  }
+    ngOnInit() {
+        this.setupTelegramTheme();
 
-  public toggleTheme(): void {
-    this.themeService.toggleTheme();
-  }
+        this.themeService.darkTheme$.subscribe(isDark => {
+            this.isDarkTheme = isDark;
+        });
+
+        this.store.dispatch(
+            callGetUserByTelegramIdRequestedAction({
+                telegramUserId: this.telegram.initDataUnsafe.user?.id || this.defaultTelegramUserId,
+            })
+        );
+    }
+
+    ngOnDestroy(): void {
+        this.telegram.close();
+    }
+
+    private setupTelegramTheme(): void {
+        if (this.telegram.colorScheme === 'dark') {
+            this.themeService.setTheme(true);
+        }
+    }
+
+    closeApp(): void {
+        this.telegram.close();
+    }
+
+    public toggleTheme(): void {
+        this.themeService.toggleTheme();
+    }
+
+    createAccount(): void {
+        const user = this.telegram.initDataUnsafe.user;
+
+        if (user) {
+            this.store.dispatch(
+                callCreateUserFromTelegramRequestedAction({
+                    telegramUserId: user.id || this.defaultTelegramUserId,
+                    isBot: user.is_bot || false,
+                    firstName: user.first_name || 'Unbekannt',
+                    lastName: user.last_name || null,
+                    username: user.username || null,
+                    languageCode: user.language_code || 'de',
+                    isPremium: user.is_premium || false,
+                    addedToAttachmentMenu: user.added_to_attachment_menu || false,
+                    allowsWriteToPm: user.allows_write_to_pm || false,
+                    photoUrl: user.photo_url || null,
+                })
+            );
+        } else {
+            // Fallback für Test/Entwicklung ohne echte Telegram-Daten
+            this.store.dispatch(
+                callCreateUserFromTelegramRequestedAction({
+                    telegramUserId: this.defaultTelegramUserId,
+                    isBot: false,
+                    firstName: 'Test',
+                    lastName: 'User',
+                    username: 'testuser',
+                    languageCode: 'de',
+                    isPremium: false,
+                    addedToAttachmentMenu: false,
+                    allowsWriteToPm: false,
+                    photoUrl: null,
+                })
+            );
+        }
+    }
 }

@@ -5,8 +5,8 @@ import { callCreateHouseholdFailedAction } from '../actions/call-create-househol
 import { CreateHouseholdState } from '../models/create-household.state';
 
 export const createHouseholdReducer = createReducer<CreateHouseholdState>(
-  'not-submitted',
-  on(callCreateHouseholdRequestedAction, () => 'submitting'),
-  on(callCreateHouseholdSucceededAction, (_state, action) => action.response),
-  on(callCreateHouseholdFailedAction, () => 'submit-failed')
-); 
+    'not-submitted',
+    on(callCreateHouseholdRequestedAction, () => 'submitting'),
+    on(callCreateHouseholdSucceededAction, (_state, action) => action.response),
+    on(callCreateHouseholdFailedAction, () => 'submit-failed')
+);

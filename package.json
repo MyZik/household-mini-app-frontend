@@ -7,7 +7,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "generate-api-client": "docker-compose up openapi-generator"
+    "generate-api-client": "docker-compose up openapi-generator",
+    "format": "prettier --write \"src/**/*.{ts,html,scss,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,html,scss,json}\"",
+    "lint": "eslint --config eslint.config.mjs \"src/**/*.ts\" --fix",
+    "lint:check": "eslint --config eslint.config.mjs \"src/**/*.ts\""
   },
   "private": true,
   "dependencies": {
@@ -30,15 +34,23 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.18",
+    "@angular-eslint/eslint-plugin": "^19.3.0",
+    "@angular-eslint/eslint-plugin-template": "^19.3.0",
+    "@angular-eslint/template-parser": "^19.3.0",
     "@angular/cli": "^18.2.18",
     "@angular/compiler-cli": "^18.2.13",
     "@types/jasmine": "~5.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "prettier": "^3.5.3",
     "typescript": "~5.4.2"
   }
 }

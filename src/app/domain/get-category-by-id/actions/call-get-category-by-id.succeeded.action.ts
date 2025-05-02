@@ -3,9 +3,9 @@ import { getCategoryByIdSlice } from '../get-category-by-id.slice';
 import { GetCategoryByIdResponse } from '../../api-client/generated';
 
 export const callGetCategoryByIdSucceededAction = createAction(
-  `[${getCategoryByIdSlice}] call succeeded`,
-  props<{
-    id: number,
-    response: GetCategoryByIdResponse
-  }>()
-); 
+    `[${getCategoryByIdSlice}] call succeeded`,
+    props<{
+        id: number;
+        response: GetCategoryByIdResponse;
+    }>()
+);

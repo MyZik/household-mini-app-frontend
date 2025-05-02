@@ -1,1 +1,1 @@
-export const getHouseholdItemsSlice = 'get-household-items'; 
+export const getHouseholdItemsSlice = 'get-household-items';

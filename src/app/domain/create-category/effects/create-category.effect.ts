@@ -9,30 +9,36 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class CreateCategoryEffect {
-  constructor(
-    private readonly actions$: Actions,
-    private readonly categoriesService: CategoriesService
-  ) {}
+    constructor(
+        private readonly actions$: Actions,
+        private readonly categoriesService: CategoriesService
+    ) {}
 
-  public readonly effect$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(callCreateCategoryRequestedAction),
-      switchMap((action) =>
-        this.categoriesService.createCategory({
-          householdId: action.householdId,
-          name: action.name,
-          emoji: action.emoji
-        }).pipe(
-          map((response: CreateCategoryResponse) => {
-            return callCreateCategorySucceededAction({
-              response
-            });
-          }),
-          catchError(error => of(callCreateCategoryFailedAction({
-            error
-          })))
+    public readonly effect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(callCreateCategoryRequestedAction),
+            switchMap(action =>
+                this.categoriesService
+                    .createCategory({
+                        householdId: action.householdId,
+                        name: action.name,
+                        emoji: action.emoji,
+                    })
+                    .pipe(
+                        map((response: CreateCategoryResponse) => {
+                            return callCreateCategorySucceededAction({
+                                response,
+                            });
+                        }),
+                        catchError(error =>
+                            of(
+                                callCreateCategoryFailedAction({
+                                    error,
+                                })
+                            )
+                        )
+                    )
+            )
         )
-      )
-    )
-  );
-} 
+    );
+}

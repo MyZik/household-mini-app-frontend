@@ -5,8 +5,8 @@ import { callGetHouseholdByIdFailedAction } from '../actions/call-get-household-
 import { GetHouseholdByIdState } from '../models/get-household-by-id.state';
 
 export const getHouseholdByIdReducer = createReducer<GetHouseholdByIdState>(
-  'not-loaded',
-  on(callGetHouseholdByIdRequestedAction, () => 'loading'),
-  on(callGetHouseholdByIdSucceededAction, (_state, action) => action.response),
-  on(callGetHouseholdByIdFailedAction, () => 'load-failed')
-); 
+    'not-loaded',
+    on(callGetHouseholdByIdRequestedAction, () => 'loading'),
+    on(callGetHouseholdByIdSucceededAction, (_state, action) => action.response),
+    on(callGetHouseholdByIdFailedAction, () => 'load-failed')
+);

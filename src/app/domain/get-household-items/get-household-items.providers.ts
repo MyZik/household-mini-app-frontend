@@ -5,6 +5,6 @@ import { getHouseholdItemsReducer } from './reducers/get-household-items.reducer
 import { GetHouseholdItemsEffect } from './effects/get-household-items.effect';
 
 export const GET_HOUSEHOLD_ITEMS_PROVIDERS = [
-  provideState(getHouseholdItemsSlice, getHouseholdItemsReducer),
-  provideEffects([GetHouseholdItemsEffect])
+    provideState(getHouseholdItemsSlice, getHouseholdItemsReducer),
+    provideEffects([GetHouseholdItemsEffect]),
 ];

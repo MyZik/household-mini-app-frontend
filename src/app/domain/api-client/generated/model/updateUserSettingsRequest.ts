@@ -14,5 +14,6 @@
 export interface UpdateUserSettingsRequest { 
     userId: number;
     isDarkMode: boolean;
+    defaultHouseholdId: number;
 }
 

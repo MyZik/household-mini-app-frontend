@@ -1,1 +1,1 @@
-export const createCategorySlice = 'create-category'; 
+export const createCategorySlice = 'create-category';

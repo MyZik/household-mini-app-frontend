@@ -1,1 +1,1 @@
-export const createHouseholdSlice = 'create-household'; 
+export const createHouseholdSlice = 'create-household';

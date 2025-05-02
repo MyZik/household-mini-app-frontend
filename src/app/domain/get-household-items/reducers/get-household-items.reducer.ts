@@ -5,8 +5,8 @@ import { callGetHouseholdItemsFailedAction } from '../actions/call-get-household
 import { GetHouseholdItemsState } from '../models/get-household-items.state';
 
 export const getHouseholdItemsReducer = createReducer<GetHouseholdItemsState>(
-  'not-loaded',
-  on(callGetHouseholdItemsRequestedAction, () => 'loading'),
-  on(callGetHouseholdItemsSucceededAction, (_state, action) => action.response),
-  on(callGetHouseholdItemsFailedAction, () => 'load-failed')
-); 
+    'not-loaded',
+    on(callGetHouseholdItemsRequestedAction, () => 'loading'),
+    on(callGetHouseholdItemsSucceededAction, (_state, action) => action.response),
+    on(callGetHouseholdItemsFailedAction, () => 'load-failed')
+);

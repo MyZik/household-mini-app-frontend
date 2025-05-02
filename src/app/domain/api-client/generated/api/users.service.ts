@@ -19,9 +19,11 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { CreateUserRequest } from '../model/createUserRequest';
+import { CreateUserFromTelegramRequest } from '../model/createUserFromTelegramRequest';
 // @ts-ignore
-import { CreateUserResponse } from '../model/createUserResponse';
+import { CreateUserFromTelegramResponseBody } from '../model/createUserFromTelegramResponseBody';
+// @ts-ignore
+import { GetUserByTelegramIdResponseBody } from '../model/getUserByTelegramIdResponseBody';
 // @ts-ignore
 import { UpdateUserSettingsRequest } from '../model/updateUserSettingsRequest';
 // @ts-ignore
@@ -98,17 +100,17 @@ export class UsersService {
     }
 
     /**
-     * Create a new user
-     * @param createUserRequest 
+     * Create a new user by Telegram data
+     * @param createUserFromTelegramRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createUser(createUserRequest: CreateUserRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CreateUserResponse>;
-    public createUser(createUserRequest: CreateUserRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CreateUserResponse>>;
-    public createUser(createUserRequest: CreateUserRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CreateUserResponse>>;
-    public createUser(createUserRequest: CreateUserRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        if (createUserRequest === null || createUserRequest === undefined) {
-            throw new Error('Required parameter createUserRequest was null or undefined when calling createUser.');
+    public createUserFromTelegram(createUserFromTelegramRequest: CreateUserFromTelegramRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CreateUserFromTelegramResponseBody>;
+    public createUserFromTelegram(createUserFromTelegramRequest: CreateUserFromTelegramRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CreateUserFromTelegramResponseBody>>;
+    public createUserFromTelegram(createUserFromTelegramRequest: CreateUserFromTelegramRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CreateUserFromTelegramResponseBody>>;
+    public createUserFromTelegram(createUserFromTelegramRequest: CreateUserFromTelegramRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        if (createUserFromTelegramRequest === null || createUserFromTelegramRequest === undefined) {
+            throw new Error('Required parameter createUserFromTelegramRequest was null or undefined when calling createUserFromTelegram.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -156,11 +158,75 @@ export class UsersService {
             }
         }
 
-        let localVarPath = `/api/users/create-user`;
-        return this.httpClient.request<CreateUserResponse>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/users/create-user-from-telegram`;
+        return this.httpClient.request<CreateUserFromTelegramResponseBody>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: createUserRequest,
+                body: createUserFromTelegramRequest,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                transferCache: localVarTransferCache,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get user by Telegram ID
+     * @param telegramUserId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getUserByTelegramId(telegramUserId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<GetUserByTelegramIdResponseBody>;
+    public getUserByTelegramId(telegramUserId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GetUserByTelegramIdResponseBody>>;
+    public getUserByTelegramId(telegramUserId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GetUserByTelegramIdResponseBody>>;
+    public getUserByTelegramId(telegramUserId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        if (telegramUserId === null || telegramUserId === undefined) {
+            throw new Error('Required parameter telegramUserId was null or undefined when calling getUserByTelegramId.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+        let localVarTransferCache: boolean | undefined = options && options.transferCache;
+        if (localVarTransferCache === undefined) {
+            localVarTransferCache = true;
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/users/get-user-by-telegram-id/${this.configuration.encodeParam({name: "telegramUserId", value: telegramUserId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}`;
+        return this.httpClient.request<GetUserByTelegramIdResponseBody>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

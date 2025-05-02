@@ -23,9 +23,9 @@ import { CreateItemRequest } from '../model/createItemRequest';
 // @ts-ignore
 import { CreateItemResponse } from '../model/createItemResponse';
 // @ts-ignore
-import { GetHouseholdItemsResponseBodyItemsInner } from '../model/getHouseholdItemsResponseBodyItemsInner';
-// @ts-ignore
 import { GetItemByIdResponse } from '../model/getItemByIdResponse';
+// @ts-ignore
+import { GetItemsByCategoryResponseInner } from '../model/getItemsByCategoryResponseInner';
 // @ts-ignore
 import { UpdateItemQuantityRequest } from '../model/updateItemQuantityRequest';
 
@@ -243,9 +243,9 @@ export class ItemsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getItemsByCategory(categoryId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<GetHouseholdItemsResponseBodyItemsInner>>;
-    public getItemsByCategory(categoryId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<GetHouseholdItemsResponseBodyItemsInner>>>;
-    public getItemsByCategory(categoryId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<GetHouseholdItemsResponseBodyItemsInner>>>;
+    public getItemsByCategory(categoryId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<GetItemsByCategoryResponseInner>>;
+    public getItemsByCategory(categoryId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<GetItemsByCategoryResponseInner>>>;
+    public getItemsByCategory(categoryId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<GetItemsByCategoryResponseInner>>>;
     public getItemsByCategory(categoryId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (categoryId === null || categoryId === undefined) {
             throw new Error('Required parameter categoryId was null or undefined when calling getItemsByCategory.');
@@ -288,7 +288,7 @@ export class ItemsService {
         }
 
         let localVarPath = `/api/items/get-items-by-category/${this.configuration.encodeParam({name: "categoryId", value: categoryId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}`;
-        return this.httpClient.request<Array<GetHouseholdItemsResponseBodyItemsInner>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<GetItemsByCategoryResponseInner>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

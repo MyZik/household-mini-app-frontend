@@ -5,6 +5,6 @@ import { getHouseholdByIdReducer } from './reducers/get-household-by-id.reducer'
 import { GetHouseholdByIdEffect } from './effects/get-household-by-id.effect';
 
 export const GET_HOUSEHOLD_BY_ID_PROVIDERS = [
-  provideState(getHouseholdByIdSlice, getHouseholdByIdReducer),
-  provideEffects([GetHouseholdByIdEffect])
+    provideState(getHouseholdByIdSlice, getHouseholdByIdReducer),
+    provideEffects([GetHouseholdByIdEffect]),
 ];

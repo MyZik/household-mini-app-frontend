@@ -5,6 +5,6 @@ import { getHouseholdCategoriesReducer } from './reducers/get-household-categori
 import { GetHouseholdCategoriesEffect } from './effects/get-household-categories.effect';
 
 export const GET_HOUSEHOLD_CATEGORIES_PROVIDERS = [
-  provideState(getHouseholdCategoriesSlice, getHouseholdCategoriesReducer),
-  provideEffects([GetHouseholdCategoriesEffect])
+    provideState(getHouseholdCategoriesSlice, getHouseholdCategoriesReducer),
+    provideEffects([GetHouseholdCategoriesEffect]),
 ];

@@ -17,5 +17,9 @@ export interface CreateItemRequest {
     name: string;
     emoji: string;
     quantity: number;
+    /**
+     * Type of quantity (piece, package, liter, milliliter, gram, kilogram)
+     */
+    quantityType: string;
 }
 

@@ -5,8 +5,8 @@ import { callCreateCategoryFailedAction } from '../actions/call-create-category.
 import { CreateCategoryState } from '../models/create-category.state';
 
 export const createCategoryReducer = createReducer<CreateCategoryState>(
-  'not-submitted',
-  on(callCreateCategoryRequestedAction, () => 'submitting'),
-  on(callCreateCategorySucceededAction, (_state, action) => action.response),
-  on(callCreateCategoryFailedAction, () => 'submit-failed')
-); 
+    'not-submitted',
+    on(callCreateCategoryRequestedAction, () => 'submitting'),
+    on(callCreateCategorySucceededAction, (_state, action) => action.response),
+    on(callCreateCategoryFailedAction, () => 'submit-failed')
+);
