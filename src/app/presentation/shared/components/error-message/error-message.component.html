@@ -1,0 +1,9 @@
+<div class="error-container">
+    <mat-icon class="error-icon" color="warn">error</mat-icon>
+    <p class="error-text">
+        {{ message }}
+    </p>
+    <button *ngIf="showRetryButton" class="secondary-button" (click)="onRetry()">
+        Erneut versuchen
+    </button>
+</div> 

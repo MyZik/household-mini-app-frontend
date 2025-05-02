@@ -1,0 +1,21 @@
+<mat-card class="category-card">
+    <div class="category-header" (click)="onTogglePanel()">
+        <div class="category-info">
+            <span class="category-emoji">{{ category.emoji }}</span>
+            <span class="category-name">{{ category.name }}</span>
+        </div>
+        <mat-icon class="toggle-button">
+            {{ expanded() ? 'expand_less' : 'expand_more' }}
+        </mat-icon>
+    </div>
+
+    @if (expanded() === true) {
+        <mat-card-content class="category-items" (click)="$event.stopPropagation()">
+            <div class="item-list">
+                @for (item of category.items; track item) {
+                    <app-category-item [item]="item" />
+                }
+            </div>
+        </mat-card-content>
+    }
+</mat-card>

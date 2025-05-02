@@ -1,19 +1,3 @@
-.shared-status-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 48px 24px;
-  margin: 32px auto;
-  max-width: 600px;
-  border-radius: 16px;
-  box-shadow: var(--card-shadow);
-  text-align: center;
-  border: 1px solid var(--border-color);
-  backdrop-filter: blur(10px);
-  min-height: 300px;
-}
-
 .icon-48 {
   font-size: 48px;
   height: 48px;
@@ -59,22 +43,6 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
-}
-
-.category-card {
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: var(--card-background);
-  border: 1px solid var(--border-color);
-  backdrop-filter: blur(10px);
-  box-shadow: var(--card-shadow);
-  transition: all 0.3s ease;
-  padding: 0;
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  }
 }
 
 .category-header {
@@ -183,22 +151,6 @@
   font-size: 16px;
 }
 
-.item-quantity {
-  background-color: var(--qty-background);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
-  padding: 6px 12px;
-  border-radius: 14px;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--qty-text);
-  border: 1px solid var(--qty-border);
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-}
-
 .loading-icon {
   .pulse;
   font-size: 28px;
@@ -211,7 +163,6 @@
 // 🔄 Fehler- & Leerer Zustand
 .error-container,
 .empty-container {
-  .shared-status-container;
   background-color: var(--card-background);
 }
 
@@ -238,9 +189,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  justify-content: center;
+  padding: 48px 24px;
+  margin: 32px auto;
+  max-width: 600px;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
   text-align: center;
-  
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  min-height: 300px;
+
   .empty-duck-image {
     width: 150px;
     height: auto;
@@ -249,45 +208,24 @@
     transition: transform 0.3s ease;
 
     &:hover {
-      transform: scale(1.05) rotate(5deg);
+      transform: scale(1.05) rotate(-5deg);
     }
   }
-  
+
   .empty-message {
-    font-size: 1.2rem;
+    font-size: 20px;
     font-weight: 500;
-    margin-bottom: 0.5rem;
+    margin-bottom: 8px;
     color: var(--card-text);
   }
-  
+
   .empty-suggestion {
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
+    color: var(--card-text);
+    opacity: 0.8;
+    margin-bottom: 24px;
   }
-  
+
   .create-button {
-    background-color: #4285F4;
-    color: white;
-    padding: 14px 24px;
-    font-size: 16px;
-    font-weight: 500;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    width: 100%;
-    max-width: 300px;
-    
-    &:hover {
-      background-color: #3367d6;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
-    
-    &:active {
-      transform: translateY(-1px);
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    }
+    padding: 8px 20px;
   }
 }

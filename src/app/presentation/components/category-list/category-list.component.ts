@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { LoadingDuckComponent } from '../../shared/components/loading-duck';
+import { LoadingDuckComponent } from '../../shared/components';
 import { Store } from '@ngrx/store';
 import { householdCategoriesWithItemsSelector } from '../../../application/households/selectors/household-categories-with-items.selector';
+import { CategoryCardComponent } from '../category-card/category-card.component';
+import { ErrorMessageComponent } from '../../shared/components';
 
 @Component({
     selector: 'app-category-list',
@@ -16,12 +14,10 @@ import { householdCategoriesWithItemsSelector } from '../../../application/house
     imports: [
         CommonModule,
         RouterModule,
-        MatExpansionModule,
-        MatCardModule,
-        MatIconModule,
         MatButtonModule,
-        MatProgressSpinnerModule,
         LoadingDuckComponent,
+        CategoryCardComponent,
+        ErrorMessageComponent
     ],
     templateUrl: './category-list.component.html',
     styleUrl: './category-list.component.less',

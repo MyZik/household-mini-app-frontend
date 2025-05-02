@@ -9,13 +9,12 @@ import {
     callGetUserByTelegramIdRequestedAction,
     getUserByTelegramIdFeatureSelector,
 } from './domain/get-user-by-telegram-id';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { userByTelegramIdLoadStatusSelector, userByTelegramIdSelector } from './application/users';
 import { callCreateUserFromTelegramRequestedAction } from './domain/create-user-from-telegram';
 import { createUserFromTelegramSubmitStatusSelector } from './application/users/selectors/create-user-from-telegram-submit-status.selector';
-import { LoadingDuckComponent } from './presentation/shared/components/loading-duck';
+import { ErrorMessageComponent, LoadingDuckComponent, WelcomeComponent } from './presentation/shared/components';
 
 @Component({
     selector: 'app-root',
@@ -24,10 +23,11 @@ import { LoadingDuckComponent } from './presentation/shared/components/loading-d
         RouterOutlet,
         MatSlideToggleModule,
         MatIconModule,
-        MatProgressSpinnerModule,
         MatButtonModule,
         CommonModule,
         LoadingDuckComponent,
+        WelcomeComponent,
+        ErrorMessageComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.less',

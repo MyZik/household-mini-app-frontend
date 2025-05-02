@@ -1,0 +1,25 @@
+<div class="welcome-container">
+    <img
+        src="../../../../assets/duck-hello-transparent.png"
+        alt="Willkommen"
+        class="welcome-duck"
+    />
+    <div class="welcome-message">
+        <h2>Hallo!</h2>
+        <p>
+            Diese kleine App hilft dir, die Sachen in deinem Haushalt im
+            Blick zu behalten.
+        </p>
+        <p>
+            Möchtest du loslegen und einen Account bzw. Haushalt erstellen?
+        </p>
+    </div>
+    <div class="welcome-actions">
+        <button class="primary-button" (click)="onCreateAccount()">
+            Ja, loslegen
+        </button>
+        <button class="secondary-button" (click)="onCloseApp()">
+            App schließen
+        </button>
+    </div>
+</div>

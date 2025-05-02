@@ -1,0 +1,56 @@
+.item {
+  display: flex;
+  align-items: center;
+  padding: 14px;
+  background-color: var(--item-background);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  gap: 14px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--item-hover);
+    cursor: pointer;
+    transform: translateX(3px);
+  }
+
+  &:active {
+    background-color: var(--item-active);
+    transform: translateX(5px);
+  }
+}
+
+.item-emoji {
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.item-name {
+  flex: 1;
+  font-weight: 500;
+  color: var(--card-text);
+  font-size: 16px;
+}
+
+.item-quantity {
+  background-color: var(--qty-background);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--qty-text);
+  border: 1px solid var(--qty-border);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+} 

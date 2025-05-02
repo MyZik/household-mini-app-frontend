@@ -1,0 +1,95 @@
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  background: var(--card-background);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+
+  .welcome-duck {
+    width: 150px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05) rotate(5deg);
+    }
+  }
+
+  .welcome-message {
+    margin-bottom: 24px;
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--card-text);
+    }
+
+    p {
+      color: var(--text-color);
+      line-height: 1.5;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+  }
+
+  .welcome-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    margin-top: 8px;
+
+    button {
+      width: 100%;
+      padding: 14px 0;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    .primary-button {
+      background-color: #4285F4;
+      color: white;
+
+      &:hover {
+        background-color: #3367d6;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      &:active {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .secondary-button {
+      background-color: transparent;
+      border: 2px solid #BDBDBD;
+      color: var(--text-color);
+
+      &:hover {
+        border-color: #9E9E9E;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      &:active {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+} 
