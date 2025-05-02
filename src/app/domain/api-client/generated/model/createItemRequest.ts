@@ -20,6 +20,18 @@ export interface CreateItemRequest {
     /**
      * Type of quantity (piece, package, liter, milliliter, gram, kilogram)
      */
-    quantityType: string;
+    quantityType: CreateItemRequest.QuantityTypeEnum;
 }
+export namespace CreateItemRequest {
+    export type QuantityTypeEnum = 'piece' | 'package' | 'liter' | 'milliliter' | 'gram' | 'kilogram';
+    export const QuantityTypeEnum = {
+        Piece: 'piece' as QuantityTypeEnum,
+        Package: 'package' as QuantityTypeEnum,
+        Liter: 'liter' as QuantityTypeEnum,
+        Milliliter: 'milliliter' as QuantityTypeEnum,
+        Gram: 'gram' as QuantityTypeEnum,
+        Kilogram: 'kilogram' as QuantityTypeEnum
+    };
+}
+
 
