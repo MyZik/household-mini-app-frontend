@@ -12,9 +12,6 @@
             <img src="assets/duck-lens-transparent.png" alt="Entchen" class="empty-duck-image" />
             <p class="empty-message">Keine Kategorien gefunden.</p>
             <p class="empty-suggestion">Möchtest du deine erste Kategorie erstellen?</p>
-            <button mat-raised-button color="primary" class="create-button">
-                Neue Kategorie erstellen
-            </button>
         </div>
     } @else {
         <div class="category-list-container">
@@ -30,5 +27,15 @@
                 }
             </div>
         </div>
+    }
+
+    @if (isCreateFormActive()) {
+        <app-category-create-form />
+    } @else {
+        <app-custom-button
+            buttonType="primary"
+            text="Neue Kategorie erstellen"
+            (onClick)="openCreateForm()"
+        ></app-custom-button>
     }
 }

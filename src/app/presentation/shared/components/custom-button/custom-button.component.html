@@ -1,11 +1,13 @@
-<ng-container *ngIf="buttonType === 'primary'">
-    <button mat-raised-button [disabled]="disabled" (click)="handleClick()">
-        {{ text }}
-    </button>
-</ng-container>
-
-<ng-container *ngIf="buttonType === 'secondary'">
-    <button mat-button [disabled]="disabled" (click)="handleClick()">
-        {{ text }}
-    </button>
-</ng-container>
+@switch (buttonType()) {
+    @case ('primary') {
+        <button mat-raised-button [disabled]="disabled()" (click)="handleClick()">
+            {{ text() }}
+        </button>
+    }
+    @case ('secondary') {
+        <button mat-button [disabled]="disabled()" (click)="handleClick()">
+            {{ text() }}
+        </button>
+    }
+    @default {}
+}

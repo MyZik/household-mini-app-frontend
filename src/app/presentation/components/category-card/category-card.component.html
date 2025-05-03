@@ -9,7 +9,7 @@
         </mat-icon>
     </div>
 
-    @if (expanded() === true) {
+    @if (expanded()) {
         <mat-card-content class="category-items" (click)="$event.stopPropagation()">
             <div class="item-list">
                 @for (item of category.items; track item) {

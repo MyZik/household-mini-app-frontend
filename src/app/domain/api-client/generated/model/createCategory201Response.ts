@@ -11,10 +11,7 @@
  */
 
 
-export interface CreateCategoryRequest { 
-    householdId: number;
-    userId: number;
-    name: string;
-    emoji: string;
+export interface CreateCategory201Response { 
+    id: number;
 }
 

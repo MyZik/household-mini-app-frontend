@@ -1,5 +1,5 @@
+export * from './createCategory201Response';
 export * from './createCategoryRequest';
-export * from './createCategoryResponse';
 export * from './createHouseholdRequest';
 export * from './createHouseholdResponse';
 export * from './createItemRequest';

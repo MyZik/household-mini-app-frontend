@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -10,9 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
     styleUrls: ['./custom-button.component.less'],
 })
 export class CustomButtonComponent {
-    @Input() buttonType: 'primary' | 'secondary' = 'primary';
-    @Input() text: string = '';
-    @Input() disabled: boolean = false;
+    public buttonType = input.required<'primary' | 'secondary'>();
+    public text = input.required<string>();
+    public disabled = input<boolean>(false);
     @Output() onClick = new EventEmitter<void>();
 
     handleClick(): void {

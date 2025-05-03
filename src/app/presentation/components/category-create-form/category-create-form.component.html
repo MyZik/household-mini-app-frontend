@@ -1,0 +1,49 @@
+<div class="category-form-container">
+    <h2 class="form-title">Neue Kategorie erstellen</h2>
+
+    <form [formGroup]="categoryForm" (ngSubmit)="submitForm()">
+        <div class="form-fields">
+            <div class="form-row">
+                <div class="form-field emoji-field">
+                    <label for="categoryEmoji">Emoji:</label>
+                    <select id="categoryEmoji" formControlName="emoji" class="emoji-select">
+                        @for (emoji of emojis; track emoji) {
+                            <option [value]="emoji">{{ emoji }}</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-field name-field">
+                    <label for="categoryName">Name:</label>
+                    <input
+                        type="text"
+                        id="categoryName"
+                        formControlName="name"
+                        class="input-field"
+                        placeholder="Kategoriename eingeben"
+                        autocomplete="off"
+                    />
+                    @if (categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched) {
+                        <div class="error-message">Der Name ist erforderlich.</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <app-custom-button
+                buttonType="secondary"
+                text="Abbrechen"
+                type="button"
+                (onClick)="cancelForm()"
+            ></app-custom-button>
+
+            <app-custom-button
+                buttonType="primary"
+                text="Speichern"
+                type="submit"
+                [disabled]="categoryForm.invalid"
+            ></app-custom-button>
+        </div>
+    </form>
+</div>

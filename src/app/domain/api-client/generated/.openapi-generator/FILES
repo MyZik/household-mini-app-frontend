@@ -10,8 +10,8 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/createCategory201Response.ts
 model/createCategoryRequest.ts
-model/createCategoryResponse.ts
 model/createHouseholdRequest.ts
 model/createHouseholdResponse.ts
 model/createItemRequest.ts

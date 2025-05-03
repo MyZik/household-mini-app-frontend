@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { CreateCategoryRequest } from '../model/createCategoryRequest';
+import { CreateCategory201Response } from '../model/createCategory201Response';
 // @ts-ignore
-import { CreateCategoryResponse } from '../model/createCategoryResponse';
+import { CreateCategoryRequest } from '../model/createCategoryRequest';
 // @ts-ignore
 import { GetCategoryByIdResponse } from '../model/getCategoryByIdResponse';
 
@@ -101,9 +101,9 @@ export class CategoriesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createCategory(createCategoryRequest: CreateCategoryRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CreateCategoryResponse>;
-    public createCategory(createCategoryRequest: CreateCategoryRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CreateCategoryResponse>>;
-    public createCategory(createCategoryRequest: CreateCategoryRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CreateCategoryResponse>>;
+    public createCategory(createCategoryRequest: CreateCategoryRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CreateCategory201Response>;
+    public createCategory(createCategoryRequest: CreateCategoryRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CreateCategory201Response>>;
+    public createCategory(createCategoryRequest: CreateCategoryRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CreateCategory201Response>>;
     public createCategory(createCategoryRequest: CreateCategoryRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (createCategoryRequest === null || createCategoryRequest === undefined) {
             throw new Error('Required parameter createCategoryRequest was null or undefined when calling createCategory.');
@@ -155,7 +155,7 @@ export class CategoriesService {
         }
 
         let localVarPath = `/api/categories/create-category`;
-        return this.httpClient.request<CreateCategoryResponse>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<CreateCategory201Response>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: createCategoryRequest,

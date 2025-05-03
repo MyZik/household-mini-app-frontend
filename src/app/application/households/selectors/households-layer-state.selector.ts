@@ -1,6 +1,5 @@
 import { createFeatureSelector } from '@ngrx/store';
-import { HouseholdsLayerState } from '../models/households-layer.state';
-import { householdsLayerSlice } from '../households-layer.slice';
+import { HouseholdsState } from '../models/households.state';
+import { householdsSlice } from '../households.slice';
 
-export const householdsLayerStateSelector =
-    createFeatureSelector<HouseholdsLayerState>(householdsLayerSlice);
+export const householdsLayerStateSelector = createFeatureSelector<HouseholdsState>(householdsSlice);

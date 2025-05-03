@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { householdsLayerSlice } from '../households-layer.slice';
+import { householdsSlice } from '../households.slice';
 
 export const loadHouseholdDataRequestedAction = createAction(
-    `[${householdsLayerSlice}] load household data requested`,
+    `[${householdsSlice}] load household data requested`,
     props<{
         userId: number;
         householdId: number;

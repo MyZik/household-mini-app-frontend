@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 import { GET_USER_BY_TELEGRAM_ID_PROVIDERS } from './domain/get-user-by-telegram-id/get-user-by-telegram-id.providers';
 import { CREATE_USER_FROM_TELEGRAM_PROVIDERS } from './domain/create-user-from-telegram/create-user-from-telegram.providers';
 import { HOUSEHOLDS_LAYER_PROVIDERS } from './application/households/households.provider';
+import { CATEGORIES_PROVIDER } from './application/categories/categories.provider';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -39,6 +40,7 @@ export const appConfig: ApplicationConfig = {
 
         // Application
         ...HOUSEHOLDS_LAYER_PROVIDERS,
+        ...CATEGORIES_PROVIDER,
 
         ...API_CLIENT_PROVIDERS,
 

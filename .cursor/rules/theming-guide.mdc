@@ -1,0 +1,48 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Angular Theming-Guide mit Less
+
+In diesem Projekt wird ein duales Theming-System verwendet, das sowohl ein Light Theme als auch ein Dark Theme unterstützt. Bei der Entwicklung neuer Komponenten oder der Anpassung bestehender Komponenten müssen immer beide Themes berücksichtigt werden. Das gesamte Styling wird ausschließlich mit Less umgesetzt.
+
+## Theme-System
+
+Das Theme-System basiert auf CSS-Variablen, die in [themes.less](mdc:src/app/presentation/theme/themes.less) definiert sind. Alle Styling-Eigenschaften sollten diese Variablen verwenden, anstatt Farbwerte direkt zu kodieren.
+
+## Theme-Service
+
+Der [ThemeService](mdc:src/app/presentation/services/theme.service.ts) verwaltet den Theme-Zustand und bietet Methoden zum Umschalten zwischen Light und Dark Theme.
+
+## Richtlinien für die Entwicklung
+
+Bei der Arbeit mit dem Styling-System:
+
+1. **Ausschließlich Less verwenden** - Alle Styles müssen in .less-Dateien definiert werden
+2. **Immer CSS-Variablen verwenden** - Verwende niemals hartcodierte Farbwerte in Komponenten
+3. **Beide Themes testen** - Stelle sicher, dass alle UI-Elemente in beiden Themes gut aussehen
+4. **Theme-spezifische Variablen** - Verwende `--variable-name` in deinen Less-Styles
+5. **Kontrastprüfung** - Stelle sicher, dass Text auf allen Hintergründen lesbar ist
+
+Beispiel für korrektes Styling mit Less:
+```less
+.my-component {
+  background-color: var(--card-background);
+  color: var(--card-text);
+  border: 1px solid var(--border-color);
+  
+  // Less-Verschachtelung nutzen
+  &-header {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  // Verwendung von Less-Variablen aus themes.less
+  &-accent {
+    color: var(--ut-orange);
+  }
+}
+```
+
+Dieses Vorgehen gewährleistet, dass die Anwendung in beiden Theme-Modi korrekt dargestellt wird und die Vorteile von Less (Verschachtelung, Variablen, Mixins) genutzt werden.

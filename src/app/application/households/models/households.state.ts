@@ -1,7 +1,7 @@
 import { Category } from '../../models/category';
 import { Item } from '../../models/item';
 
-export interface HouseholdsLayerState {
+export interface HouseholdsState {
     pendingItems?: Item[];
     pendingCategories?: Category[];
 
@@ -11,6 +11,6 @@ export interface HouseholdsLayerState {
     hasPendingChanges: boolean;
 }
 
-export const initialHouseholdsLayerState: HouseholdsLayerState = {
+export const initialHouseholdsState: HouseholdsState = {
     hasPendingChanges: false,
 };
