@@ -19,17 +19,14 @@
     <main class="app-content">
         @if (userLoadStatusSignal) {
             @if (userLoadStatusSignal === 'loading' || userLoadStatusSignal === 'not-loaded') {
-                <app-loading-duck message="Daten werden geladen..." duckType="flapping">
-                </app-loading-duck>
+                <app-loading-duck message="Daten werden geladen..." duckType="flapping" />
             } @else if (userLoadStatusSignal === 'load-failed') {
                 <app-error-message
                     message="Fehler beim Laden der Daten. Bitte versuche es später erneut."
-                ></app-error-message>
+                />
             } @else if (userLoadStatusSignal === 'loaded') {
                 @if (userDataSignal) {
-                    <div *ngIf="userDataSignal">
-                        <router-outlet></router-outlet>
-                    </div>
+                    <router-outlet></router-outlet>
                 } @else {
                     @if (createUserStatusSignal === 'submitted') {
                         <div *ngIf="userDataSignal">

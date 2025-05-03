@@ -1,32 +1,7 @@
-.icon-48 {
-  font-size: 48px;
-  height: 48px;
-  width: 48px;
-}
-
-.pulse {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.9;
-  }
-  100% {
-    transform: scale(0.95);
-    opacity: 0.6;
-  }
-}
-
 .category-list-container {
-  padding: 16px;
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 600px;
+  min-width: 360px;
+  margin: 0 auto 15px;
 }
 
 .category-list-title {
@@ -60,118 +35,6 @@
   }
 }
 
-.category-info {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.category-emoji {
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.category-name {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--card-text);
-}
-
-.toggle-button {
-  color: var(--card-text);
-  margin-right: 8px;
-  display: flex;
-  align-items: center;
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.category-items {
-  padding: 12px 18px 18px;
-  margin: 0;
-  cursor: default;
-  border-top: 1px solid var(--separator-border);
-}
-
-.item-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.item {
-  display: flex;
-  align-items: center;
-  padding: 14px;
-  background-color: var(--item-background);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  gap: 14px;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: var(--item-hover);
-    cursor: pointer;
-    transform: translateX(3px);
-  }
-
-  &:active {
-    background-color: var(--item-active);
-    transform: translateX(5px);
-  }
-}
-
-.item-emoji {
-  font-size: 20px;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-}
-
-.item-name {
-  flex: 1;
-  font-weight: 500;
-  color: var(--card-text);
-  font-size: 16px;
-}
-
-.loading-icon {
-  .pulse;
-  font-size: 28px;
-  height: 28px;
-  width: 28px;
-  color: var(--ut-orange);
-  opacity: 0.8;
-}
-
-// 🔄 Fehler- & Leerer Zustand
-.error-container,
-.empty-container {
-  background-color: var(--card-background);
-}
-
-.error-icon {
-  .icon-48;
-  color: #f44336;
-  margin-bottom: 16px;
-}
-
 .error-title {
   color: var(--card-text);
   font-size: 22px;
@@ -187,12 +50,11 @@
 
 .empty-container {
   display: flex;
+  background-color: var(--card-background);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  //padding: 48px 24px;
   padding: 25px 24px;
-  //margin: 32px auto;
   margin: 15px auto;
   max-width: 600px;
   min-width: 320px;
@@ -203,7 +65,7 @@
   backdrop-filter: blur(10px);
   min-height: 300px;
 
-  .empty-duck-image {
+ img {
     width: 150px;
     height: auto;
     margin-bottom: 1rem;
@@ -226,9 +88,5 @@
     color: var(--card-text);
     opacity: 0.8;
     margin-bottom: 24px;
-  }
-
-  .create-button {
-    padding: 8px 20px;
   }
 }

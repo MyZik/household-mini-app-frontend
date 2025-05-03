@@ -1,33 +1,45 @@
 .error-container {
   display: flex;
+  background-color: var(--card-background);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px 24px;
-  margin: 32px auto;
-  max-width: 500px;
-  width: 100%;
+  padding: 25px 24px;
+  margin: 15px auto;
+  max-width: 600px;
+  min-width: 320px;
   border-radius: 16px;
   box-shadow: var(--card-shadow);
   text-align: center;
-  background-color: var(--card-background);
-  
-  .error-icon {
-    font-size: 48px;
-    height: 48px;
-    width: 48px;
-    color: var(--warn-color);
-    margin-bottom: 16px;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  min-height: 300px;
+
+  img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05) rotate(-5deg);
+    }
   }
-  
-  .error-text {
-    color: var(--card-text);
-    font-size: 16px;
+
+  .error-message {
+    font-size: 20px;
     font-weight: 500;
-    margin-bottom: 24px;
-    line-height: 1.5;
+    margin-bottom: 8px;
+    color: var(--card-text);
   }
-  
+
+  .error-suggestion {
+    color: var(--card-text);
+    opacity: 0.8;
+    margin-bottom: 24px;
+  }
+
   .secondary-button {
     background-color: transparent;
     border: 2px solid #BDBDBD;
@@ -50,4 +62,4 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
   }
-} 
+}

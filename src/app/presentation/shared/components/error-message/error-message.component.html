@@ -1,9 +1,16 @@
+@let suggestionSignal = suggestion();
+
 <div class="error-container">
-    <mat-icon class="error-icon" color="warn">error</mat-icon>
-    <p class="error-text">
-        {{ message }}
+    <img src="assets/duck-groceries-fall-transparent.png" alt="Entchen" />
+    <p class="error-message">
+        {{ message() }}
     </p>
-    <button *ngIf="showRetryButton" class="secondary-button" (click)="onRetry()">
-        Erneut versuchen
-    </button>
+    @if (suggestionSignal) {
+        <p class="error-suggestion">
+            {{ suggestionSignal }}
+        </p>
+    }
+    @if (showRetryButton()) {
+        <button class="secondary-button" (click)="onRetry()">Erneut versuchen</button>
+    }
 </div>
