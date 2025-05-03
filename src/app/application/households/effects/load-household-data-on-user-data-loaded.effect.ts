@@ -1,12 +1,8 @@
-
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map } from 'rxjs/operators';
 import { loadHouseholdDataRequestedAction } from '../actions/load-household-data-requested.action';
-import { callGetHouseholdCategoriesRequestedAction } from '../../../domain/get-household-categories';
-import {
-  callGetUserByTelegramIdSucceededAction
-} from "../../../domain/get-user-by-telegram-id/actions/call-get-user-by-telegram-id.succeeded.action";
+import { callGetUserByTelegramIdSucceededAction } from '../../../domain/get-user-by-telegram-id/actions/call-get-user-by-telegram-id.succeeded.action';
 
 @Injectable()
 export class LoadHouseholdDataOnUserDataLoadedEffect {

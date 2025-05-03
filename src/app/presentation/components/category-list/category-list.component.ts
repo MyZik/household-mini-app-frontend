@@ -17,7 +17,7 @@ import { ErrorMessageComponent } from '../../shared/components';
         MatButtonModule,
         LoadingDuckComponent,
         CategoryCardComponent,
-        ErrorMessageComponent
+        ErrorMessageComponent,
     ],
     templateUrl: './category-list.component.html',
     styleUrl: './category-list.component.less',

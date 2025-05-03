@@ -1,17 +1,16 @@
 <div class="loading-container">
-    <mat-spinner 
-        [diameter]="spinnerDiameter" 
-        [color]="spinnerColor" 
-        class="loading-spinner">
+    <mat-spinner [diameter]="spinnerDiameter" [color]="spinnerColor" class="loading-spinner">
     </mat-spinner>
-    <div 
+    <div
         [ngClass]="{
             'duck-emoji': duckType === 'swimming',
             'jumping-duck': duckType === 'jumping',
             'dancing-duck': duckType === 'dancing',
             'spinning-duck': duckType === 'spinning',
-            'flapping-duck': duckType === 'flapping'
+            'flapping-duck': duckType === 'flapping',
         }"
-    >🦆</div>
+    >
+        🦆
+    </div>
     <p class="loading-text">{{ message }}</p>
-</div> 
+</div>

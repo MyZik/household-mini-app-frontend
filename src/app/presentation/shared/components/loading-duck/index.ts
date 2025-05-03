@@ -1,1 +1,1 @@
-export * from './loading-duck.component'; 
+export * from './loading-duck.component';

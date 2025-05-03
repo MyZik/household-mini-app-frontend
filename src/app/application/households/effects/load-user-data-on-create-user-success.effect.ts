@@ -13,7 +13,7 @@ export class LoadUserDataOnCreateUserSuccessEffect {
             ofType(callCreateUserFromTelegramSucceededAction),
             map(action =>
                 callGetUserByTelegramIdRequestedAction({
-                    telegramUserId: action.telegramUserId
+                    telegramUserId: action.telegramUserId,
                 })
             )
         )

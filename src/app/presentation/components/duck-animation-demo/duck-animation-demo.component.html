@@ -1,20 +1,23 @@
 <div class="duck-demo-container">
-  <h1 class="duck-demo-title">Enten-Animations-Gallerie</h1>
-  <p class="duck-demo-subtitle">Hier siehst du alle verfügbaren Animationen für unsere LoadingDuck-Komponente</p>
+    <h1 class="duck-demo-title">Enten-Animations-Gallerie</h1>
+    <p class="duck-demo-subtitle">
+        Hier siehst du alle verfügbaren Animationen für unsere LoadingDuck-Komponente
+    </p>
 
-  <div class="duck-animation-grid">
-    <mat-card class="duck-animation-card" *ngFor="let animation of duckAnimations">
-      <mat-card-header>
-        <mat-card-title>{{ animation.name }}</mat-card-title>
-        <mat-card-subtitle>{{ animation.description }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <app-loading-duck
-          [duckType]="animation.type"
-          [message]="'Duck Type: ' + animation.type"
-          [spinnerDiameter]="40">
-        </app-loading-duck>
-      </mat-card-content>
-    </mat-card>
-  </div>
+    <div class="duck-animation-grid">
+        <mat-card class="duck-animation-card" *ngFor="let animation of duckAnimations">
+            <mat-card-header>
+                <mat-card-title>{{ animation.name }}</mat-card-title>
+                <mat-card-subtitle>{{ animation.description }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <app-loading-duck
+                    [duckType]="animation.type"
+                    [message]="'Duck Type: ' + animation.type"
+                    [spinnerDiameter]="40"
+                >
+                </app-loading-duck>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

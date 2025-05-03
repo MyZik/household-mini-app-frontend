@@ -4,4 +4,4 @@ export type CreateUserFromTelegramState =
     | 'not-submitted'
     | 'submitting'
     | 'submit-failed'
-    | CreateUserFromTelegramResponseBody; 
+    | CreateUserFromTelegramResponseBody;

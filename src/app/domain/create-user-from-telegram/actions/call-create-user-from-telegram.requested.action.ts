@@ -5,4 +5,4 @@ import { CreateUserFromTelegramRequest } from '../../api-client/generated';
 export const callCreateUserFromTelegramRequestedAction = createAction(
     `[${createUserFromTelegramSlice}] call requested`,
     props<CreateUserFromTelegramRequest>()
-); 
+);

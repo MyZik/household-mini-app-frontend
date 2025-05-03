@@ -1,11 +1,9 @@
-
 import { createSelector } from '@ngrx/store';
-import { getUserByTelegramIdFeatureSelector } from '../../../domain/get-user-by-telegram-id';
-import {createUserFromTelegramFeatureSelector} from "../../../domain/create-user-from-telegram";
+import { createUserFromTelegramFeatureSelector } from '../../../domain/create-user-from-telegram';
 
 export const createUserFromTelegramSubmitStatusSelector = createSelector(
     createUserFromTelegramFeatureSelector,
-    (state) => {
+    state => {
         switch (state) {
             case 'not-submitted':
                 return 'not-submitted';

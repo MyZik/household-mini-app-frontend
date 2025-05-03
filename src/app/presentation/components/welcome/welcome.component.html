@@ -6,20 +6,19 @@
     />
     <div class="welcome-message">
         <h2>Hallo!</h2>
-        <p>
-            Diese kleine App hilft dir, die Sachen in deinem Haushalt im
-            Blick zu behalten.
-        </p>
-        <p>
-            Möchtest du loslegen und einen Account bzw. Haushalt erstellen?
-        </p>
+        <p>Diese kleine App hilft dir, die Sachen in deinem Haushalt im Blick zu behalten.</p>
+        <p>Möchtest du loslegen und einen Account bzw. Haushalt erstellen?</p>
     </div>
     <div class="welcome-actions">
-        <button class="primary-button" (click)="onCreateAccount()">
-            Ja, loslegen
-        </button>
-        <button class="secondary-button" (click)="onCloseApp()">
-            App schließen
-        </button>
+        <app-custom-button
+            buttonType="primary"
+            text="Ja, loslegen"
+            (onClick)="onCreateAccount()"
+        ></app-custom-button>
+        <app-custom-button
+            buttonType="secondary"
+            text="App schließen"
+            (onClick)="onCloseApp()"
+        ></app-custom-button>
     </div>
 </div>

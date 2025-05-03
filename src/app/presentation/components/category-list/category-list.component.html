@@ -1,10 +1,7 @@
 @let categoriesData = categories();
 
 @if (categoriesData === 'loading' || categoriesData === 'not-loaded') {
-    <app-loading-duck
-        message="Daten werden geladen..."
-        duckType="dancing">
-    </app-loading-duck>
+    <app-loading-duck message="Daten werden geladen..." duckType="dancing"> </app-loading-duck>
 } @else if (categoriesData === 'load-failed') {
     <app-error-message
         message="Die Kategorien konnten nicht geladen werden. Bitte versuche es später erneut."
@@ -12,7 +9,7 @@
 } @else {
     @if (categoriesData && categoriesData.length === 0) {
         <div class="empty-container">
-            <img src="assets/duck-lens-transparent.png" alt="Entchen" class="empty-duck-image">
+            <img src="assets/duck-lens-transparent.png" alt="Entchen" class="empty-duck-image" />
             <p class="empty-message">Keine Kategorien gefunden.</p>
             <p class="empty-suggestion">Möchtest du deine erste Kategorie erstellen?</p>
             <button mat-raised-button color="primary" class="create-button">

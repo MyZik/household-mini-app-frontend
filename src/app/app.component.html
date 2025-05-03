@@ -19,9 +19,7 @@
     <main class="app-content">
         @if (userLoadStatusSignal) {
             @if (userLoadStatusSignal === 'loading' || userLoadStatusSignal === 'not-loaded') {
-                <app-loading-duck
-                    message="Daten werden geladen..."
-                    duckType="flapping">
+                <app-loading-duck message="Daten werden geladen..." duckType="flapping">
                 </app-loading-duck>
             } @else if (userLoadStatusSignal === 'load-failed') {
                 <app-error-message
@@ -40,18 +38,18 @@
                     } @else if (createUserStatusSignal === 'submitting') {
                         <app-loading-duck
                             message="Super! Dein Haushalt wird erstellt..."
-                            [duckType]="'jumping'">
+                            [duckType]="'jumping'"
+                        >
                         </app-loading-duck>
                     } @else if (createUserStatusSignal === 'submit-failed') {
                         <app-error-message
                             message="Fehler beim Erstellen deines Haushalts. Bitte versuche es später erneut."
                             [showRetryButton]="true"
-                            (retry)="createAccount()">
+                            (retry)="createAccount()"
+                        >
                         </app-error-message>
                     } @else {
-                        <app-welcome
-                            (createAccount)="createAccount()"
-                            (closeApp)="closeApp()">
+                        <app-welcome (createAccount)="createAccount()" (closeApp)="closeApp()">
                         </app-welcome>
                     }
                 }

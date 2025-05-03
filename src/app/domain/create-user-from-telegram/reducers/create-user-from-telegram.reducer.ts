@@ -9,4 +9,4 @@ export const createUserFromTelegramReducer = createReducer<CreateUserFromTelegra
     on(callCreateUserFromTelegramRequestedAction, () => 'submitting'),
     on(callCreateUserFromTelegramSucceededAction, (_state, action) => action.response),
     on(callCreateUserFromTelegramFailedAction, () => 'submit-failed')
-); 
+);

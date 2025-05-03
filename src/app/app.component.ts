@@ -14,7 +14,11 @@ import { CommonModule } from '@angular/common';
 import { userByTelegramIdLoadStatusSelector, userByTelegramIdSelector } from './application/users';
 import { callCreateUserFromTelegramRequestedAction } from './domain/create-user-from-telegram';
 import { createUserFromTelegramSubmitStatusSelector } from './application/users/selectors/create-user-from-telegram-submit-status.selector';
-import { ErrorMessageComponent, LoadingDuckComponent, WelcomeComponent } from './presentation/shared/components';
+import {
+    ErrorMessageComponent,
+    LoadingDuckComponent,
+    WelcomeComponent,
+} from './presentation/shared/components';
 
 @Component({
     selector: 'app-root',
@@ -27,7 +31,7 @@ import { ErrorMessageComponent, LoadingDuckComponent, WelcomeComponent } from '.
         CommonModule,
         LoadingDuckComponent,
         WelcomeComponent,
-        ErrorMessageComponent
+        ErrorMessageComponent,
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.less',

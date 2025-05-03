@@ -1,1 +1,1 @@
-export const createUserFromTelegramSlice = 'create-user-from-telegram'; 
+export const createUserFromTelegramSlice = 'create-user-from-telegram';
