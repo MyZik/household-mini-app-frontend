@@ -60,18 +60,18 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        // this.setupTelegramTheme();
-        // this.storeTelegramData();
-        //
-        // this.themeService.darkTheme$.subscribe(isDark => {
-        //     this.isDarkTheme = isDark;
-        // });
-        //
-        // this.store.dispatch(
-        //     callGetUserByTelegramIdRequestedAction({
-        //         telegramUserId: this.telegram.initDataUnsafe.user?.id || this.defaultTelegramUserId,
-        //     })
-        // );
+        this.setupTelegramTheme();
+        this.storeTelegramData();
+
+        this.themeService.darkTheme$.subscribe(isDark => {
+            this.isDarkTheme = isDark;
+        });
+
+        this.store.dispatch(
+            callGetUserByTelegramIdRequestedAction({
+                telegramUserId: this.telegram.initDataUnsafe.user?.id || this.defaultTelegramUserId,
+            })
+        );
 
         console.log('Init data', this.telegram.initData);
     }
@@ -87,14 +87,20 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     private storeTelegramData(): void {
-        console.log('Storing Telegram data');
-        console.log(this.telegram);
-        console.log(this.telegram.initData);
-        console.log(this.telegram.initDataUnsafe);
+        let telegramInitData = this.telegram.initData;
+        const telegramInitDataInLocalStorage = localStorage.getItem('telegramInitData');
+
+        if (this.telegram.initDataUnsafe.user !== null && telegramInitDataInLocalStorage === null) {
+            localStorage.setItem('telegramInitData', telegramInitData);
+        }
+
+        if (this.telegram.initDataUnsafe.user === null && telegramInitDataInLocalStorage !== null) {
+            telegramInitData = telegramInitDataInLocalStorage;
+        }
+
         this.store.dispatch(
             setTelegramInitDataAction({
-                initData: this.telegram.initData,
-                initDataUnsafe: this.telegram.initDataUnsafe,
+                initData: telegramInitData,
             })
         );
     }

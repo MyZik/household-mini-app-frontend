@@ -1,7 +1,7 @@
 import { ApplicationConfig, importProvidersFrom, inject } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { provideStore } from '@ngrx/store';
+import { provideStore, Store } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
@@ -23,9 +23,7 @@ import { ITEMS_PROVIDER } from './application/items/items.provider';
 import { CREATE_ITEM_PROVIDERS } from './domain/create-item';
 import { GET_ITEMS_BY_CATEGORY_PROVIDERS } from './domain/get-items-by-category';
 import { TELEGRAM_INIT_DATA_PROVIDERS } from './domain/telegram-init-data';
-import { TELEGRAM_LAYER_PROVIDERS } from './application/telegram';
 import { HTTP_INTERCEPTOR_PROVIDERS, telegramInitDataInterceptorFn } from './infrastructure/http';
-import { Store } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -56,7 +54,6 @@ export const appConfig: ApplicationConfig = {
         ...HOUSEHOLDS_LAYER_PROVIDERS,
         ...CATEGORIES_PROVIDER,
         ...ITEMS_PROVIDER,
-        ...TELEGRAM_LAYER_PROVIDERS,
 
         ...API_CLIENT_PROVIDERS,
         ...HTTP_INTERCEPTOR_PROVIDERS,
