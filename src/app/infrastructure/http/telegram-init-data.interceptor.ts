@@ -25,7 +25,7 @@ export class TelegramInitDataInterceptor implements HttpInterceptor {
 
                 const modifiedRequest = request.clone({
                     setHeaders: {
-                        'X-Telegram-Init-Data': telegramInitData.initData,
+                        'Authorization': `tma ${telegramInitData.initData}`,
                     },
                 });
 
@@ -46,7 +46,7 @@ export function telegramInitDataInterceptorFn(store: Store) {
 
                 const modifiedRequest = req.clone({
                     setHeaders: {
-                        'X-Telegram-Init-Data': telegramInitData.initData,
+                        'Authorization': `tma ${telegramInitData.initData}`,
                     },
                 });
 

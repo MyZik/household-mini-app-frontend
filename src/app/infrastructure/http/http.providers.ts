@@ -12,5 +12,4 @@ export const HTTP_INTERCEPTOR_PROVIDERS = [
     },
 ];
 
-// Export für funktionelle Interceptoren
 export { telegramInitDataInterceptorFn };
