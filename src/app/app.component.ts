@@ -90,6 +90,10 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     private storeTelegramData(): void {
+        console.log('Storing Telegram data');
+        console.log(this.telegram);
+        console.log(this.telegram.initData);
+        console.log(this.telegram.initDataUnsafe);
         this.store.dispatch(
             setTelegramInitDataAction({
                 initData: this.telegram.initData,
