@@ -19,6 +19,10 @@ import {
     LoadingDuckComponent,
     WelcomeComponent,
 } from './presentation/shared/components';
+import {
+    setTelegramInitDataAction,
+    telegramInitDataFeatureSelector,
+} from './domain/telegram-init-data';
 
 @Component({
     selector: 'app-root',
@@ -48,6 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
     protected createUserStatus = this.store.selectSignal(
         createUserFromTelegramSubmitStatusSelector
     );
+    protected telegramData = this.store.selectSignal(telegramInitDataFeatureSelector);
 
     user = this.telegram.initDataUnsafe?.user;
 
@@ -59,6 +64,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.setupTelegramTheme();
+        this.storeTelegramData();
 
         this.themeService.darkTheme$.subscribe(isDark => {
             this.isDarkTheme = isDark;
@@ -81,6 +87,15 @@ export class AppComponent implements OnInit, OnDestroy {
         if (this.telegram.colorScheme === 'dark') {
             this.themeService.setTheme(true);
         }
+    }
+
+    private storeTelegramData(): void {
+        this.store.dispatch(
+            setTelegramInitDataAction({
+                initData: this.telegram.initData,
+                initDataUnsafe: this.telegram.initDataUnsafe,
+            })
+        );
     }
 
     closeApp(): void {

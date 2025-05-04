@@ -20,7 +20,6 @@ model/createUserFromTelegramRequest.ts
 model/createUserFromTelegramResponseBody.ts
 model/getCategoryByIdResponse.ts
 model/getHouseholdByIdResponse.ts
-model/getHouseholdCategoriesRequest.ts
 model/getHouseholdCategoriesResponseBody.ts
 model/getHouseholdCategoriesResponseBodyCategoriesInner.ts
 model/getHouseholdItemsResponseBody.ts

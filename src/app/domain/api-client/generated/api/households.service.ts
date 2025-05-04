@@ -25,8 +25,6 @@ import { CreateHouseholdResponse } from '../model/createHouseholdResponse';
 // @ts-ignore
 import { GetHouseholdByIdResponse } from '../model/getHouseholdByIdResponse';
 // @ts-ignore
-import { GetHouseholdCategoriesRequest } from '../model/getHouseholdCategoriesRequest';
-// @ts-ignore
 import { GetHouseholdCategoriesResponseBody } from '../model/getHouseholdCategoriesResponseBody';
 // @ts-ignore
 import { GetHouseholdItemsResponseBody } from '../model/getHouseholdItemsResponseBody';
@@ -241,19 +239,26 @@ export class HouseholdsService {
 
     /**
      * Get categories by household ID with visibility information
-     * @param getHouseholdCategoriesRequest Request body for getting household categories
+     * @param householdId ID of the household to get categories for
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getHouseholdCategories(getHouseholdCategoriesRequest: GetHouseholdCategoriesRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<GetHouseholdCategoriesResponseBody>;
-    public getHouseholdCategories(getHouseholdCategoriesRequest: GetHouseholdCategoriesRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GetHouseholdCategoriesResponseBody>>;
-    public getHouseholdCategories(getHouseholdCategoriesRequest: GetHouseholdCategoriesRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GetHouseholdCategoriesResponseBody>>;
-    public getHouseholdCategories(getHouseholdCategoriesRequest: GetHouseholdCategoriesRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        if (getHouseholdCategoriesRequest === null || getHouseholdCategoriesRequest === undefined) {
-            throw new Error('Required parameter getHouseholdCategoriesRequest was null or undefined when calling getHouseholdCategories.');
+    public getHouseholdCategories(householdId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<GetHouseholdCategoriesResponseBody>;
+    public getHouseholdCategories(householdId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GetHouseholdCategoriesResponseBody>>;
+    public getHouseholdCategories(householdId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GetHouseholdCategoriesResponseBody>>;
+    public getHouseholdCategories(householdId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        if (householdId === null || householdId === undefined) {
+            throw new Error('Required parameter householdId was null or undefined when calling getHouseholdCategories.');
         }
 
         let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (telegramInitData) required
+        localVarCredential = this.configuration.lookupCredential('telegramInitData');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', localVarCredential);
+        }
 
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
         if (localVarHttpHeaderAcceptSelected === undefined) {
@@ -278,15 +283,6 @@ export class HouseholdsService {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
-        }
-
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
             if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -298,11 +294,10 @@ export class HouseholdsService {
             }
         }
 
-        let localVarPath = `/api/households/get-household-categories`;
-        return this.httpClient.request<GetHouseholdCategoriesResponseBody>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/households/get-household-categories/${this.configuration.encodeParam({name: "householdId", value: householdId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}`;
+        return this.httpClient.request<GetHouseholdCategoriesResponseBody>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: getHouseholdCategoriesRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -315,19 +310,26 @@ export class HouseholdsService {
 
     /**
      * Get all items for a household
-     * @param getHouseholdCategoriesRequest Request body for getting household items
+     * @param householdId ID of the household to get items for
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getHouseholdItems(getHouseholdCategoriesRequest: GetHouseholdCategoriesRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<GetHouseholdItemsResponseBody>;
-    public getHouseholdItems(getHouseholdCategoriesRequest: GetHouseholdCategoriesRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GetHouseholdItemsResponseBody>>;
-    public getHouseholdItems(getHouseholdCategoriesRequest: GetHouseholdCategoriesRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GetHouseholdItemsResponseBody>>;
-    public getHouseholdItems(getHouseholdCategoriesRequest: GetHouseholdCategoriesRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        if (getHouseholdCategoriesRequest === null || getHouseholdCategoriesRequest === undefined) {
-            throw new Error('Required parameter getHouseholdCategoriesRequest was null or undefined when calling getHouseholdItems.');
+    public getHouseholdItems(householdId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<GetHouseholdItemsResponseBody>;
+    public getHouseholdItems(householdId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GetHouseholdItemsResponseBody>>;
+    public getHouseholdItems(householdId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GetHouseholdItemsResponseBody>>;
+    public getHouseholdItems(householdId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        if (householdId === null || householdId === undefined) {
+            throw new Error('Required parameter householdId was null or undefined when calling getHouseholdItems.');
         }
 
         let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (telegramInitData) required
+        localVarCredential = this.configuration.lookupCredential('telegramInitData');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', localVarCredential);
+        }
 
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
         if (localVarHttpHeaderAcceptSelected === undefined) {
@@ -352,15 +354,6 @@ export class HouseholdsService {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
-        }
-
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
             if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -372,11 +365,10 @@ export class HouseholdsService {
             }
         }
 
-        let localVarPath = `/api/households/get-household-items`;
-        return this.httpClient.request<GetHouseholdItemsResponseBody>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/households/get-household-items/${this.configuration.encodeParam({name: "householdId", value: householdId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}`;
+        return this.httpClient.request<GetHouseholdItemsResponseBody>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: getHouseholdCategoriesRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

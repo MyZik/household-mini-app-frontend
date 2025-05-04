@@ -86,6 +86,17 @@ export class Configuration {
         else {
             this.credentials = {};
         }
+
+        // init default telegramInitData credential
+        if (!this.credentials['telegramInitData']) {
+            this.credentials['telegramInitData'] = () => {
+                if (this.apiKeys === null || this.apiKeys === undefined) {
+                    return undefined;
+                } else {
+                    return this.apiKeys['telegramInitData'] || this.apiKeys['Authorization'];
+                }
+            };
+        }
     }
 
     /**

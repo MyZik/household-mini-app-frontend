@@ -8,7 +8,6 @@ export * from './createUserFromTelegramRequest';
 export * from './createUserFromTelegramResponseBody';
 export * from './getCategoryByIdResponse';
 export * from './getHouseholdByIdResponse';
-export * from './getHouseholdCategoriesRequest';
 export * from './getHouseholdCategoriesResponseBody';
 export * from './getHouseholdCategoriesResponseBodyCategoriesInner';
 export * from './getHouseholdItemsResponseBody';

@@ -13,7 +13,6 @@
 
 export interface CreateCategoryRequest { 
     householdId: number;
-    userId: number;
     name: string;
     emoji: string;
 }

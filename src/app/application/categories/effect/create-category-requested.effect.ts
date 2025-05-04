@@ -20,7 +20,6 @@ export class CreateCategoryRequestedEffect {
             withLatestFrom(this.store.select(userByTelegramIdSelector).pipe(filterNullValues())),
             map(([action, user]) =>
                 callCreateCategoryRequestedAction({
-                    userId: user.userId,
                     householdId: user.settings?.defaultHouseholdId,
                     name: action.name,
                     emoji: action.emoji,

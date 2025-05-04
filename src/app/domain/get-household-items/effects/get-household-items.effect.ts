@@ -18,27 +18,22 @@ export class GetHouseholdItemsEffect {
         this.actions$.pipe(
             ofType(callGetHouseholdItemsRequestedAction),
             switchMap(action =>
-                this.householdService
-                    .getHouseholdItems({
-                        householdId: action.householdId,
-                        userId: action.userId,
-                    })
-                    .pipe(
-                        map(response => {
-                            return callGetHouseholdItemsSucceededAction({
+                this.householdService.getHouseholdItems(action.householdId).pipe(
+                    map(response => {
+                        return callGetHouseholdItemsSucceededAction({
+                            householdId: action.householdId,
+                            response: response,
+                        });
+                    }),
+                    catchError(error =>
+                        of(
+                            callGetHouseholdItemsFailedAction({
                                 householdId: action.householdId,
-                                response: response,
-                            });
-                        }),
-                        catchError(error =>
-                            of(
-                                callGetHouseholdItemsFailedAction({
-                                    householdId: action.householdId,
-                                    error,
-                                })
-                            )
+                                error,
+                            })
                         )
                     )
+                )
             )
         )
     );
