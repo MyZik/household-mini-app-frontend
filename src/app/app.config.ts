@@ -24,6 +24,8 @@ import { CREATE_ITEM_PROVIDERS } from './domain/create-item';
 import { GET_ITEMS_BY_CATEGORY_PROVIDERS } from './domain/get-items-by-category';
 import { TELEGRAM_INIT_DATA_PROVIDERS } from './domain/telegram-init-data';
 import { HTTP_INTERCEPTOR_PROVIDERS, telegramInitDataInterceptorFn } from './infrastructure/http';
+import { DELETE_CATEGORY_PROVIDERS } from './domain/delete-category';
+import { DELETE_ITEM_PROVIDERS } from './domain/delete-item';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -48,6 +50,8 @@ export const appConfig: ApplicationConfig = {
         ...GET_USER_BY_TELEGRAM_ID_PROVIDERS,
         ...CREATE_USER_FROM_TELEGRAM_PROVIDERS,
         ...GET_ITEMS_BY_CATEGORY_PROVIDERS,
+        ...DELETE_CATEGORY_PROVIDERS,
+        ...DELETE_ITEM_PROVIDERS,
         ...TELEGRAM_INIT_DATA_PROVIDERS,
 
         // Application
