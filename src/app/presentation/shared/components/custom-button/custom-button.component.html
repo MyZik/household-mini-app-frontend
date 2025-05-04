@@ -9,5 +9,20 @@
             {{ text() }}
         </button>
     }
+    @case ('accent') {
+        <button mat-raised-button color="accent" [disabled]="disabled()" (click)="handleClick()">
+            {{ text() }}
+        </button>
+    }
+    @case ('outline') {
+        <button mat-stroked-button [disabled]="disabled()" (click)="handleClick()">
+            {{ text() }}
+        </button>
+    }
+    @case ('flat') {
+        <button mat-flat-button [disabled]="disabled()" (click)="handleClick()">
+            {{ text() }}
+        </button>
+    }
     @default {}
 }

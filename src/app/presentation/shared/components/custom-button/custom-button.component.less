@@ -1,10 +1,14 @@
+@import '../../../../presentation/theme/themes.less';
+
 :host {
   display: block;
   width: 100%;
 }
 
 button[mat-raised-button],
-button[mat-button] {
+button[mat-button],
+button[mat-stroked-button],
+button[mat-flat-button] {
   width: 100%;
   padding: 14px 0;
   font-size: 16px;
@@ -17,12 +21,13 @@ button[mat-button] {
   height: auto;
 }
 
-button[mat-raised-button] {
-  background-color: #4285F4;
+// Primary Button
+button[mat-raised-button]:not([color="accent"]) {
+  background-color: var(--ut-orange);
   color: #fff;
 
   &:hover:not([disabled]) {
-    background-color: #3367d6;
+    background-color: darken(#ff8600, 10%);
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   }
@@ -31,15 +36,25 @@ button[mat-raised-button] {
     transform: translateY(-1px);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   }
+
+  .dark-theme & {
+    background-color: var(--ut-orange);
+
+    &:hover:not([disabled]) {
+      background-color: lighten(#ff8600, 5%);
+    }
+  }
 }
 
+// Secondary Button
 button[mat-button] {
   background-color: transparent;
-  border: 2px solid #BDBDBD;
+  border: 2px solid var(--border-color);
   color: var(--text-color);
 
   &:hover:not([disabled]) {
-    border-color: #9E9E9E;
+    border-color: var(--ut-orange);
+    color: var(--ut-orange);
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
@@ -48,4 +63,82 @@ button[mat-button] {
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-} 
+
+  .dark-theme & {
+    border-color: var(--border-color);
+
+    &:hover:not([disabled]) {
+      border-color: var(--ut-orange);
+      color: var(--ut-orange);
+    }
+  }
+}
+
+// Accent Button
+button[mat-raised-button][color="accent"] {
+  background-color: var(--persian-indigo);
+  color: white;
+
+  &:hover:not([disabled]) {
+    background-color: lighten(@persian-indigo, 10%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active:not([disabled]) {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .dark-theme & {
+    background-color: var(--cornflower-blue);
+
+    &:hover:not([disabled]) {
+      background-color: lighten(@cornflower-blue, 10%);
+    }
+  }
+}
+
+// Outline Button
+button[mat-stroked-button] {
+  border: 2px solid var(--cornflower-blue);
+  color: var(--cornflower-blue);
+
+  &:hover:not([disabled]) {
+    background-color: rgba(117, 139, 253, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active:not([disabled]) {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark-theme & {
+    border-color: var(--periwinkle);
+    color: var(--periwinkle);
+
+    &:hover:not([disabled]) {
+      background-color: rgba(174, 184, 254, 0.2);
+    }
+  }
+}
+
+// Flat Button
+button[mat-flat-button] {
+  background-color: var(--card-background);
+  color: var(--card-text);
+
+  &:hover:not([disabled]) {
+    background-color: var(--item-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active:not([disabled]) {
+    background-color: var(--item-active);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}

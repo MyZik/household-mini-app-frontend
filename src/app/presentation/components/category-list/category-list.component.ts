@@ -12,6 +12,8 @@ import {
     isCreateCategoryFormActiveSelector,
 } from '../../../application/categories';
 import { CategoryCreateFormComponent } from '../category-create-form';
+import { categoryCollapsedAction } from '../../../application/items';
+import { isCreateCategoryFormSubmittedSelector } from '../../../application/categories/selectors/is-create-category-form-submitted.selector';
 
 @Component({
     selector: 'app-category-list',
@@ -35,10 +37,19 @@ export class CategoryListComponent {
 
     protected categories = this.store.selectSignal(householdCategoriesWithItemsSelector);
     protected isCreateFormActive = this.store.selectSignal(isCreateCategoryFormActiveSelector);
+    protected isCreateFormSubmitted = this.store.selectSignal(
+        isCreateCategoryFormSubmittedSelector
+    );
 
     constructor(private store: Store) {}
 
     public togglePanel(categoryId: number): void {
+        this.store.dispatch(
+            categoryCollapsedAction({
+                categoryId: categoryId,
+            })
+        );
+
         if (this.expandedPanels.has(categoryId)) {
             this.expandedPanels.delete(categoryId);
         } else {

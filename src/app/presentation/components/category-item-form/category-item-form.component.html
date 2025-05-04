@@ -1,0 +1,60 @@
+<div class="item-form-container">
+    <h2 class="form-title">Neues Produkt hinzufügen</h2>
+
+    <form [formGroup]="itemForm" (ngSubmit)="submitForm()">
+        <div class="form-fields">
+            <div class="form-row">
+                <div class="form-field emoji-field">
+                    <label for="itemEmoji">Emoji:</label>
+                    <select id="itemEmoji" formControlName="emoji" class="emoji-select">
+                        @for (emoji of emojis; track emoji) {
+                            <option [value]="emoji">{{ emoji }}</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-field name-field">
+                    <label for="itemName">Name:</label>
+                    <input
+                        type="text"
+                        id="itemName"
+                        formControlName="name"
+                        class="input-field"
+                        placeholder="Produktname eingeben"
+                        autocomplete="off"
+                    />
+                    @if (itemForm.get('name')?.invalid && itemForm.get('name')?.touched) {
+                        <div class="error-message">Der Name ist erforderlich.</div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-field unit-field">
+                    <label for="itemUnitType">Einheitstyp:</label>
+                    <select id="itemUnitType" formControlName="unitType" class="unit-select">
+                        @for (unitType of unitTypes; track unitType) {
+                            <option [value]="unitType.value">{{ unitType.label }}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <app-custom-button
+                buttonType="secondary"
+                text="Abbrechen"
+                type="button"
+                (onClick)="cancelForm()"
+            ></app-custom-button>
+
+            <app-custom-button
+                buttonType="primary"
+                text="Speichern"
+                type="submit"
+                [disabled]="itemForm.invalid"
+            ></app-custom-button>
+        </div>
+    </form>
+</div>

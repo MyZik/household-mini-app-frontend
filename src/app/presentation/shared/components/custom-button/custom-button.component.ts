@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
     styleUrls: ['./custom-button.component.less'],
 })
 export class CustomButtonComponent {
-    public buttonType = input.required<'primary' | 'secondary'>();
+    public buttonType = input.required<'primary' | 'secondary' | 'accent' | 'outline' | 'flat'>();
     public text = input.required<string>();
     public disabled = input<boolean>(false);
     @Output() onClick = new EventEmitter<void>();

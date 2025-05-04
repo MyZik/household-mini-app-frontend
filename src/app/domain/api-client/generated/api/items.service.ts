@@ -19,13 +19,15 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { CreateItemRequest } from '../model/createItemRequest';
+import { CreateItem201Response } from '../model/createItem201Response';
 // @ts-ignore
-import { CreateItemResponse } from '../model/createItemResponse';
+import { CreateItemRequest } from '../model/createItemRequest';
 // @ts-ignore
 import { GetItemByIdResponse } from '../model/getItemByIdResponse';
 // @ts-ignore
-import { GetItemsByCategoryResponseInner } from '../model/getItemsByCategoryResponseInner';
+import { GetItemsByCategory200Response } from '../model/getItemsByCategory200Response';
+// @ts-ignore
+import { GetItemsByCategoryRequest } from '../model/getItemsByCategoryRequest';
 // @ts-ignore
 import { UpdateItemQuantityRequest } from '../model/updateItemQuantityRequest';
 
@@ -105,9 +107,9 @@ export class ItemsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createItem(createItemRequest: CreateItemRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CreateItemResponse>;
-    public createItem(createItemRequest: CreateItemRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CreateItemResponse>>;
-    public createItem(createItemRequest: CreateItemRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CreateItemResponse>>;
+    public createItem(createItemRequest: CreateItemRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CreateItem201Response>;
+    public createItem(createItemRequest: CreateItemRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CreateItem201Response>>;
+    public createItem(createItemRequest: CreateItemRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CreateItem201Response>>;
     public createItem(createItemRequest: CreateItemRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (createItemRequest === null || createItemRequest === undefined) {
             throw new Error('Required parameter createItemRequest was null or undefined when calling createItem.');
@@ -159,7 +161,7 @@ export class ItemsService {
         }
 
         let localVarPath = `/api/items/create-item`;
-        return this.httpClient.request<CreateItemResponse>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<CreateItem201Response>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: createItemRequest,
@@ -239,16 +241,16 @@ export class ItemsService {
 
     /**
      * Get items by category
-     * @param categoryId 
+     * @param getItemsByCategoryRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getItemsByCategory(categoryId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<GetItemsByCategoryResponseInner>>;
-    public getItemsByCategory(categoryId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<GetItemsByCategoryResponseInner>>>;
-    public getItemsByCategory(categoryId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<GetItemsByCategoryResponseInner>>>;
-    public getItemsByCategory(categoryId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        if (categoryId === null || categoryId === undefined) {
-            throw new Error('Required parameter categoryId was null or undefined when calling getItemsByCategory.');
+    public getItemsByCategory(getItemsByCategoryRequest: GetItemsByCategoryRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<GetItemsByCategory200Response>;
+    public getItemsByCategory(getItemsByCategoryRequest: GetItemsByCategoryRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GetItemsByCategory200Response>>;
+    public getItemsByCategory(getItemsByCategoryRequest: GetItemsByCategoryRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GetItemsByCategory200Response>>;
+    public getItemsByCategory(getItemsByCategoryRequest: GetItemsByCategoryRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        if (getItemsByCategoryRequest === null || getItemsByCategoryRequest === undefined) {
+            throw new Error('Required parameter getItemsByCategoryRequest was null or undefined when calling getItemsByCategory.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -276,6 +278,15 @@ export class ItemsService {
         }
 
 
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
             if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -287,10 +298,11 @@ export class ItemsService {
             }
         }
 
-        let localVarPath = `/api/items/get-items-by-category/${this.configuration.encodeParam({name: "categoryId", value: categoryId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}`;
-        return this.httpClient.request<Array<GetItemsByCategoryResponseInner>>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/items/get-items-by-category`;
+        return this.httpClient.request<GetItemsByCategory200Response>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                body: getItemsByCategoryRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

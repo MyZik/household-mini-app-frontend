@@ -1,12 +1,14 @@
 @let categoriesData = categories();
 
 @if (categoriesData === 'loading' || categoriesData === 'not-loaded') {
-    <app-loading-duck message="Daten werden geladen..." duckType="dancing"> </app-loading-duck>
+    <app-loading-duck message="Kategorien werden geladen..." duckType="dancing" />
 } @else if (categoriesData === 'load-failed') {
     <app-error-message
         message="Oh no...!"
         suggestion="Die Kategorien konnten nicht geladen werden. Bitte versuche es später erneut."
     />
+} @else if (isCreateFormSubmitted()) {
+    <app-loading-duck message="Quack! Kategorie wird erstellt..." duckType="spinning" />
 } @else {
     @if (categoriesData && categoriesData.length === 0) {
         <div class="empty-container">
@@ -24,7 +26,7 @@
                         [category]="category"
                         [expanded]="isPanelExpanded(category.id)"
                         (toggleExpand)="togglePanel($event)"
-                    ></app-category-card>
+                    />
                 }
             </div>
         </div>
@@ -34,9 +36,9 @@
         <app-category-create-form />
     } @else {
         <app-custom-button
-            buttonType="primary"
+            buttonType="accent"
             text="Neue Kategorie erstellen"
             (onClick)="openCreateForm()"
-        ></app-custom-button>
+        />
     }
 }

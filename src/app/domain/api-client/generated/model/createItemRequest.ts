@@ -14,6 +14,7 @@
 export interface CreateItemRequest { 
     householdId: number;
     categoryId: number;
+    userId: number;
     name: string;
     emoji: string;
     quantity: number;

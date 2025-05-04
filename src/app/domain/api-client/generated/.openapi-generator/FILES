@@ -14,8 +14,8 @@ model/createCategory201Response.ts
 model/createCategoryRequest.ts
 model/createHouseholdRequest.ts
 model/createHouseholdResponse.ts
+model/createItem201Response.ts
 model/createItemRequest.ts
-model/createItemResponse.ts
 model/createUserFromTelegramRequest.ts
 model/createUserFromTelegramResponseBody.ts
 model/getCategoryByIdResponse.ts
@@ -26,7 +26,9 @@ model/getHouseholdCategoriesResponseBodyCategoriesInner.ts
 model/getHouseholdItemsResponseBody.ts
 model/getHouseholdItemsResponseBodyItemsInner.ts
 model/getItemByIdResponse.ts
-model/getItemsByCategoryResponseInner.ts
+model/getItemsByCategory200Response.ts
+model/getItemsByCategory200ResponseItemsInner.ts
+model/getItemsByCategoryRequest.ts
 model/getUserByTelegramIdResponseBody.ts
 model/getUserByTelegramIdResponseBodySettings.ts
 model/models.ts

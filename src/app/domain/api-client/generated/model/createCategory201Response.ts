@@ -12,6 +12,6 @@
 
 
 export interface CreateCategory201Response { 
-    id: number;
+    categoryId: number;
 }
 
