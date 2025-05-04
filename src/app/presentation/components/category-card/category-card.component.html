@@ -14,35 +14,43 @@
 
         @if (expanded()) {
             <mat-card-content class="category-items" (click)="$event.stopPropagation()">
-                @if (isCreateItemFormSubmitted()) {
-                    <app-loading-duck
-                        duckType="spinning"
-                        message="Okay, Produkt wird erstellt... Quack!"
-                        [spinnerDiameter]="40"
-                    ></app-loading-duck>
-                } @else if (isCategoryItemsListLoading()) {
-                    <app-loading-duck
-                        duckType="dancing"
-                        message="Lade die Liste von Produkten..."
-                        [spinnerDiameter]="40"
-                    ></app-loading-duck>
-                } @else {
-                    <div class="item-list">
-                        @for (item of categoryData.items; track item) {
-                            <app-category-item [item]="item" />
-                        }
+                <div class="item-list">
+                    @for (item of categoryData.items; track item) {
+                        <app-category-item [item]="item" />
+                    }
 
-                        @if (isCreateItemFormActive()) {
-                            <app-category-item-form [categoryId]="categoryData.id" />
-                        } @else {
-                            <app-custom-button
-                                buttonType="primary"
-                                text="Neues Produkt hinzfügen"
-                                (onClick)="openCreateItemForm()"
-                            />
-                        }
-                    </div>
-                }
+                    @if (isCreateItemFormSubmitted()) {
+                        <div class="new-item-loading">
+                            <app-loading-duck
+                                duckType="spinning"
+                                message="Produkt wird hinzugefügt..."
+                                [spinnerDiameter]="30"
+                                [compact]="true"
+                            ></app-loading-duck>
+                        </div>
+                    }
+
+                    @if (isCategoryItemsListLoading()) {
+                        <div class="new-item-loading">
+                            <app-loading-duck
+                                duckType="spinning"
+                                message="Lade die Liste neu..."
+                                [spinnerDiameter]="30"
+                                [compact]="true"
+                            ></app-loading-duck>
+                        </div>
+                    }
+
+                    @if (isCreateItemFormActive()) {
+                        <app-category-item-form [categoryId]="categoryData.id" />
+                    } @else {
+                        <app-custom-button
+                            buttonType="primary"
+                            text="Neues Produkt hinzfügen"
+                            (onClick)="openCreateItemForm()"
+                        />
+                    }
+                </div>
             </mat-card-content>
         }
     </mat-card>

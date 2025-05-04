@@ -24,6 +24,9 @@ export const itemsReducer = createReducer<ItemsState>(
         }
         return {
             ...state,
+            activeCategoryFormsIds: state.activeCategoryFormsIds.filter(
+                id => id !== action.categoryId
+            ),
             submittedFormsCategoryIds: [...state.submittedFormsCategoryIds, action.categoryId],
         };
     }),

@@ -14,4 +14,5 @@ export class LoadingDuckComponent {
     @Input() duckType: 'swimming' | 'jumping' | 'dancing' | 'spinning' | 'flapping' = 'swimming';
     @Input() spinnerColor: 'primary' | 'accent' | 'warn' = 'accent';
     @Input() spinnerDiameter: number = 50;
+    @Input() compact: boolean = false;
 }
