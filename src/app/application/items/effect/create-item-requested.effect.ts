@@ -18,11 +18,9 @@ export class CreateItemRequestedEffect {
         this.actions$.pipe(
             ofType(createItemFormSubmittedAction),
             withLatestFrom(this.store.select(userByTelegramIdSelector).pipe(filterNullValues())),
-            map(([action, user]) => {
+            map(([action]) => {
                 return callCreateItemRequestedAction({
-                    householdId: user.settings.defaultHouseholdId,
                     categoryId: action.categoryId,
-                    userId: user.userId,
                     name: action.name,
                     emoji: action.emoji,
                     quantity: 1,

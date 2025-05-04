@@ -15,7 +15,6 @@ export * from './getHouseholdItemsResponseBodyItemsInner';
 export * from './getItemByIdResponse';
 export * from './getItemsByCategory200Response';
 export * from './getItemsByCategory200ResponseItemsInner';
-export * from './getItemsByCategoryRequest';
 export * from './getUserByTelegramIdResponseBody';
 export * from './getUserByTelegramIdResponseBodySettings';
 export * from './updateItemQuantityRequest';

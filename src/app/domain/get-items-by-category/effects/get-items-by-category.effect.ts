@@ -19,11 +19,7 @@ export class GetItemsByCategoryEffect {
             ofType(callGetItemsByCategoryRequestedAction),
             switchMap(actionRequest =>
                 this.itemsService
-                    .getItemsByCategory({
-                        categoryId: actionRequest.categoryId,
-                        userId: actionRequest.userId,
-                        householdId: actionRequest.householdId,
-                    })
+                    .getItemsByCategory(actionRequest.categoryId)
                     .pipe(
                         tap(response =>
                             console.log(

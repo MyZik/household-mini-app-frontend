@@ -27,8 +27,6 @@ import { GetItemByIdResponse } from '../model/getItemByIdResponse';
 // @ts-ignore
 import { GetItemsByCategory200Response } from '../model/getItemsByCategory200Response';
 // @ts-ignore
-import { GetItemsByCategoryRequest } from '../model/getItemsByCategoryRequest';
-// @ts-ignore
 import { UpdateItemQuantityRequest } from '../model/updateItemQuantityRequest';
 
 // @ts-ignore
@@ -241,16 +239,16 @@ export class ItemsService {
 
     /**
      * Get items by category
-     * @param getItemsByCategoryRequest 
+     * @param categoryId ID of the category to filter items by
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getItemsByCategory(getItemsByCategoryRequest: GetItemsByCategoryRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<GetItemsByCategory200Response>;
-    public getItemsByCategory(getItemsByCategoryRequest: GetItemsByCategoryRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GetItemsByCategory200Response>>;
-    public getItemsByCategory(getItemsByCategoryRequest: GetItemsByCategoryRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GetItemsByCategory200Response>>;
-    public getItemsByCategory(getItemsByCategoryRequest: GetItemsByCategoryRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        if (getItemsByCategoryRequest === null || getItemsByCategoryRequest === undefined) {
-            throw new Error('Required parameter getItemsByCategoryRequest was null or undefined when calling getItemsByCategory.');
+    public getItemsByCategory(categoryId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<GetItemsByCategory200Response>;
+    public getItemsByCategory(categoryId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GetItemsByCategory200Response>>;
+    public getItemsByCategory(categoryId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GetItemsByCategory200Response>>;
+    public getItemsByCategory(categoryId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        if (categoryId === null || categoryId === undefined) {
+            throw new Error('Required parameter categoryId was null or undefined when calling getItemsByCategory.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -278,15 +276,6 @@ export class ItemsService {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
-        }
-
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
             if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -298,11 +287,10 @@ export class ItemsService {
             }
         }
 
-        let localVarPath = `/api/items/get-items-by-category`;
-        return this.httpClient.request<GetItemsByCategory200Response>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/items/get-items-by-category/${this.configuration.encodeParam({name: "categoryId", value: categoryId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}`;
+        return this.httpClient.request<GetItemsByCategory200Response>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: getItemsByCategoryRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

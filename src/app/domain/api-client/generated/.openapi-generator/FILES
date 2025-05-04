@@ -27,7 +27,6 @@ model/getHouseholdItemsResponseBodyItemsInner.ts
 model/getItemByIdResponse.ts
 model/getItemsByCategory200Response.ts
 model/getItemsByCategory200ResponseItemsInner.ts
-model/getItemsByCategoryRequest.ts
 model/getUserByTelegramIdResponseBody.ts
 model/getUserByTelegramIdResponseBodySettings.ts
 model/models.ts

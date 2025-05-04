@@ -20,9 +20,7 @@ export class CreateItemEffect {
             switchMap(action =>
                 this.itemsService
                     .createItem({
-                        householdId: action.householdId,
                         categoryId: action.categoryId,
-                        userId: action.userId,
                         name: action.name,
                         emoji: action.emoji,
                         quantity: action.quantity,
