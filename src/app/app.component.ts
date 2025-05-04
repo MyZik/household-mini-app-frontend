@@ -52,9 +52,6 @@ export class AppComponent implements OnInit, OnDestroy {
     protected createUserStatus = this.store.selectSignal(
         createUserFromTelegramSubmitStatusSelector
     );
-    protected telegramData = this.store.selectSignal(telegramInitDataFeatureSelector);
-
-    user = this.telegram.initDataUnsafe?.user;
 
     private readonly defaultTelegramUserId = 150142952;
 
@@ -63,18 +60,18 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.setupTelegramTheme();
-        this.storeTelegramData();
-
-        this.themeService.darkTheme$.subscribe(isDark => {
-            this.isDarkTheme = isDark;
-        });
-
-        this.store.dispatch(
-            callGetUserByTelegramIdRequestedAction({
-                telegramUserId: this.telegram.initDataUnsafe.user?.id || this.defaultTelegramUserId,
-            })
-        );
+        // this.setupTelegramTheme();
+        // this.storeTelegramData();
+        //
+        // this.themeService.darkTheme$.subscribe(isDark => {
+        //     this.isDarkTheme = isDark;
+        // });
+        //
+        // this.store.dispatch(
+        //     callGetUserByTelegramIdRequestedAction({
+        //         telegramUserId: this.telegram.initDataUnsafe.user?.id || this.defaultTelegramUserId,
+        //     })
+        // );
 
         console.log('Init data', this.telegram.initData);
     }
