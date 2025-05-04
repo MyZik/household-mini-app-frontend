@@ -69,6 +69,8 @@ export class AppComponent implements OnInit, OnDestroy {
                 telegramUserId: this.telegram.initDataUnsafe.user?.id || this.defaultTelegramUserId,
             })
         );
+
+        console.log('Init data', this.telegram.initData);
     }
 
     ngOnDestroy(): void {
