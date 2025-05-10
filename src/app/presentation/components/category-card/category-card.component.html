@@ -64,15 +64,15 @@
             <mat-icon class="delete-icon">delete</mat-icon>
         </button>
     </div>
-}
 
-<app-modal-wrapper [isOpen]="isDeleteModalOpen()" (close)="closeDeleteModal()">
-    <app-category-delete-confirmation
-        [data]="{
-            categoryName: categoryData?.name || '',
-            categoryId: categoryData?.id || 0,
-        }"
-        (confirmDelete)="confirmDelete($event)"
-        (cancelDelete)="closeDeleteModal()"
-    ></app-category-delete-confirmation>
-</app-modal-wrapper>
+    <app-modal-wrapper [isOpen]="isDeleteModalOpen()" (close)="closeDeleteModal()">
+        <app-category-delete-confirmation
+            [categoryData]="{
+                categoryName: categoryData.name || '',
+                categoryId: categoryData.id || 0,
+            }"
+            (confirmDelete)="confirmDelete($event)"
+            (cancelDelete)="closeDeleteModal()"
+        />
+    </app-modal-wrapper>
+}

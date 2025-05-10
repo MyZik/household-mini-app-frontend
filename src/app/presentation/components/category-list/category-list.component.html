@@ -7,6 +7,8 @@
         message="Oh no...!"
         suggestion="Die Kategorien konnten nicht geladen werden. Bitte versuche es später erneut."
     />
+} @else if (isDeleteCategoryLoading()) {
+    <app-loading-duck message="Kategorie wird gelöscht..." duckType="spinning" />
 } @else if (isCreateCategorySubmitting()) {
     <app-loading-duck message="Kategorie wird erstellt..." duckType="spinning" />
 } @else {

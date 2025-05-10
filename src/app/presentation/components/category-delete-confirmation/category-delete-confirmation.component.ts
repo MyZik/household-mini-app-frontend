@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomButtonComponent } from '../../shared/components/custom-button';
 
-interface DialogData {
+interface CategoryData {
     categoryName: string;
     categoryId: number;
 }
@@ -15,12 +15,14 @@ interface DialogData {
     styleUrl: './category-delete-confirmation.component.less',
 })
 export class CategoryDeleteConfirmationComponent {
-    @Input() data!: DialogData;
+    public readonly categoryData = input.required<CategoryData>();
     @Output() confirmDelete = new EventEmitter<number>();
     @Output() cancelDelete = new EventEmitter<void>();
 
     protected onConfirmDelete(): void {
-        this.confirmDelete.emit(this.data.categoryId);
+        const dialogData = this.categoryData();
+
+        this.confirmDelete.emit(dialogData.categoryId);
     }
 
     protected onCancelDelete(): void {

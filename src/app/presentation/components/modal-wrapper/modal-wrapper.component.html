@@ -1,5 +1,7 @@
-<div *ngIf="isOpen" class="modal-backdrop" (click)="onBackdropClick($event)">
-    <div class="modal-container">
-        <ng-content></ng-content>
+@if (isOpen()) {
+    <div class="modal-backdrop" (click)="onBackdropClick($event)">
+        <div class="modal-container">
+            <ng-content></ng-content>
+        </div>
     </div>
-</div>
+}

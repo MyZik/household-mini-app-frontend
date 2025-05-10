@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +11,7 @@ import {
     createCategoryFormOpenedAction,
     isCreateCategoryFormActiveSelector,
     isCreateCategorySubmittingSelector,
+    isDeleteCategoryLoadingSelector,
 } from '../../../application/categories';
 import { CategoryCreateFormComponent } from '../category-create-form';
 import { categoryCollapsedAction } from '../../../application/items';
@@ -42,6 +43,9 @@ export class CategoryListComponent {
     protected isCreateFormActive = this.store.selectSignal(isCreateCategoryFormActiveSelector);
     protected isCreateCategorySubmitting = this.store.selectSignal(
         isCreateCategorySubmittingSelector
+    );
+    protected isDeleteCategoryLoading = computed(() =>
+        this.store.selectSignal(isDeleteCategoryLoadingSelector)()
     );
 
     constructor(private store: Store) {}
