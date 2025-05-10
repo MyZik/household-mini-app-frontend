@@ -6,5 +6,5 @@ import { DeleteItemEffect } from './effects/delete-item.effect';
 
 export const DELETE_ITEM_PROVIDERS = [
     provideState(deleteItemSlice, deleteItemReducer),
-    provideEffects([DeleteItemEffect])
-]; 
+    provideEffects([DeleteItemEffect]),
+];

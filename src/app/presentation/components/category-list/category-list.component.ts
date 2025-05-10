@@ -14,6 +14,9 @@ import {
 import { CategoryCreateFormComponent } from '../category-create-form';
 import { categoryCollapsedAction } from '../../../application/items';
 import { isCreateCategoryFormSubmittedSelector } from '../../../application/categories/selectors/is-create-category-form-submitted.selector';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { CategoryDeleteConfirmationComponent } from '../category-delete-confirmation/category-delete-confirmation.component';
+import { callDeleteCategoryRequestedAction } from '../../../domain/delete-category';
 
 @Component({
     selector: 'app-category-list',
@@ -22,11 +25,13 @@ import { isCreateCategoryFormSubmittedSelector } from '../../../application/cate
         CommonModule,
         RouterModule,
         MatButtonModule,
+        MatDialogModule,
         LoadingDuckComponent,
         CategoryCardComponent,
         ErrorMessageComponent,
         CustomButtonComponent,
         CategoryCreateFormComponent,
+        CategoryDeleteConfirmationComponent,
     ],
     templateUrl: './category-list.component.html',
     styleUrl: './category-list.component.less',
@@ -41,7 +46,10 @@ export class CategoryListComponent {
         isCreateCategoryFormSubmittedSelector
     );
 
-    constructor(private store: Store) {}
+    constructor(
+        private store: Store,
+        private dialog: MatDialog
+    ) {}
 
     public togglePanel(categoryId: number): void {
         this.store.dispatch(
@@ -63,5 +71,13 @@ export class CategoryListComponent {
 
     protected openCreateForm() {
         this.store.dispatch(createCategoryButtonClickedAction());
+    }
+
+    protected onDeleteCategory(categoryId: number): void {
+        this.store.dispatch(
+            callDeleteCategoryRequestedAction({
+                categoryId: categoryId,
+            })
+        );
     }
 }

@@ -6,4 +6,4 @@ export const callDeleteItemSucceededAction = createAction(
     props<{
         itemId: number;
     }>()
-); 
+);

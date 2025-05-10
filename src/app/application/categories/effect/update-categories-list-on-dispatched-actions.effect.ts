@@ -6,9 +6,10 @@ import { userByTelegramIdSelector } from '../../users';
 import { filterNullValues } from '../../../infrastructure/operators/src';
 import { callCreateCategorySucceededAction } from '../../../domain/create-category/actions/call-create-category.succeeded.action';
 import { callGetHouseholdCategoriesRequestedAction } from '../../../domain/get-household-categories';
+import { callDeleteCategorySucceededAction } from '../../../domain/delete-category/actions/call-delete-category.succeeded.action';
 
 @Injectable()
-export class UpdateCategoriesListOnCreateCategoryEffect {
+export class UpdateCategoriesListOnDispatchedActionsEffect {
     constructor(
         private readonly actions$: Actions,
         private store: Store
@@ -16,7 +17,7 @@ export class UpdateCategoriesListOnCreateCategoryEffect {
 
     public readonly effect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(callCreateCategorySucceededAction),
+            ofType(callCreateCategorySucceededAction, callDeleteCategorySucceededAction),
             withLatestFrom(this.store.select(userByTelegramIdSelector).pipe(filterNullValues())),
             map(([_action, user]) =>
                 callGetHouseholdCategoriesRequestedAction({

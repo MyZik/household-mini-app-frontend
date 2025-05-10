@@ -5,7 +5,7 @@ import { setTelegramInitDataAction } from '../actions/set-telegram-init-data.act
 export const telegramInitDataReducer = createReducer<TelegramInitDataState>(
     { initData: null },
     on(setTelegramInitDataAction, (_state, action) => ({
-        initData: action.initData
+        initData: action.initData,
         // initDataUnsafe: action.initDataUnsafe,
     }))
 );

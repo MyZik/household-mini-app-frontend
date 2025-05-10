@@ -9,4 +9,4 @@ export const deleteCategoryReducer = createReducer<DeleteCategoryState>(
     on(callDeleteCategoryRequestedAction, () => 'loading'),
     on(callDeleteCategorySucceededAction, () => 'succeeded'),
     on(callDeleteCategoryFailedAction, () => 'load-failed')
-); 
+);

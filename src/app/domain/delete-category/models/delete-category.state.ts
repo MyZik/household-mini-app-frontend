@@ -1,5 +1,1 @@
-export type DeleteCategoryState =
-    | 'not-loaded'
-    | 'loading'
-    | 'load-failed'
-    | 'succeeded'; 
+export type DeleteCategoryState = 'not-loaded' | 'loading' | 'load-failed' | 'succeeded';

@@ -6,5 +6,5 @@ import { DeleteCategoryEffect } from './effects/delete-category.effect';
 
 export const DELETE_CATEGORY_PROVIDERS = [
     provideState(deleteCategorySlice, deleteCategoryReducer),
-    provideEffects([DeleteCategoryEffect])
-]; 
+    provideEffects([DeleteCategoryEffect]),
+];

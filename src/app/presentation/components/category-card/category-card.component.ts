@@ -1,4 +1,4 @@
-import { Component, computed, EventEmitter, input, Output } from '@angular/core';
+import { Component, computed, EventEmitter, input, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -13,6 +13,8 @@ import {
 import { CategoryItemFormComponent } from '../category-item-form/category-item-form.component';
 import { LoadingDuckComponent } from '../../shared/components/loading-duck';
 import { isLoadingItemsByCategorySelector } from '../../../domain/get-items-by-category';
+import { CategoryDeleteConfirmationComponent } from '../category-delete-confirmation/category-delete-confirmation.component';
+import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 
 interface CategoryItem {
     id: number;
@@ -39,6 +41,8 @@ interface Category {
         CustomButtonComponent,
         CategoryItemFormComponent,
         LoadingDuckComponent,
+        CategoryDeleteConfirmationComponent,
+        ModalWrapperComponent,
     ],
     templateUrl: './category-card.component.html',
     styleUrl: './category-card.component.less',
@@ -46,6 +50,7 @@ interface Category {
 export class CategoryCardComponent {
     public readonly category = input.required<Category>();
     public expanded = input.required<boolean>();
+    protected isDeleteModalOpen = signal(false);
 
     protected isCreateItemFormActive = computed(() =>
         this.store.selectSignal(isCreateItemFormActiveSelector(this.category().id))()
@@ -60,6 +65,7 @@ export class CategoryCardComponent {
     );
 
     @Output() toggleExpand = new EventEmitter<number>();
+    @Output() deleteCategory = new EventEmitter<number>();
 
     constructor(private readonly store: Store) {}
 
@@ -73,5 +79,19 @@ export class CategoryCardComponent {
                 categoryId: this.category().id,
             })
         );
+    }
+
+    protected onDeleteCategory(event: Event): void {
+        event.stopPropagation();
+        this.isDeleteModalOpen.set(true);
+    }
+
+    protected closeDeleteModal(): void {
+        this.isDeleteModalOpen.set(false);
+    }
+
+    protected confirmDelete(categoryId: number): void {
+        this.deleteCategory.emit(categoryId);
+        this.closeDeleteModal();
     }
 }

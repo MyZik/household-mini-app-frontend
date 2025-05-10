@@ -6,4 +6,4 @@ export const callDeleteCategorySucceededAction = createAction(
     props<{
         categoryId: number;
     }>()
-); 
+);

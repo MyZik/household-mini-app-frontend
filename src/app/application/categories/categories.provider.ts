@@ -3,10 +3,10 @@ import { provideEffects } from '@ngrx/effects';
 import { categoriesSlice } from './categories.slice';
 import { categoriesReducer } from './reducers/categories.reducer';
 import { CreateCategoryRequestedEffect } from './effect/create-category-requested.effect';
-import { UpdateCategoriesListOnCreateCategoryEffect } from './effect/update-categories-list-on-create-category.effect';
+import { UpdateCategoriesListOnDispatchedActionsEffect } from './effect/update-categories-list-on-dispatched-actions.effect';
 
 export const CATEGORIES_PROVIDER = [
     provideState(categoriesSlice, categoriesReducer),
 
-    provideEffects([CreateCategoryRequestedEffect, UpdateCategoriesListOnCreateCategoryEffect]),
+    provideEffects([CreateCategoryRequestedEffect, UpdateCategoriesListOnDispatchedActionsEffect]),
 ];

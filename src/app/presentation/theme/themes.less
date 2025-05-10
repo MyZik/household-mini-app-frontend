@@ -5,6 +5,8 @@
 @anti-flash-white: #f1f2f6;
 @ut-orange: #ff8600;
 @radius: 14px;
+@ut-warning: #f59e0b;
+@ut-danger: #ef4444;
 
 // Light Theme Variablen
 @light-background: linear-gradient(135deg, #4f46e5, #9333ea) fixed;
@@ -22,6 +24,12 @@
 @light-qty-background: rgba(255, 134, 0, 0.15);
 @light-qty-text: #e67200;
 @light-qty-border: rgba(255, 134, 0, 0.4);
+@light-popup-background: rgba(255, 255, 255, 0.95);
+@light-popup-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+@light-heading-text: #252160;
+@light-body-text: #374151;
+@light-modal-border: rgba(151, 149, 198, 0.3);
+@light-warning-background: rgba(245, 158, 11, 0.1);
 
 // Dark Theme Variablen
 @dark-background: linear-gradient(135deg, #1f2937, #111827) fixed;
@@ -39,6 +47,12 @@
 @dark-qty-background: rgba(255, 134, 0, 0.2);
 @dark-qty-text: #ffb84d;
 @dark-qty-border: rgba(255, 134, 0, 0.4);
+@dark-popup-background: rgba(31, 41, 55, 0.95);
+@dark-popup-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+@dark-heading-text: #ffffff;
+@dark-body-text: #e5e7eb;
+@dark-modal-border: rgba(75, 85, 99, 0.7);
+@dark-warning-background: rgba(245, 158, 11, 0.15);
 
 // CSS-Variablen für Theme-Wechsel
 :root {
@@ -48,6 +62,8 @@
   --periwinkle: @periwinkle;
   --anti-flash-white: @anti-flash-white;
   --ut-orange: @ut-orange;
+  --ut-warning: @ut-warning;
+  --ut-danger: @ut-danger;
 
   // Theme-spezifische Variablen (Light Theme als Standard)
   --background: @light-background;
@@ -65,6 +81,12 @@
   --qty-background: @light-qty-background;
   --qty-text: @light-qty-text;
   --qty-border: @light-qty-border;
+  --popup-background: @light-popup-background;
+  --popup-shadow: @light-popup-shadow;
+  --heading-text: @light-heading-text;
+  --body-text: @light-body-text;
+  --modal-border: @light-modal-border;
+  --warning-background: @light-warning-background;
 }
 
 // Dark Theme Klasse
@@ -84,4 +106,10 @@
   --qty-background: @dark-qty-background;
   --qty-text: @dark-qty-text;
   --qty-border: @dark-qty-border;
+  --popup-background: @dark-popup-background;
+  --popup-shadow: @dark-popup-shadow;
+  --heading-text: @dark-heading-text;
+  --body-text: @dark-body-text;
+  --modal-border: @dark-modal-border;
+  --warning-background: @dark-warning-background;
 } 

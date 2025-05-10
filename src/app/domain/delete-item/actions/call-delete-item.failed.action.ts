@@ -7,4 +7,4 @@ export const callDeleteItemFailedAction = createAction(
         itemId: number;
         error: any;
     }>()
-); 
+);

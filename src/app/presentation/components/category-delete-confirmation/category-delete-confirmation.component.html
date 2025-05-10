@@ -1,0 +1,32 @@
+<div class="delete-confirmation-container">
+    <div class="delete-confirmation-content">
+        <div class="duck-image-container">
+            <img src="assets/duck-asking-transparent.png" alt="Entchen fragt" class="duck-image" />
+        </div>
+
+        <h2 class="delete-confirmation-title">Kategorie löschen?</h2>
+
+        <p class="delete-confirmation-message">
+            Möchtest du wirklich die Kategorie <strong>{{ data.categoryName }}</strong> löschen?
+        </p>
+
+        <div class="delete-confirmation-warning">
+            <strong>⚠️ Achtung:</strong> Alle Produkte in dieser Kategorie werden ebenfalls
+            gelöscht.
+        </div>
+
+        <div class="delete-confirmation-actions">
+            <app-custom-button
+                buttonType="secondary"
+                text="Abbrechen"
+                (onClick)="onCancelDelete()"
+            ></app-custom-button>
+
+            <app-custom-button
+                buttonType="accent"
+                text="Löschen"
+                (onClick)="onConfirmDelete()"
+            ></app-custom-button>
+        </div>
+    </div>
+</div>

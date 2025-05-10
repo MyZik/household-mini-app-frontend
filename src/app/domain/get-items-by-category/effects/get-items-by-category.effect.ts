@@ -18,30 +18,22 @@ export class GetItemsByCategoryEffect {
         this.actions$.pipe(
             ofType(callGetItemsByCategoryRequestedAction),
             switchMap(actionRequest =>
-                this.itemsService
-                    .getItemsByCategory(actionRequest.categoryId)
-                    .pipe(
-                        tap(response =>
-                            console.log(
-                                'DEBUG: ItemService.getItemsByCategory - Response erhalten:',
-                                response
-                            )
-                        ),
-                        map((response: GetItemsByCategory200Response) => {
-                            return callGetItemsByCategorySucceededAction({
+                this.itemsService.getItemsByCategory(actionRequest.categoryId).pipe(
+                    map((response: GetItemsByCategory200Response) => {
+                        return callGetItemsByCategorySucceededAction({
+                            categoryId: actionRequest.categoryId,
+                            response: response,
+                        });
+                    }),
+                    catchError(error => {
+                        return of(
+                            callGetItemsByCategoryFailedAction({
                                 categoryId: actionRequest.categoryId,
-                                response: response,
-                            });
-                        }),
-                        catchError(error => {
-                            return of(
-                                callGetItemsByCategoryFailedAction({
-                                    categoryId: actionRequest.categoryId,
-                                    error,
-                                })
-                            );
-                        })
-                    )
+                                error,
+                            })
+                        );
+                    })
+                )
             )
         )
     );

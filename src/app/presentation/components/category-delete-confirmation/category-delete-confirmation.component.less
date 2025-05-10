@@ -1,0 +1,85 @@
+.delete-confirmation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  background-color: var(--popup-background);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.delete-confirmation-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.duck-image-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.duck-image {
+  width: 120px;
+  height: auto;
+  max-width: 100%;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.delete-confirmation-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--heading-text);
+  margin-bottom: 16px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.delete-confirmation-message {
+  font-size: 16px;
+  color: var(--body-text);
+  margin-bottom: 12px;
+  line-height: 1.5;
+  width: 100%;
+  
+  strong {
+    color: var(--ut-orange);
+    font-weight: 600;
+  }
+}
+
+.delete-confirmation-warning {
+  font-size: 14px;
+  color: var(--ut-warning);
+  margin-bottom: 24px;
+  line-height: 1.5;
+  width: 100%;
+  background-color: var(--warning-background);
+  padding: 10px;
+  border-radius: 8px;
+  border-left: 3px solid var(--ut-warning);
+}
+
+.delete-confirmation-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+  width: 100%;
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  ::ng-deep app-custom-button {
+    flex: 1;
+  }
+} 

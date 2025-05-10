@@ -1,1 +1,1 @@
-export const deleteCategorySlice = 'delete-category'; 
+export const deleteCategorySlice = 'delete-category';

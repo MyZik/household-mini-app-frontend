@@ -9,4 +9,4 @@ export const deleteItemReducer = createReducer<DeleteItemState>(
     on(callDeleteItemRequestedAction, () => 'loading'),
     on(callDeleteItemSucceededAction, () => 'succeeded'),
     on(callDeleteItemFailedAction, () => 'load-failed')
-); 
+);

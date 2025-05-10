@@ -7,4 +7,4 @@ export const callDeleteCategoryFailedAction = createAction(
         categoryId: number;
         error: any;
     }>()
-); 
+);
