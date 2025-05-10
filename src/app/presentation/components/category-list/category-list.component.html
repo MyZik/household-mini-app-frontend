@@ -7,8 +7,8 @@
         message="Oh no...!"
         suggestion="Die Kategorien konnten nicht geladen werden. Bitte versuche es später erneut."
     />
-} @else if (isCreateFormSubmitted()) {
-    <app-loading-duck message="Quack! Kategorie wird erstellt..." duckType="spinning" />
+} @else if (isCreateCategorySubmitting()) {
+    <app-loading-duck message="Kategorie wird erstellt..." duckType="spinning" />
 } @else {
     @if (categoriesData && categoriesData.length === 0) {
         <div class="empty-container">

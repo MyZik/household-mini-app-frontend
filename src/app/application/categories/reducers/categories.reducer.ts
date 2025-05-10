@@ -1,45 +1,27 @@
 import { createReducer, on } from '@ngrx/store';
 import { CategoriesState, initialCategoriesState } from '../models/categories.state';
-import { createCategoryButtonClickedAction } from '../actions/create-category-button-clicked.action';
-import { callCreateCategorySucceededAction } from '../../../domain/create-category/actions/call-create-category.succeeded.action';
+import { createCategoryFormOpenedAction } from '../actions/create-category-form-opened.action';
 import { cancelCreateCategoryButtonClickedAction } from '../actions/cancel-create-category-button-clicked.action';
-import { callCreateCategoryFailedAction } from '../../../domain/create-category/actions/call-create-category.failed.action';
-import { createCategoryFormSubmittedAction } from '../actions/create-category-form-submitted.action';
+import { callCreateCategoryRequestedAction } from '../../../domain/create-category';
 
 export const categoriesReducer = createReducer<CategoriesState>(
     initialCategoriesState,
-    on(createCategoryButtonClickedAction, state => {
+    on(createCategoryFormOpenedAction, state => {
         return {
             ...state,
             isCreateFormActive: true,
         };
     }),
-    on(createCategoryFormSubmittedAction, state => {
-        return {
-            ...state,
-            isCreateFormSubmitted: true,
-            isCreateFormActive: false,
-        };
-    }),
-    on(callCreateCategorySucceededAction, state => {
+    on(callCreateCategoryRequestedAction, state => {
         return {
             ...state,
             isCreateFormActive: false,
-            isCreateFormSubmitted: false,
-        };
-    }),
-    on(callCreateCategoryFailedAction, state => {
-        return {
-            ...state,
-            isCreateFormActive: false,
-            isCreateFormSubmitted: false,
         };
     }),
     on(cancelCreateCategoryButtonClickedAction, state => {
         return {
             ...state,
             isCreateFormActive: false,
-            isCreateFormSubmitted: true,
         };
     })
 );

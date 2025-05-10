@@ -8,14 +8,13 @@ import { householdCategoriesWithItemsSelector } from '../../../application/house
 import { CategoryCardComponent } from '../category-card/category-card.component';
 import { CustomButtonComponent } from '../../shared/components/custom-button';
 import {
-    createCategoryButtonClickedAction,
+    createCategoryFormOpenedAction,
     isCreateCategoryFormActiveSelector,
+    isCreateCategorySubmittingSelector,
 } from '../../../application/categories';
 import { CategoryCreateFormComponent } from '../category-create-form';
 import { categoryCollapsedAction } from '../../../application/items';
-import { isCreateCategoryFormSubmittedSelector } from '../../../application/categories/selectors/is-create-category-form-submitted.selector';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { CategoryDeleteConfirmationComponent } from '../category-delete-confirmation/category-delete-confirmation.component';
+import { MatDialogModule } from '@angular/material/dialog';
 import { callDeleteCategoryRequestedAction } from '../../../domain/delete-category';
 
 @Component({
@@ -31,7 +30,6 @@ import { callDeleteCategoryRequestedAction } from '../../../domain/delete-catego
         ErrorMessageComponent,
         CustomButtonComponent,
         CategoryCreateFormComponent,
-        CategoryDeleteConfirmationComponent,
     ],
     templateUrl: './category-list.component.html',
     styleUrl: './category-list.component.less',
@@ -42,14 +40,11 @@ export class CategoryListComponent {
 
     protected categories = this.store.selectSignal(householdCategoriesWithItemsSelector);
     protected isCreateFormActive = this.store.selectSignal(isCreateCategoryFormActiveSelector);
-    protected isCreateFormSubmitted = this.store.selectSignal(
-        isCreateCategoryFormSubmittedSelector
+    protected isCreateCategorySubmitting = this.store.selectSignal(
+        isCreateCategorySubmittingSelector
     );
 
-    constructor(
-        private store: Store,
-        private dialog: MatDialog
-    ) {}
+    constructor(private store: Store) {}
 
     public togglePanel(categoryId: number): void {
         this.store.dispatch(
@@ -70,7 +65,7 @@ export class CategoryListComponent {
     }
 
     protected openCreateForm() {
-        this.store.dispatch(createCategoryButtonClickedAction());
+        this.store.dispatch(createCategoryFormOpenedAction());
     }
 
     protected onDeleteCategory(categoryId: number): void {

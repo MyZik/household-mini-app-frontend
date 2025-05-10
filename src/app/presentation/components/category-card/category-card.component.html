@@ -1,70 +1,68 @@
 @let categoryData = category();
 
 @if (categoryData) {
-    <div class="category-wrapper">
-        <div class="category-header-row">
-            <mat-card class="category-card">
-                <div class="category-header" (click)="onTogglePanel()">
-                    <div class="category-info">
-                        <span class="category-emoji">{{ categoryData.emoji }}</span>
-                        <span class="category-name">{{ categoryData.name }}</span>
-                    </div>
-                    <mat-icon class="toggle-button">
-                        {{ expanded() ? 'expand_less' : 'expand_more' }}
-                    </mat-icon>
+    <div class="category-header-row">
+        <mat-card>
+            <div class="category-header" (click)="onTogglePanel()">
+                <div class="category-info">
+                    <span class="category-emoji">{{ categoryData.emoji }}</span>
+                    <span class="category-name">{{ categoryData.name }}</span>
                 </div>
+                <mat-icon class="toggle-button">
+                    {{ expanded() ? 'expand_less' : 'expand_more' }}
+                </mat-icon>
+            </div>
 
-                @if (expanded()) {
-                    <mat-card-content class="category-items" (click)="$event.stopPropagation()">
-                        <div class="item-list">
-                            @for (item of categoryData.items; track item) {
-                                <app-category-item [item]="item" />
-                            }
+            @if (expanded()) {
+                <mat-card-content (click)="$event.stopPropagation()">
+                    <div class="item-list">
+                        @for (item of categoryData.items; track item) {
+                            <app-category-item [item]="item" />
+                        }
 
-                            @if (isCreateItemFormSubmitted()) {
-                                <div class="new-item-loading">
-                                    <app-loading-duck
-                                        duckType="spinning"
-                                        message="Produkt wird hinzugefügt..."
-                                        [spinnerDiameter]="30"
-                                        [compact]="true"
-                                    ></app-loading-duck>
-                                </div>
-                            }
+                        @if (isCreateItemFormSubmitted()) {
+                            <div class="new-item-loading">
+                                <app-loading-duck
+                                    duckType="spinning"
+                                    message="Produkt wird hinzugefügt..."
+                                    [spinnerDiameter]="30"
+                                    [compact]="true"
+                                ></app-loading-duck>
+                            </div>
+                        }
 
-                            @if (isCategoryItemsListLoading()) {
-                                <div class="new-item-loading">
-                                    <app-loading-duck
-                                        duckType="spinning"
-                                        message="Lade die Liste neu..."
-                                        [spinnerDiameter]="30"
-                                        [compact]="true"
-                                    ></app-loading-duck>
-                                </div>
-                            }
+                        @if (isCategoryItemsListLoading()) {
+                            <div class="new-item-loading">
+                                <app-loading-duck
+                                    duckType="spinning"
+                                    message="Lade die Liste neu..."
+                                    [spinnerDiameter]="30"
+                                    [compact]="true"
+                                ></app-loading-duck>
+                            </div>
+                        }
 
-                            @if (isCreateItemFormActive()) {
-                                <app-category-item-form [categoryId]="categoryData.id" />
-                            } @else {
-                                <app-custom-button
-                                    buttonType="primary"
-                                    text="Neues Produkt hinzfügen"
-                                    (onClick)="openCreateItemForm()"
-                                />
-                            }
-                        </div>
-                    </mat-card-content>
-                }
-            </mat-card>
+                        @if (isCreateItemFormActive()) {
+                            <app-category-item-form [categoryId]="categoryData.id" />
+                        } @else {
+                            <app-custom-button
+                                buttonType="primary"
+                                text="Neues Produkt hinzfügen"
+                                (onClick)="openCreateItemForm()"
+                            />
+                        }
+                    </div>
+                </mat-card-content>
+            }
+        </mat-card>
 
-            <button
-                class="delete-button"
-                (click)="onDeleteCategory($event)"
-                aria-label="Kategorie löschen"
-            >
-                <mat-icon class="delete-icon">delete</mat-icon>
-            </button>
-        </div>
+        <button
+            class="delete-button"
+            (click)="onDeleteCategory($event)"
+            aria-label="Kategorie löschen"
+        >
+            <mat-icon class="delete-icon">delete</mat-icon>
+        </button>
     </div>
 }
 

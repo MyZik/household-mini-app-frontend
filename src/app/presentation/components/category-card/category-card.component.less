@@ -1,7 +1,6 @@
 .category-wrapper {
   position: relative;
   width: 100%;
-  margin-bottom: 16px;
 }
 
 .category-header-row {
@@ -11,7 +10,7 @@
   position: relative;
 }
 
-.category-card {
+mat-card {
   border-radius: 16px;
   overflow: hidden;
   background-color: var(--card-background);
@@ -19,13 +18,19 @@
   backdrop-filter: blur(10px);
   box-shadow: var(--card-shadow);
   transition: all 0.3s ease;
-  padding: 0;
   width: 100%;
 
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   }
+}
+
+mat-card-content {
+  padding: 12px 18px 18px;
+  margin: 0;
+  cursor: default;
+  border-top: 1px solid var(--separator-border);
 }
 
 .category-header {
@@ -118,13 +123,6 @@
   opacity: 0.5;
   transition: all 0.2s ease;
   font-size: 22px;
-}
-
-.category-items {
-  padding: 12px 18px 18px;
-  margin: 0;
-  cursor: default;
-  border-top: 1px solid var(--separator-border);
 }
 
 .item-list {
