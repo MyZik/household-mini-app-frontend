@@ -1,26 +1,32 @@
 @switch (buttonType()) {
     @case ('primary') {
-        <button mat-raised-button [disabled]="disabled()" (click)="handleClick()">
+        <button mat-raised-button [type]="type()" [disabled]="disabled()" (click)="handleClick()">
             {{ text() }}
         </button>
     }
     @case ('secondary') {
-        <button mat-button [disabled]="disabled()" (click)="handleClick()">
+        <button mat-button [type]="type()" [disabled]="disabled()" (click)="handleClick()">
             {{ text() }}
         </button>
     }
     @case ('accent') {
-        <button mat-raised-button color="accent" [disabled]="disabled()" (click)="handleClick()">
+        <button
+            mat-raised-button
+            color="accent"
+            [type]="type()"
+            [disabled]="disabled()"
+            (click)="handleClick()"
+        >
             {{ text() }}
         </button>
     }
     @case ('outline') {
-        <button mat-stroked-button [disabled]="disabled()" (click)="handleClick()">
+        <button mat-stroked-button [type]="type()" [disabled]="disabled()" (click)="handleClick()">
             {{ text() }}
         </button>
     }
     @case ('flat') {
-        <button mat-flat-button [disabled]="disabled()" (click)="handleClick()">
+        <button mat-flat-button [type]="type()" [disabled]="disabled()" (click)="handleClick()">
             {{ text() }}
         </button>
     }

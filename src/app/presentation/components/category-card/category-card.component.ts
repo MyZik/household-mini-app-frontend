@@ -10,13 +10,17 @@ import {
     isCreateItemFormActiveSelector,
     isCreateItemFormSubmittedSelector,
 } from '../../../application/items';
-import { toggleCategoryVisibilityIconClickedAction } from '../../../application/categories';
+import {
+    isUpdatingCategoryDataSelector,
+    isUpdatingCategoryVisibilitySelector,
+    toggleCategoryVisibilityIconClickedAction,
+} from '../../../application/categories';
 import { CategoryItemFormComponent } from '../category-item-form/category-item-form.component';
 import { LoadingDuckComponent } from '../../shared/components/loading-duck';
 import { isLoadingItemsByCategorySelector } from '../../../domain/get-items-by-category';
 import { CategoryDeleteConfirmationComponent } from '../category-delete-confirmation/category-delete-confirmation.component';
+import { CategoryEditFormComponent } from '../category-edit-form/category-edit-form.component';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
-import { isUpdatingCategoryVisibilitySelector } from '../../../domain/update-category-visibility';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 interface CategoryItem {
@@ -46,6 +50,7 @@ interface Category {
         CategoryItemFormComponent,
         LoadingDuckComponent,
         CategoryDeleteConfirmationComponent,
+        CategoryEditFormComponent,
         ModalWrapperComponent,
         MatProgressSpinnerModule,
     ],
@@ -56,6 +61,7 @@ export class CategoryCardComponent {
     public readonly category = input.required<Category>();
     public expanded = input.required<boolean>();
     protected isDeleteModalOpen = signal(false);
+    protected isEditModalOpen = signal(false);
 
     protected isCreateItemFormActive = computed(() =>
         this.store.selectSignal(isCreateItemFormActiveSelector(this.category().id))()
@@ -73,8 +79,13 @@ export class CategoryCardComponent {
         this.store.selectSignal(isUpdatingCategoryVisibilitySelector(this.category().id))()
     );
 
+    protected isUpdatingCategoryData = computed(() =>
+        this.store.selectSignal(isUpdatingCategoryDataSelector(this.category().id))()
+    );
+
     @Output() toggleExpand = new EventEmitter<number>();
     @Output() deleteCategory = new EventEmitter<number>();
+    @Output() editCategory = new EventEmitter<{ id: number; name: string; emoji: string }>();
 
     constructor(private readonly store: Store) {}
 
@@ -113,5 +124,19 @@ export class CategoryCardComponent {
                 isVisible: shouldBeVisible,
             })
         );
+    }
+
+    protected onEditCategory(event: Event): void {
+        event.stopPropagation();
+        this.isEditModalOpen.set(true);
+    }
+
+    protected closeEditModal(): void {
+        this.isEditModalOpen.set(false);
+    }
+
+    protected confirmEdit(data: { id: number; name: string; emoji: string }): void {
+        this.editCategory.emit(data);
+        this.closeEditModal();
     }
 }

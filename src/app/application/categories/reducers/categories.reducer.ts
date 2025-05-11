@@ -6,6 +6,7 @@ import { callCreateCategoryRequestedAction } from '../../../domain/create-catego
 import { toggleShowHiddenCategoriesAction } from '../actions/toggle-show-hidden-categories.action';
 import { callDeleteCategoryRequestedAction } from '../../../domain/delete-category';
 import { callUpdateCategoryVisibilitySucceededAction } from '../../../domain/update-category-visibility/actions/call-update-category-visibility.succeeded.action';
+import { callUpdateCategoryDataSucceededAction } from '../../../domain/update-category-data/actions/call-update-category-data.succeeded.action';
 
 export const categoriesReducer = createReducer<CategoriesState>(
     initialCategoriesState,
@@ -46,6 +47,18 @@ export const categoriesReducer = createReducer<CategoriesState>(
             visibilityUpdates: {
                 ...state.visibilityUpdates,
                 [action.categoryId]: Boolean(action.response.isVisible),
+            },
+        };
+    }),
+    on(callUpdateCategoryDataSucceededAction, (state, action) => {
+        return {
+            ...state,
+            categoryDataUpdates: {
+                ...state.categoryDataUpdates,
+                [action.categoryId]: {
+                    name: action.name,
+                    emoji: action.emoji,
+                },
             },
         };
     })

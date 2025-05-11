@@ -17,6 +17,7 @@ export * from './getItemsByCategory200Response';
 export * from './getItemsByCategory200ResponseItemsInner';
 export * from './getUserByTelegramIdResponseBody';
 export * from './getUserByTelegramIdResponseBodySettings';
+export * from './updateCategoryRequest';
 export * from './updateCategoryVisibility200Response';
 export * from './updateCategoryVisibilityRequest';
 export * from './updateItemQuantityRequest';

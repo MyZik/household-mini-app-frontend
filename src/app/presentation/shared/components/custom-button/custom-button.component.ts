@@ -13,6 +13,7 @@ export class CustomButtonComponent {
     public buttonType = input.required<'primary' | 'secondary' | 'accent' | 'outline' | 'flat'>();
     public text = input.required<string>();
     public disabled = input<boolean>(false);
+    public type = input<'button' | 'submit' | 'reset'>('button');
     @Output() onClick = new EventEmitter<void>();
 
     handleClick(): void {

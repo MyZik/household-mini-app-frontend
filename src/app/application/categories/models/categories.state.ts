@@ -4,6 +4,7 @@ export interface CategoriesState {
     isDeleteCategoryLoading: boolean;
     showHiddenCategories: boolean;
     visibilityUpdates: Record<number, boolean>; // CategoryId -> isVisible
+    categoryDataUpdates: Record<number, { name: string; emoji: string }>; // CategoryId -> {name, emoji}
 }
 
 export const initialCategoriesState: CategoriesState = {
@@ -12,4 +13,5 @@ export const initialCategoriesState: CategoriesState = {
     isDeleteCategoryLoading: false,
     showHiddenCategories: false,
     visibilityUpdates: {},
+    categoryDataUpdates: {},
 };

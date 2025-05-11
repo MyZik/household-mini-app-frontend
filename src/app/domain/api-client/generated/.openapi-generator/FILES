@@ -30,6 +30,7 @@ model/getItemsByCategory200ResponseItemsInner.ts
 model/getUserByTelegramIdResponseBody.ts
 model/getUserByTelegramIdResponseBodySettings.ts
 model/models.ts
+model/updateCategoryRequest.ts
 model/updateCategoryVisibility200Response.ts
 model/updateCategoryVisibilityRequest.ts
 model/updateItemQuantityRequest.ts

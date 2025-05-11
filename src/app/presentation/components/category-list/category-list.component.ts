@@ -12,11 +12,13 @@ import {
     isCreateCategoryFormActiveSelector,
     isCreateCategorySubmittingSelector,
     isDeleteCategoryLoadingSelector,
+    editCategoryIconClickedAction,
 } from '../../../application/categories';
 import { CategoryCreateFormComponent } from '../category-create-form';
 import { categoryCollapsedAction } from '../../../application/items';
 import { MatDialogModule } from '@angular/material/dialog';
 import { callDeleteCategoryRequestedAction } from '../../../domain/delete-category';
+import { callUpdateCategoryDataRequestedAction } from '../../../domain/update-category-data';
 
 @Component({
     selector: 'app-category-list',
@@ -76,6 +78,16 @@ export class CategoryListComponent {
         this.store.dispatch(
             callDeleteCategoryRequestedAction({
                 categoryId: categoryId,
+            })
+        );
+    }
+
+    protected onEditCategory(data: { id: number; name: string; emoji: string }): void {
+        this.store.dispatch(
+            editCategoryIconClickedAction({
+                categoryId: data.id,
+                name: data.name,
+                emoji: data.emoji,
             })
         );
     }

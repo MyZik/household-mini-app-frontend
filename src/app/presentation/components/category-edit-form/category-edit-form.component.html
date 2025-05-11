@@ -1,0 +1,61 @@
+@let categoryDataSignal = categoryData();
+
+@if (categoryDataSignal) {
+    <div class="edit-form-container">
+        <div class="duck-image-container">
+            <img
+                src="assets/duck-with-pencil-transparent.png"
+                alt="Entchen mit Stift"
+                class="duck-image"
+            />
+        </div>
+
+        <h2 class="form-title">Kategorie bearbeiten</h2>
+
+        <form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+            <div class="form-fields">
+                <div class="form-row">
+                    <div class="form-field emoji-field">
+                        <label for="categoryEmoji">Emoji:</label>
+                        <select id="categoryEmoji" formControlName="emoji" class="emoji-select">
+                            @for (emoji of emojis; track emoji) {
+                                <option [value]="emoji">{{ emoji }}</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-field name-field">
+                        <label for="categoryName">Name:</label>
+                        <input
+                            type="text"
+                            id="categoryName"
+                            formControlName="name"
+                            class="input-field"
+                            placeholder="Kategoriename eingeben"
+                            autocomplete="off"
+                        />
+                        @if (editForm.get('name')?.invalid && editForm.get('name')?.touched) {
+                            <div class="error-message">Der Name ist erforderlich.</div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <app-custom-button
+                    buttonType="secondary"
+                    text="Abbrechen"
+                    type="button"
+                    (onClick)="onCancelEdit()"
+                ></app-custom-button>
+
+                <app-custom-button
+                    buttonType="accent"
+                    text="Speichern"
+                    type="submit"
+                    [disabled]="editForm.invalid"
+                ></app-custom-button>
+            </div>
+        </form>
+    </div>
+}

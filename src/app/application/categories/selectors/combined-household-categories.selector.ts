@@ -3,14 +3,17 @@ import { householdCategoriesSelector } from '../../households/selectors/househol
 import { GetHouseholdCategoriesResponseBodyCategoriesInner } from '../../../domain/api-client';
 import { showHiddenCategoriesSelector } from './show-hidden-categories.selector';
 import { categoriesVisibilityUpdatesSelector } from './categories-visibility-updates.selector';
+import { categoryDataUpdatesSelector } from './category-data-updates.selector';
 
 export const combinedHouseholdCategoriesSelector = createSelector(
     householdCategoriesSelector,
     categoriesVisibilityUpdatesSelector,
+    categoryDataUpdatesSelector,
     showHiddenCategoriesSelector,
     (
         domainCategories,
         visibilityUpdates,
+        dataUpdates,
         showHiddenCategories
     ):
         | 'not-loaded'
@@ -23,13 +26,24 @@ export const combinedHouseholdCategoriesSelector = createSelector(
 
         const categoriesWithUpdates = domainCategories.map(category => {
             const categoryId = category.id;
+            let updatedCategory = { ...category };
+
             if (categoryId in visibilityUpdates) {
-                return {
-                    ...category,
+                updatedCategory = {
+                    ...updatedCategory,
                     isVisibleForCurrentUser: visibilityUpdates[categoryId],
                 };
             }
-            return category;
+
+            if (categoryId in dataUpdates) {
+                updatedCategory = {
+                    ...updatedCategory,
+                    name: dataUpdates[categoryId].name,
+                    emoji: dataUpdates[categoryId].emoji,
+                };
+            }
+
+            return updatedCategory;
         });
 
         if (!showHiddenCategories) {
