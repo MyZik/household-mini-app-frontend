@@ -10,6 +10,24 @@
   position: relative;
 }
 
+.hidden-category {
+  mat-card {
+    opacity: 0.7;
+    background-color: rgba(0, 0, 0, 0.05);
+
+    .dark-theme & {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .category-name {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+
+    border-style: dashed;
+  }
+}
+
 mat-card {
   border-radius: 16px;
   overflow: hidden;
@@ -19,11 +37,27 @@ mat-card {
   box-shadow: var(--card-shadow);
   transition: all 0.3s ease;
   width: 100%;
+  position: relative;
 
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   }
+}
+
+.visibility-updating-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  border-radius: 16px;
+  backdrop-filter: blur(2px);
 }
 
 mat-card-content {
@@ -85,7 +119,18 @@ mat-card-content {
   }
 }
 
-.delete-button {
+.category-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-left: 12px;
+  margin-top: 16px;
+  position: sticky;
+  top: 18px;
+  z-index: 2;
+}
+
+.delete-button, .visibility-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,32 +138,44 @@ mat-card-content {
   height: 50px;
   cursor: pointer;
   padding: 0;
-  margin-left: 12px;
-  margin-top: 16px;
   transition: all 0.2s ease;
   flex-shrink: 0;
   background-color: var(--card-background);
   border-radius: 50%;
   border: 1px solid var(--border-color);
   box-shadow: var(--card-shadow);
-  position: sticky;
-  top: 18px;
-  z-index: 2;
   opacity: 0.85;
 
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     opacity: 1;
+  }
 
-    .delete-icon {
-      color: var(--ut-danger);
-      opacity: 1;
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
     }
   }
 }
 
-.delete-icon {
+.delete-button:hover .delete-icon {
+  color: var(--ut-danger);
+  opacity: 1;
+}
+
+.visibility-button:hover .visibility-icon {
+  color: var(--ut-primary);
+  opacity: 1;
+}
+
+.delete-icon, .visibility-icon {
   color: var(--card-text);
   opacity: 0.5;
   transition: all 0.2s ease;

@@ -24,6 +24,10 @@ import { CreateCategory201Response } from '../model/createCategory201Response';
 import { CreateCategoryRequest } from '../model/createCategoryRequest';
 // @ts-ignore
 import { GetCategoryByIdResponse } from '../model/getCategoryByIdResponse';
+// @ts-ignore
+import { UpdateCategoryVisibility200Response } from '../model/updateCategoryVisibility200Response';
+// @ts-ignore
+import { UpdateCategoryVisibilityRequest } from '../model/updateCategoryVisibilityRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -307,6 +311,80 @@ export class CategoriesService {
         return this.httpClient.request<GetCategoryByIdResponse>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                transferCache: localVarTransferCache,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update visibility of a category for a user
+     * @param updateCategoryVisibilityRequest 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateCategoryVisibility(updateCategoryVisibilityRequest: UpdateCategoryVisibilityRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<UpdateCategoryVisibility200Response>;
+    public updateCategoryVisibility(updateCategoryVisibilityRequest: UpdateCategoryVisibilityRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<UpdateCategoryVisibility200Response>>;
+    public updateCategoryVisibility(updateCategoryVisibilityRequest: UpdateCategoryVisibilityRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<UpdateCategoryVisibility200Response>>;
+    public updateCategoryVisibility(updateCategoryVisibilityRequest: UpdateCategoryVisibilityRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        if (updateCategoryVisibilityRequest === null || updateCategoryVisibilityRequest === undefined) {
+            throw new Error('Required parameter updateCategoryVisibilityRequest was null or undefined when calling updateCategoryVisibility.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+        let localVarTransferCache: boolean | undefined = options && options.transferCache;
+        if (localVarTransferCache === undefined) {
+            localVarTransferCache = true;
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/categories/update-category-visibility`;
+        return this.httpClient.request<UpdateCategoryVisibility200Response>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: updateCategoryVisibilityRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

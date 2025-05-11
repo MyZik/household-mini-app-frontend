@@ -1,6 +1,7 @@
 @let userLoadStatusSignal = userDataLoadStatus();
 @let userDataSignal = userData();
 @let createUserStatusSignal = createUserStatus();
+@let showHiddenCategoriesValue = showHiddenCategories();
 
 <div class="app-container">
     <header class="app-header">
@@ -8,7 +9,16 @@
             <div class="logo-container">
                 <img src="assets/duck-logo.png" alt="Logo" class="app-logo" />
             </div>
-            <div class="theme-toggle">
+            <div class="header-controls">
+                <button
+                    mat-icon-button
+                    (click)="toggleShowHiddenCategories()"
+                    aria-label="Versteckte Kategorien anzeigen"
+                >
+                    <mat-icon>{{
+                        showHiddenCategoriesValue ? 'visibility' : 'visibility_off'
+                    }}</mat-icon>
+                </button>
                 <mat-slide-toggle [checked]="isDarkTheme" (change)="toggleTheme()" color="primary">
                     <mat-icon>{{ isDarkTheme ? 'dark_mode' : 'light_mode' }}</mat-icon>
                 </mat-slide-toggle>

@@ -19,10 +19,11 @@ import {
     LoadingDuckComponent,
     WelcomeComponent,
 } from './presentation/shared/components';
+import { setTelegramInitDataAction } from './domain/telegram-init-data';
 import {
-    setTelegramInitDataAction,
-    telegramInitDataFeatureSelector,
-} from './domain/telegram-init-data';
+    showHiddenCategoriesSelector,
+    toggleShowHiddenCategoriesAction,
+} from './application/categories';
 
 @Component({
     selector: 'app-root',
@@ -45,6 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly themeService = inject(ThemeService);
 
     public isDarkTheme = false;
+    protected showHiddenCategories = this.store.selectSignal(showHiddenCategoriesSelector);
 
     protected backendUserData = this.store.selectSignal(getUserByTelegramIdFeatureSelector);
     protected userDataLoadStatus = this.store.selectSignal(userByTelegramIdLoadStatusSelector);
@@ -111,6 +113,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     public toggleTheme(): void {
         this.themeService.toggleTheme();
+    }
+
+    public toggleShowHiddenCategories(): void {
+        this.store.dispatch(toggleShowHiddenCategoriesAction());
     }
 
     createAccount(): void {

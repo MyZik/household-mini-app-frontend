@@ -1,12 +1,13 @@
 import { createSelector } from '@ngrx/store';
-import { householdCategoriesSelector } from './household-categories.selector';
 import { householdItemsSelector } from './household-items.selector';
 import { getItemsByCategoryFeatureSelector } from '../../../domain/get-items-by-category';
+import { combinedHouseholdCategoriesSelector } from '../../categories/selectors/combined-household-categories.selector';
 
 export interface CategoryWithItems {
     id: number;
     name: string;
     emoji: string;
+    isVisibleForCurrentUser: boolean;
     items: ItemModel[];
 }
 
@@ -19,7 +20,7 @@ export interface ItemModel {
 }
 
 export const householdCategoriesWithItemsSelector = createSelector(
-    householdCategoriesSelector,
+    combinedHouseholdCategoriesSelector,
     householdItemsSelector,
     getItemsByCategoryFeatureSelector,
     (
@@ -68,6 +69,7 @@ export const householdCategoriesWithItemsSelector = createSelector(
                 id: category.id,
                 name: category.name,
                 emoji: category.emoji,
+                isVisibleForCurrentUser: category.isVisibleForCurrentUser,
                 items: categoryItems,
             });
         }

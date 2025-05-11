@@ -1,7 +1,15 @@
 export interface CategoriesState {
-    isCreateFormActive: boolean;
+    isCreateCategoryFormActive: boolean;
+    isCreateCategorySubmitting: boolean;
+    isDeleteCategoryLoading: boolean;
+    showHiddenCategories: boolean;
+    visibilityUpdates: Record<number, boolean>; // CategoryId -> isVisible
 }
 
 export const initialCategoriesState: CategoriesState = {
-    isCreateFormActive: false,
+    isCreateCategoryFormActive: false,
+    isCreateCategorySubmitting: false,
+    isDeleteCategoryLoading: false,
+    showHiddenCategories: false,
+    visibilityUpdates: {},
 };

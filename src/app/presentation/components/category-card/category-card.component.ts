@@ -10,11 +10,14 @@ import {
     isCreateItemFormActiveSelector,
     isCreateItemFormSubmittedSelector,
 } from '../../../application/items';
+import { toggleCategoryVisibilityIconClickedAction } from '../../../application/categories';
 import { CategoryItemFormComponent } from '../category-item-form/category-item-form.component';
 import { LoadingDuckComponent } from '../../shared/components/loading-duck';
 import { isLoadingItemsByCategorySelector } from '../../../domain/get-items-by-category';
 import { CategoryDeleteConfirmationComponent } from '../category-delete-confirmation/category-delete-confirmation.component';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
+import { isUpdatingCategoryVisibilitySelector } from '../../../domain/update-category-visibility';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 interface CategoryItem {
     id: number;
@@ -28,6 +31,7 @@ interface Category {
     name: string;
     emoji: string;
     items: CategoryItem[];
+    isVisibleForCurrentUser: boolean;
 }
 
 @Component({
@@ -43,6 +47,7 @@ interface Category {
         LoadingDuckComponent,
         CategoryDeleteConfirmationComponent,
         ModalWrapperComponent,
+        MatProgressSpinnerModule,
     ],
     templateUrl: './category-card.component.html',
     styleUrl: './category-card.component.less',
@@ -62,6 +67,10 @@ export class CategoryCardComponent {
 
     protected isCategoryItemsListLoading = computed(() =>
         this.store.selectSignal(isLoadingItemsByCategorySelector(this.category().id))()
+    );
+
+    protected isUpdatingVisibility = computed(() =>
+        this.store.selectSignal(isUpdatingCategoryVisibilitySelector(this.category().id))()
     );
 
     @Output() toggleExpand = new EventEmitter<number>();
@@ -93,5 +102,16 @@ export class CategoryCardComponent {
     protected confirmDelete(categoryId: number): void {
         this.deleteCategory.emit(categoryId);
         this.closeDeleteModal();
+    }
+
+    protected onToggleVisibility(event: Event, categoryId: number, shouldBeVisible: boolean): void {
+        event.stopPropagation();
+
+        this.store.dispatch(
+            toggleCategoryVisibilityIconClickedAction({
+                categoryId: categoryId,
+                isVisible: shouldBeVisible,
+            })
+        );
     }
 }

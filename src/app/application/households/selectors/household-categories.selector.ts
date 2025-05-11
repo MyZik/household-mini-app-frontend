@@ -1,10 +1,16 @@
 import { createSelector } from '@ngrx/store';
 import { getHouseholdCategoriesFeatureSelector } from '../../../domain/get-household-categories';
-import { Category } from '../../models/category';
+import { GetHouseholdCategoriesResponseBodyCategoriesInner } from '../../../domain/api-client';
 
 export const householdCategoriesSelector = createSelector(
     getHouseholdCategoriesFeatureSelector,
-    (categoriesState): 'not-loaded' | 'loading' | 'load-failed' | Category[] => {
+    (
+        categoriesState
+    ):
+        | 'not-loaded'
+        | 'loading'
+        | 'load-failed'
+        | GetHouseholdCategoriesResponseBodyCategoriesInner[] => {
         if (
             categoriesState === 'loading' ||
             categoriesState === 'load-failed' ||
@@ -13,10 +19,6 @@ export const householdCategoriesSelector = createSelector(
             return categoriesState;
         }
 
-        return categoriesState.categories.map(category => ({
-            id: category.id,
-            name: category.name,
-            emoji: category.emoji,
-        }));
+        return categoriesState.categories;
     }
 );

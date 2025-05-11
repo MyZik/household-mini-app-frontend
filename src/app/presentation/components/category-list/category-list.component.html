@@ -1,47 +1,51 @@
 @let categoriesData = categories();
 
-@if (categoriesData === 'loading' || categoriesData === 'not-loaded') {
-    <app-loading-duck message="Kategorien werden geladen..." duckType="dancing" />
-} @else if (categoriesData === 'load-failed') {
-    <app-error-message
-        message="Oh no...!"
-        suggestion="Die Kategorien konnten nicht geladen werden. Bitte versuche es später erneut."
-    />
-} @else if (isDeleteCategoryLoading()) {
-    <app-loading-duck message="Kategorie wird gelöscht..." duckType="spinning" />
-} @else if (isCreateCategorySubmitting()) {
-    <app-loading-duck message="Kategorie wird erstellt..." duckType="spinning" />
-} @else {
-    @if (categoriesData && categoriesData.length === 0) {
-        <div class="empty-container">
-            <img src="assets/duck-lens-transparent.png" alt="Entchen" />
-            <p class="empty-message">Keine Kategorien gefunden.</p>
-            <p class="empty-suggestion">Möchtest du deine erste Kategorie erstellen?</p>
+<div class="category-container">
+    @if (categoriesData === 'loading' || categoriesData === 'not-loaded') {
+        <div class="loading-state">
+            <app-loading-duck message="Kategorien werden geladen..." duckType="dancing" />
         </div>
-    } @else {
-        <div class="category-list-container">
-            <h1 class="category-list-title">Meine Kategorien</h1>
-
-            <div class="category-cards">
-                @for (category of categoriesData; track category.id) {
-                    <app-category-card
-                        [category]="category"
-                        [expanded]="isPanelExpanded(category.id)"
-                        (toggleExpand)="togglePanel($event)"
-                        (deleteCategory)="onDeleteCategory($event)"
-                    />
-                }
-            </div>
-        </div>
-    }
-
-    @if (isCreateFormActive()) {
-        <app-category-create-form />
-    } @else {
-        <app-custom-button
-            buttonType="accent"
-            text="Neue Kategorie erstellen"
-            (onClick)="openCreateForm()"
+    } @else if (categoriesData === 'load-failed') {
+        <app-error-message
+            message="Oh no...!"
+            suggestion="Die Kategorien konnten nicht geladen werden. Bitte versuche es später erneut."
         />
+    } @else if (isDeleteCategoryLoading()) {
+        <app-loading-duck message="Kategorie wird gelöscht..." duckType="spinning" />
+    } @else if (isCreateCategorySubmitting()) {
+        <app-loading-duck message="Kategorie wird erstellt..." duckType="spinning" />
+    } @else {
+        @if (categoriesData && categoriesData.length === 0) {
+            <div class="empty-container">
+                <img src="assets/duck-lens-transparent.png" alt="Entchen" />
+                <p class="empty-message">Keine Kategorien gefunden.</p>
+                <p class="empty-suggestion">Möchtest du deine erste Kategorie erstellen?</p>
+            </div>
+        } @else {
+            <div class="category-list-container">
+                <h1 class="category-list-title">Meine Kategorien</h1>
+
+                <div class="category-cards">
+                    @for (category of categoriesData; track category.id) {
+                        <app-category-card
+                            [category]="category"
+                            [expanded]="isPanelExpanded(category.id)"
+                            (toggleExpand)="togglePanel($event)"
+                            (deleteCategory)="onDeleteCategory($event)"
+                        />
+                    }
+                </div>
+            </div>
+        }
+
+        @if (isCreateFormActive()) {
+            <app-category-create-form />
+        } @else {
+            <app-custom-button
+                buttonType="accent"
+                text="Neue Kategorie erstellen"
+                (onClick)="openCreateForm()"
+            />
+        }
     }
-}
+</div>

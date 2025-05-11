@@ -43,19 +43,26 @@ body {
       filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
     }
 
-    .theme-toggle {
+    .header-controls {
       position: absolute;
       right: 16px;
       top: 50%;
       transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 12px;
 
-      mat-icon {
-        margin-left: 8px;
-        vertical-align: middle;
-        color: white;
-        font-size: 20px;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-      }
+        mat-icon {
+          color: white;
+          vertical-align: middle;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+          font-size: 20px;
+          transition: all 0.2s ease;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
     }
   }
 }
@@ -94,8 +101,17 @@ body {
       }
     }
 
-    .theme-toggle {
+    .header-controls {
       right: 8px;
+      gap: 8px;
+
+      .visibility-toggle {
+        margin-right: 2px;
+
+        mat-icon {
+          font-size: 22px;
+        }
+      }
     }
   }
 

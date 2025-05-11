@@ -3,25 +3,50 @@ import { CategoriesState, initialCategoriesState } from '../models/categories.st
 import { createCategoryFormOpenedAction } from '../actions/create-category-form-opened.action';
 import { cancelCreateCategoryButtonClickedAction } from '../actions/cancel-create-category-button-clicked.action';
 import { callCreateCategoryRequestedAction } from '../../../domain/create-category';
+import { toggleShowHiddenCategoriesAction } from '../actions/toggle-show-hidden-categories.action';
+import { callDeleteCategoryRequestedAction } from '../../../domain/delete-category';
+import { callUpdateCategoryVisibilitySucceededAction } from '../../../domain/update-category-visibility/actions/call-update-category-visibility.succeeded.action';
 
 export const categoriesReducer = createReducer<CategoriesState>(
     initialCategoriesState,
     on(createCategoryFormOpenedAction, state => {
         return {
             ...state,
-            isCreateFormActive: true,
+            isCreateCategoryFormActive: true,
         };
     }),
     on(callCreateCategoryRequestedAction, state => {
         return {
             ...state,
-            isCreateFormActive: false,
+            isCreateCategoryFormActive: false,
+            isCreateCategorySubmitting: true,
         };
     }),
     on(cancelCreateCategoryButtonClickedAction, state => {
         return {
             ...state,
-            isCreateFormActive: false,
+            isCreateCategoryFormActive: false,
+        };
+    }),
+    on(callDeleteCategoryRequestedAction, state => {
+        return {
+            ...state,
+            isDeleteCategoryLoading: true,
+        };
+    }),
+    on(toggleShowHiddenCategoriesAction, state => {
+        return {
+            ...state,
+            showHiddenCategories: !state.showHiddenCategories,
+        };
+    }),
+    on(callUpdateCategoryVisibilitySucceededAction, (state, action) => {
+        return {
+            ...state,
+            visibilityUpdates: {
+                ...state.visibilityUpdates,
+                [action.categoryId]: Boolean(action.response.isVisible),
+            },
         };
     })
 );

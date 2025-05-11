@@ -26,6 +26,7 @@ import { TELEGRAM_INIT_DATA_PROVIDERS } from './domain/telegram-init-data';
 import { HTTP_INTERCEPTOR_PROVIDERS, telegramInitDataInterceptorFn } from './infrastructure/http';
 import { DELETE_CATEGORY_PROVIDERS } from './domain/delete-category';
 import { DELETE_ITEM_PROVIDERS } from './domain/delete-item';
+import { UPDATE_CATEGORY_VISIBILITY_PROVIDERS } from './domain/update-category-visibility/update-category-visibility.providers';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -53,6 +54,7 @@ export const appConfig: ApplicationConfig = {
         ...DELETE_CATEGORY_PROVIDERS,
         ...DELETE_ITEM_PROVIDERS,
         ...TELEGRAM_INIT_DATA_PROVIDERS,
+        ...UPDATE_CATEGORY_VISIBILITY_PROVIDERS,
 
         // Application
         ...HOUSEHOLDS_LAYER_PROVIDERS,

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { bufferTime, filter, map, withLatestFrom } from 'rxjs/operators';
 import { userByTelegramIdSelector } from '../../users';
 import { filterNullValues } from '../../../infrastructure/operators/src';
 import { callCreateCategorySucceededAction } from '../../../domain/create-category/actions/call-create-category.succeeded.action';
@@ -18,8 +18,11 @@ export class UpdateCategoriesListOnDispatchedActionsEffect {
     public readonly effect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(callCreateCategorySucceededAction, callDeleteCategorySucceededAction),
+            // Sammle alle Actions innerhalb von 300ms
+            bufferTime(300),
+            filter(actions => actions.length > 0),
             withLatestFrom(this.store.select(userByTelegramIdSelector).pipe(filterNullValues())),
-            map(([_action, user]) =>
+            map(([_actions, user]) =>
                 callGetHouseholdCategoriesRequestedAction({
                     userId: user.userId,
                     householdId: user.settings?.defaultHouseholdId,

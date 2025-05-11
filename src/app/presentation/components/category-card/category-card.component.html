@@ -1,8 +1,17 @@
 @let categoryData = category();
+@let isUpdatingVisibilityState = isUpdatingVisibility();
 
 @if (categoryData) {
-    <div class="category-header-row">
+    <div
+        class="category-header-row"
+        [class.hidden-category]="!categoryData.isVisibleForCurrentUser"
+    >
         <mat-card>
+            @if (isUpdatingVisibilityState) {
+                <div class="visibility-updating-overlay">
+                    <mat-spinner diameter="30"></mat-spinner>
+                </div>
+            }
             <div class="category-header" (click)="onTogglePanel()">
                 <div class="category-info">
                     <span class="category-emoji">{{ categoryData.emoji }}</span>
@@ -56,13 +65,32 @@
             }
         </mat-card>
 
-        <button
-            class="delete-button"
-            (click)="onDeleteCategory($event)"
-            aria-label="Kategorie löschen"
-        >
-            <mat-icon class="delete-icon">delete</mat-icon>
-        </button>
+        <div class="category-actions">
+            <button
+                class="visibility-button"
+                (click)="
+                    onToggleVisibility(
+                        $event,
+                        categoryData.id,
+                        !categoryData.isVisibleForCurrentUser
+                    )
+                "
+                aria-label="Kategorie sichtbarkeit ändern"
+                [disabled]="isUpdatingVisibilityState"
+            >
+                <mat-icon class="visibility-icon">
+                    {{ categoryData.isVisibleForCurrentUser ? 'visibility' : 'visibility_off' }}
+                </mat-icon>
+            </button>
+
+            <button
+                class="delete-button"
+                (click)="onDeleteCategory($event)"
+                aria-label="Kategorie löschen"
+            >
+                <mat-icon class="delete-icon">delete</mat-icon>
+            </button>
+        </div>
     </div>
 
     <app-modal-wrapper [isOpen]="isDeleteModalOpen()" (close)="closeDeleteModal()">
