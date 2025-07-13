@@ -18,9 +18,11 @@
                     <span class="category-emoji">{{ categoryData.emoji }}</span>
                     <span class="category-name">{{ categoryData.name }}</span>
                 </div>
-                <mat-icon class="toggle-button">
-                    {{ expanded() ? 'expand_less' : 'expand_more' }}
-                </mat-icon>
+                <div class="header-actions">
+                    <mat-icon class="toggle-button">
+                        {{ expanded() ? 'expand_less' : 'expand_more' }}
+                    </mat-icon>
+                </div>
             </div>
 
             @if (expanded()) {
@@ -57,7 +59,7 @@
                         } @else {
                             <app-custom-button
                                 buttonType="primary"
-                                text="Neues Produkt hinzfügen"
+                                text="Neues Produkt hinzufügen"
                                 (onClick)="openCreateItemForm()"
                             />
                         }
@@ -68,41 +70,23 @@
 
         <div class="category-actions">
             <button
-                class="visibility-button"
-                (click)="
-                    onToggleVisibility(
-                        $event,
-                        categoryData.id,
-                        !categoryData.isVisibleForCurrentUser
-                    )
-                "
-                aria-label="Kategorie sichtbarkeit ändern"
+                class="more-button"
+                (click)="openBottomSheet($event)"
+                aria-label="Mehr Optionen"
                 [disabled]="isUpdatingVisibilityState || isUpdatingCategoryState"
             >
-                <mat-icon class="visibility-icon">
-                    {{ categoryData.isVisibleForCurrentUser ? 'visibility' : 'visibility_off' }}
-                </mat-icon>
-            </button>
-
-            <button
-                class="edit-button"
-                (click)="onEditCategory($event)"
-                aria-label="Kategorie bearbeiten"
-                [disabled]="isUpdatingVisibilityState || isUpdatingCategoryState"
-            >
-                <mat-icon class="edit-icon">edit</mat-icon>
-            </button>
-
-            <button
-                class="delete-button"
-                (click)="onDeleteCategory($event)"
-                aria-label="Kategorie löschen"
-                [disabled]="isUpdatingVisibilityState || isUpdatingCategoryState"
-            >
-                <mat-icon class="delete-icon">delete</mat-icon>
+                <mat-icon class="more-icon">more_vert</mat-icon>
             </button>
         </div>
     </div>
+
+    <app-bottom-sheet
+        [isOpen]="isBottomSheetOpen()"
+        [title]="categoryData.name"
+        [actions]="getBottomSheetActions()"
+        (close)="closeBottomSheet()"
+        (actionClick)="onBottomSheetAction($event)"
+    />
 
     <app-modal-wrapper [isOpen]="isDeleteModalOpen()" (close)="closeDeleteModal()">
         <app-category-delete-confirmation

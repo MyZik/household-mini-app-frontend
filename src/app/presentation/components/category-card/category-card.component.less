@@ -106,9 +106,14 @@ mat-card-content {
   color: var(--card-text);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .toggle-button {
   color: var(--card-text);
-  margin-right: 8px;
   display: flex;
   align-items: center;
   opacity: 0.8;
@@ -121,16 +126,14 @@ mat-card-content {
 
 .category-actions {
   display: flex;
-  flex-direction: row;
-  gap: 10px;
+  align-items: flex-start;
   margin-left: 12px;
   margin-top: 16px;
-  position: sticky;
-  top: 18px;
-  z-index: 2;
+  position: relative;
+  z-index: 3;
 }
 
-.delete-button, .visibility-button, .edit-button {
+.more-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,6 +155,11 @@ mat-card-content {
     opacity: 1;
   }
 
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
   &[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
@@ -165,26 +173,16 @@ mat-card-content {
   }
 }
 
-.delete-button:hover .delete-icon {
-  color: var(--ut-danger);
-  opacity: 1;
-}
-
-.visibility-button:hover .visibility-icon {
-  color: var(--ut-primary);
-  opacity: 1;
-}
-
-.edit-button:hover .edit-icon {
-  color: var(--ut-orange);
-  opacity: 1;
-}
-
-.delete-icon, .visibility-icon, .edit-icon {
+.more-icon {
   color: var(--card-text);
-  opacity: 0.5;
+  opacity: 0.7;
   transition: all 0.2s ease;
   font-size: 22px;
+}
+
+.more-button:hover .more-icon {
+  opacity: 1;
+  color: var(--ut-primary);
 }
 
 .item-list {
@@ -196,4 +194,25 @@ mat-card-content {
 .new-item-loading {
   margin-top: 8px;
   width: 100%;
+}
+
+// Mobile optimizations
+@media (max-width: 768px) {
+  .category-header {
+    padding: 16px;
+  }
+  
+  .category-actions {
+    margin-left: 8px;
+    margin-top: 12px;
+  }
+  
+  .more-button {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .more-icon {
+    font-size: 20px;
+  }
 }

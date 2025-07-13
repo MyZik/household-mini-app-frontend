@@ -22,6 +22,7 @@ import { CategoryDeleteConfirmationComponent } from '../category-delete-confirma
 import { CategoryEditFormComponent } from '../category-edit-form/category-edit-form.component';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { BottomSheetComponent, BottomSheetAction } from '../bottom-sheet/bottom-sheet.component';
 
 interface CategoryItem {
     id: number;
@@ -53,6 +54,7 @@ interface Category {
         CategoryEditFormComponent,
         ModalWrapperComponent,
         MatProgressSpinnerModule,
+        BottomSheetComponent,
     ],
     templateUrl: './category-card.component.html',
     styleUrl: './category-card.component.less',
@@ -62,6 +64,7 @@ export class CategoryCardComponent {
     public expanded = input.required<boolean>();
     protected isDeleteModalOpen = signal(false);
     protected isEditModalOpen = signal(false);
+    protected isBottomSheetOpen = signal(false);
 
     protected isCreateItemFormActive = computed(() =>
         this.store.selectSignal(isCreateItemFormActiveSelector(this.category().id))()
@@ -101,8 +104,61 @@ export class CategoryCardComponent {
         );
     }
 
-    protected onDeleteCategory(event: Event): void {
+    protected openBottomSheet(event: Event): void {
         event.stopPropagation();
+        this.isBottomSheetOpen.set(true);
+    }
+
+    protected closeBottomSheet(): void {
+        this.isBottomSheetOpen.set(false);
+    }
+
+    protected getBottomSheetActions(): BottomSheetAction[] {
+        const categoryData = this.category();
+        const isUpdating = this.isUpdatingVisibility() || this.isUpdatingCategoryData();
+        
+        return [
+            {
+                id: 'toggle-visibility',
+                label: categoryData.isVisibleForCurrentUser ? 'Ausblenden' : 'Einblenden',
+                icon: categoryData.isVisibleForCurrentUser ? 'visibility_off' : 'visibility',
+                color: 'primary',
+                disabled: isUpdating,
+            },
+            {
+                id: 'edit',
+                label: 'Bearbeiten',
+                icon: 'edit',
+                color: 'warning',
+                disabled: isUpdating,
+            },
+            {
+                id: 'delete',
+                label: 'Löschen',
+                icon: 'delete',
+                color: 'danger',
+                disabled: isUpdating,
+            },
+        ];
+    }
+
+    protected onBottomSheetAction(actionId: string): void {
+        this.closeBottomSheet();
+        
+        switch (actionId) {
+            case 'toggle-visibility':
+                this.onToggleVisibility();
+                break;
+            case 'edit':
+                this.onEditCategory();
+                break;
+            case 'delete':
+                this.onDeleteCategory();
+                break;
+        }
+    }
+
+    protected onDeleteCategory(): void {
         this.isDeleteModalOpen.set(true);
     }
 
@@ -115,19 +171,17 @@ export class CategoryCardComponent {
         this.closeDeleteModal();
     }
 
-    protected onToggleVisibility(event: Event, categoryId: number, shouldBeVisible: boolean): void {
-        event.stopPropagation();
-
+    protected onToggleVisibility(): void {
+        const categoryData = this.category();
         this.store.dispatch(
             toggleCategoryVisibilityIconClickedAction({
-                categoryId: categoryId,
-                isVisible: shouldBeVisible,
+                categoryId: categoryData.id,
+                isVisible: !categoryData.isVisibleForCurrentUser,
             })
         );
     }
 
-    protected onEditCategory(event: Event): void {
-        event.stopPropagation();
+    protected onEditCategory(): void {
         this.isEditModalOpen.set(true);
     }
 
