@@ -8,6 +8,7 @@ import { categoryCollapsedAction } from '../actions/category-collapsed.action';
 import { createItemFormSubmittedAction } from '../actions/create-item-form-submitted.action';
 import { itemQuantityEditModalOpenedAction } from '../actions/item-quantity-edit-modal-opened.action';
 import { itemQuantityEditModalClosedAction } from '../actions/item-quantity-edit-modal-closed.action';
+import { callUpdateItemQuantitySucceededAction } from '../../../domain/update-item-quantity/actions/call-update-item-quantity.succeeded.action';
 
 export const itemsReducer = createReducer<ItemsState>(
     initialItemsState,
@@ -78,6 +79,18 @@ export const itemsReducer = createReducer<ItemsState>(
         return {
             ...state,
             quantityEditModalItem: null,
+        };
+    }),
+    on(callUpdateItemQuantitySucceededAction, (state, action) => {
+        return {
+            ...state,
+            quantityUpdates: {
+                ...state.quantityUpdates,
+                [action.itemId]: {
+                    quantity: action.quantity,
+                    quantityType: action.quantityType,
+                },
+            },
         };
     })
 );

@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { ErrorMessageComponent, LoadingDuckComponent } from '../../shared/components';
 import { Store } from '@ngrx/store';
-import { householdCategoriesWithItemsSelector } from '../../../application/households';
 import { CategoryCardComponent } from '../category-card/category-card.component';
 import { CustomButtonComponent } from '../../shared/components/custom-button';
 import {
@@ -15,19 +14,20 @@ import {
     editCategoryIconClickedAction,
 } from '../../../application/categories';
 import { CategoryCreateFormComponent } from '../category-create-form';
-import { categoryCollapsedAction } from '../../../application/items';
+import { 
+    categoryCollapsedAction,
+    itemQuantityEditModalOpenedAction, 
+    itemQuantityEditModalClosedAction,
+    quantityEditModalItemSelector,
+    isQuantityEditModalOpenSelector,
+    combinedHouseholdCategoriesWithItemsSelector
+} from '../../../application/items';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 import { ItemQuantityEditFormComponent } from '../item-quantity-edit-form/item-quantity-edit-form.component';
 import { callDeleteCategoryRequestedAction } from '../../../domain/delete-category';
 import { callUpdateCategoryDataRequestedAction } from '../../../domain/update-category-data';
 import { callUpdateItemQuantityRequestedAction } from '../../../domain/update-item-quantity';
-import { 
-    itemQuantityEditModalOpenedAction, 
-    itemQuantityEditModalClosedAction,
-    quantityEditModalItemSelector,
-    isQuantityEditModalOpenSelector
-} from '../../../application/items';
 
 @Component({
     selector: 'app-category-list',
@@ -52,7 +52,7 @@ import {
 export class CategoryListComponent {
     public expandedPanels: Set<number> = new Set<number>();
 
-    protected categories = this.store.selectSignal(householdCategoriesWithItemsSelector);
+    protected categories = this.store.selectSignal(combinedHouseholdCategoriesWithItemsSelector);
     protected isCreateFormActive = this.store.selectSignal(isCreateCategoryFormActiveSelector);
     protected isCreateCategorySubmitting = this.store.selectSignal(
         isCreateCategorySubmittingSelector
