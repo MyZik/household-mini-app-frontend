@@ -1,5 +1,7 @@
 <div class="item">
-    <div class="item-emoji">{{ item.emoji }}</div>
-    <div class="item-name">{{ item.name }}</div>
+    <div class="item-content" (click)="onItemClick()">
+        <div class="item-emoji">{{ item.emoji }}</div>
+        <div class="item-name">{{ item.name }}</div>
+    </div>
     <div class="item-quantity" (click)="onQuantityClick()">{{ item.quantity }}</div>
 </div>

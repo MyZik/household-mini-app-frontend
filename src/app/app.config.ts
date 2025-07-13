@@ -29,6 +29,7 @@ import { DELETE_ITEM_PROVIDERS } from './domain/delete-item';
 import { UPDATE_CATEGORY_VISIBILITY_PROVIDERS } from './domain/update-category-visibility/update-category-visibility.providers';
 import { UPDATE_CATEGORY_DATA_PROVIDERS } from './domain/update-category-data/update-category-data.providers';
 import { UPDATE_ITEM_QUANTITY_PROVIDERS } from './domain/update-item-quantity/update-item-quantity.providers';
+import { UPDATE_ITEM_DATA_PROVIDERS } from './domain/update-item-data/update-item-data.providers';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -59,6 +60,7 @@ export const appConfig: ApplicationConfig = {
         ...UPDATE_CATEGORY_VISIBILITY_PROVIDERS,
         ...UPDATE_CATEGORY_DATA_PROVIDERS,
         ...UPDATE_ITEM_QUANTITY_PROVIDERS,
+        ...UPDATE_ITEM_DATA_PROVIDERS,
 
         // Application
         ...HOUSEHOLDS_LAYER_PROVIDERS,

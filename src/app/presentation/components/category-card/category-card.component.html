@@ -29,7 +29,7 @@
                 <mat-card-content (click)="$event.stopPropagation()">
                     <div class="item-list">
                         @for (item of categoryData.items; track item) {
-                            <app-category-item [item]="item" (editQuantity)="onEditItemQuantity($event)" />
+                            <app-category-item [item]="item" (editQuantity)="onEditItemQuantity($event)" (editItem)="onEditItem($event)" />
                         }
 
                         @if (isCreateItemFormSubmitted()) {
@@ -110,4 +110,21 @@
             (cancelEdit)="closeEditModal()"
         />
     </app-modal-wrapper>
+
+    @let itemEditData = itemEditModalData();
+    @if (itemEditData) {
+        <app-modal-wrapper [isOpen]="isItemEditModalOpen()" (close)="closeItemEditModal()">
+            <app-item-edit-form
+                [itemData]="{
+                    itemName: itemEditData.itemName,
+                    itemEmoji: itemEditData.itemEmoji,
+                    itemId: itemEditData.itemId,
+                    quantity: itemEditData.quantity,
+                    quantityType: itemEditData.quantityType
+                }"
+                (confirmEdit)="confirmItemEdit($event)"
+                (cancelEdit)="closeItemEditModal()"
+            />
+        </app-modal-wrapper>
+    }
 }

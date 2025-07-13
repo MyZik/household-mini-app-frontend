@@ -24,11 +24,28 @@ export class CategoryItemComponent {
         quantity: number;
         quantityType: string;
     }>();
+    @Output() editItem = new EventEmitter<{
+        itemId: number;
+        itemName: string;
+        itemEmoji: string;
+        quantity: number;
+        quantityType: string;
+    }>();
 
     protected onQuantityClick(): void {
         this.editQuantity.emit({
             itemId: this.item.id,
             itemName: this.item.name,
+            quantity: this.item.quantity,
+            quantityType: this.item.quantityType || 'piece',
+        });
+    }
+
+    protected onItemClick(): void {
+        this.editItem.emit({
+            itemId: this.item.id,
+            itemName: this.item.name,
+            itemEmoji: this.item.emoji,
             quantity: this.item.quantity,
             quantityType: this.item.quantityType || 'piece',
         });

@@ -20,6 +20,7 @@ import { LoadingDuckComponent } from '../../shared/components/loading-duck';
 import { isLoadingItemsByCategorySelector } from '../../../domain/get-items-by-category';
 import { CategoryDeleteConfirmationComponent } from '../category-delete-confirmation/category-delete-confirmation.component';
 import { CategoryEditFormComponent } from '../category-edit-form/category-edit-form.component';
+import { ItemEditFormComponent } from '../item-edit-form/item-edit-form.component';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BottomSheetComponent, BottomSheetAction } from '../bottom-sheet/bottom-sheet.component';
@@ -53,6 +54,7 @@ interface Category {
         LoadingDuckComponent,
         CategoryDeleteConfirmationComponent,
         CategoryEditFormComponent,
+        ItemEditFormComponent,
         ModalWrapperComponent,
         MatProgressSpinnerModule,
         BottomSheetComponent,
@@ -65,6 +67,14 @@ export class CategoryCardComponent {
     public expanded = input.required<boolean>();
     protected isDeleteModalOpen = signal(false);
     protected isEditModalOpen = signal(false);
+    protected isItemEditModalOpen = signal(false);
+    protected itemEditModalData = signal<{
+        itemId: number;
+        itemName: string;
+        itemEmoji: string;
+        quantity: number;
+        quantityType: string;
+    } | null>(null);
     protected isBottomSheetOpen = signal(false);
 
     protected isCreateItemFormActive = computed(() =>
@@ -91,6 +101,7 @@ export class CategoryCardComponent {
     @Output() deleteCategory = new EventEmitter<number>();
     @Output() editCategory = new EventEmitter<{ id: number; name: string; emoji: string }>();
     @Output() editItemQuantity = new EventEmitter<{ itemId: number; itemName: string; quantity: number; quantityType: string }>();
+    @Output() editItemData = new EventEmitter<{ itemId: number; name: string; emoji: string; quantity: number; quantityType: string }>();
 
     constructor(private readonly store: Store) {}
 
@@ -198,5 +209,26 @@ export class CategoryCardComponent {
 
     protected onEditItemQuantity(data: { itemId: number; itemName: string; quantity: number; quantityType: string }): void {
         this.editItemQuantity.emit(data);
+    }
+
+    protected onEditItem(data: { itemId: number; itemName: string; itemEmoji: string; quantity: number; quantityType: string }): void {
+        this.itemEditModalData.set(data);
+        this.isItemEditModalOpen.set(true);
+    }
+
+    protected closeItemEditModal(): void {
+        this.isItemEditModalOpen.set(false);
+        this.itemEditModalData.set(null);
+    }
+
+    protected confirmItemEdit(data: { id: number; name: string; emoji: string; quantity: number; quantityType: string }): void {
+        this.editItemData.emit({
+            itemId: data.id,
+            name: data.name,
+            emoji: data.emoji,
+            quantity: data.quantity,
+            quantityType: data.quantityType,
+        });
+        this.closeItemEditModal();
     }
 }

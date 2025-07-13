@@ -8,6 +8,7 @@ export interface ItemsState {
         quantityType: string;
     } | null; // Item-Daten für das Quantity-Edit-Modal
     quantityUpdates: Record<number, { quantity: number; quantityType: string }>; // ItemId -> {quantity, quantityType}
+    itemDataUpdates: Record<number, { name: string; emoji: string; quantity: number; quantityType: string }>; // ItemId -> {name, emoji, quantity, quantityType}
 }
 
 export const initialItemsState: ItemsState = {
@@ -15,4 +16,5 @@ export const initialItemsState: ItemsState = {
     submittedFormsCategoryIds: [],
     quantityEditModalItem: null,
     quantityUpdates: {},
+    itemDataUpdates: {},
 };

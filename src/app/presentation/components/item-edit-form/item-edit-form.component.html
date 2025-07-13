@@ -1,0 +1,72 @@
+@let itemDataSignal = itemData();
+
+@if (itemDataSignal) {
+    <div class="edit-form-container">
+        <div class="duck-image-container">
+            <img
+                src="assets/duck-with-pencil-transparent.png"
+                alt="Entchen mit Stift"
+                class="duck-image"
+            />
+        </div>
+
+        <h2 class="form-title">{{ itemDataSignal.itemName }} bearbeiten</h2>
+
+        <form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+            <div class="form-fields">
+                <div class="form-row">
+                    <div class="form-field emoji-field">
+                        <label for="itemEmoji">Emoji:</label>
+                        <select id="itemEmoji" formControlName="emoji" class="emoji-select">
+                            @for (emoji of emojis; track emoji) {
+                                <option [value]="emoji">{{ emoji }}</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-field name-field">
+                        <label for="itemName">Name:</label>
+                        <input
+                            type="text"
+                            id="itemName"
+                            formControlName="name"
+                            class="input-field"
+                            placeholder="Produktname eingeben"
+                            autocomplete="off"
+                        />
+                        @if (editForm.get('name')?.invalid && editForm.get('name')?.touched) {
+                            <div class="error-message">Der Name ist erforderlich.</div>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field unit-field">
+                        <label for="itemUnitType">Einheitstyp:</label>
+                        <select id="itemUnitType" formControlName="unitType" class="unit-select">
+                            @for (unitType of unitTypes; track unitType) {
+                                <option [value]="unitType.value">{{ unitType.label }}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <app-custom-button
+                    buttonType="secondary"
+                    text="Abbrechen"
+                    type="button"
+                    (onClick)="onCancelEdit()"
+                ></app-custom-button>
+
+                <app-custom-button
+                    buttonType="accent"
+                    text="Speichern"
+                    type="submit"
+                    [disabled]="editForm.invalid"
+                ></app-custom-button>
+            </div>
+        </form>
+    </div>
+} 

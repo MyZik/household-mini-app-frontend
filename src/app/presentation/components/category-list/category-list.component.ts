@@ -28,6 +28,7 @@ import { ItemQuantityEditFormComponent } from '../item-quantity-edit-form/item-q
 import { callDeleteCategoryRequestedAction } from '../../../domain/delete-category';
 import { callUpdateCategoryDataRequestedAction } from '../../../domain/update-category-data';
 import { callUpdateItemQuantityRequestedAction } from '../../../domain/update-item-quantity';
+import { callUpdateItemDataRequestedAction } from '../../../domain/update-item-data';
 
 @Component({
     selector: 'app-category-list',
@@ -129,5 +130,17 @@ export class CategoryListComponent {
             })
         );
         this.closeQuantityEditModal();
+    }
+
+    protected onEditItemData(data: { itemId: number; name: string; emoji: string; quantity: number; quantityType: string }): void {
+        this.store.dispatch(
+            callUpdateItemDataRequestedAction({
+                itemId: data.itemId,
+                name: data.name,
+                emoji: data.emoji,
+                quantity: data.quantity,
+                quantityType: data.quantityType,
+            })
+        );
     }
 }

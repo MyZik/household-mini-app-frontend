@@ -17,6 +17,7 @@ export interface ItemModel {
     name: string;
     emoji: string;
     quantity: number;
+    quantityType?: string;
 }
 
 export const householdCategoriesWithItemsSelector = createSelector(

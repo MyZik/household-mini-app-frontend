@@ -9,6 +9,7 @@ import { createItemFormSubmittedAction } from '../actions/create-item-form-submi
 import { itemQuantityEditModalOpenedAction } from '../actions/item-quantity-edit-modal-opened.action';
 import { itemQuantityEditModalClosedAction } from '../actions/item-quantity-edit-modal-closed.action';
 import { callUpdateItemQuantitySucceededAction } from '../../../domain/update-item-quantity/actions/call-update-item-quantity.succeeded.action';
+import { callUpdateItemDataSucceededAction } from '../../../domain/update-item-data/actions/call-update-item-data.succeeded.action';
 
 export const itemsReducer = createReducer<ItemsState>(
     initialItemsState,
@@ -87,6 +88,20 @@ export const itemsReducer = createReducer<ItemsState>(
             quantityUpdates: {
                 ...state.quantityUpdates,
                 [action.itemId]: {
+                    quantity: action.quantity,
+                    quantityType: action.quantityType,
+                },
+            },
+        };
+    }),
+    on(callUpdateItemDataSucceededAction, (state, action) => {
+        return {
+            ...state,
+            itemDataUpdates: {
+                ...state.itemDataUpdates,
+                [action.itemId]: {
+                    name: action.name,
+                    emoji: action.emoji,
                     quantity: action.quantity,
                     quantityType: action.quantityType,
                 },
