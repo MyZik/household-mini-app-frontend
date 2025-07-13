@@ -4,4 +4,5 @@ export interface Item {
     name: string;
     emoji: string;
     quantity: number;
+    quantityType?: string;
 }

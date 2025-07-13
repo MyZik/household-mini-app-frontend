@@ -29,6 +29,7 @@ interface CategoryItem {
     name: string;
     emoji: string;
     quantity: number;
+    quantityType?: string;
 }
 
 interface Category {
@@ -89,6 +90,7 @@ export class CategoryCardComponent {
     @Output() toggleExpand = new EventEmitter<number>();
     @Output() deleteCategory = new EventEmitter<number>();
     @Output() editCategory = new EventEmitter<{ id: number; name: string; emoji: string }>();
+    @Output() editItemQuantity = new EventEmitter<{ itemId: number; itemName: string; quantity: number; quantityType: string }>();
 
     constructor(private readonly store: Store) {}
 
@@ -192,5 +194,9 @@ export class CategoryCardComponent {
     protected confirmEdit(data: { id: number; name: string; emoji: string }): void {
         this.editCategory.emit(data);
         this.closeEditModal();
+    }
+
+    protected onEditItemQuantity(data: { itemId: number; itemName: string; quantity: number; quantityType: string }): void {
+        this.editItemQuantity.emit(data);
     }
 }

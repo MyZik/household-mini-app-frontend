@@ -48,9 +48,18 @@
   font-weight: 600;
   color: var(--qty-text);
   border: 1px solid var(--qty-border);
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  user-select: none;
 
   &:hover {
     transform: scale(1.05);
+    background-color: var(--ut-orange);
+    color: white;
+    border-color: var(--ut-orange);
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 } 

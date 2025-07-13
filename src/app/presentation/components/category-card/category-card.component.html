@@ -29,7 +29,7 @@
                 <mat-card-content (click)="$event.stopPropagation()">
                     <div class="item-list">
                         @for (item of categoryData.items; track item) {
-                            <app-category-item [item]="item" />
+                            <app-category-item [item]="item" (editQuantity)="onEditItemQuantity($event)" />
                         }
 
                         @if (isCreateItemFormSubmitted()) {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface CategoryItem {
@@ -6,6 +6,7 @@ interface CategoryItem {
     name: string;
     emoji: string;
     quantity: number;
+    quantityType?: string;
 }
 
 @Component({
@@ -17,4 +18,19 @@ interface CategoryItem {
 })
 export class CategoryItemComponent {
     @Input() item!: CategoryItem;
+    @Output() editQuantity = new EventEmitter<{
+        itemId: number;
+        itemName: string;
+        quantity: number;
+        quantityType: string;
+    }>();
+
+    protected onQuantityClick(): void {
+        this.editQuantity.emit({
+            itemId: this.item.id,
+            itemName: this.item.name,
+            quantity: this.item.quantity,
+            quantityType: this.item.quantityType || 'piece',
+        });
+    }
 }

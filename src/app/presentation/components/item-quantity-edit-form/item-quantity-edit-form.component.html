@@ -1,0 +1,63 @@
+@let itemDataSignal = itemData();
+
+@if (itemDataSignal) {
+    <div class="edit-form-container">
+        <div class="duck-image-container">
+            <img
+                src="assets/duck-quantity-update-transparent.png"
+                alt="Entchen mit Einkäufen"
+                class="duck-image"
+            />
+        </div>
+
+        <h2 class="form-title">{{ itemDataSignal.itemName }} bearbeiten</h2>
+
+        <form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+            <div class="form-fields">
+                <div class="form-row">
+                    <div class="form-field quantity-field">
+                        <label for="quantity">Menge:</label>
+                        <input
+                            type="number"
+                            id="quantity"
+                            formControlName="quantity"
+                            class="input-field"
+                            placeholder="Menge eingeben"
+                            min="0"
+                            step="1"
+                            autocomplete="off"
+                        />
+                        @if (editForm.get('quantity')?.invalid && editForm.get('quantity')?.touched) {
+                            <div class="error-message">Eine gültige Menge ist erforderlich.</div>
+                        }
+                    </div>
+
+                    <div class="form-field quantity-type-field">
+                        <label for="quantityType">Einheit:</label>
+                        <select id="quantityType" formControlName="quantityType" class="select-field">
+                            @for (type of quantityTypes; track type.value) {
+                                <option [value]="type.value">{{ type.label }}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <app-custom-button
+                    buttonType="secondary"
+                    text="Abbrechen"
+                    type="button"
+                    (onClick)="onCancelEdit()"
+                ></app-custom-button>
+
+                <app-custom-button
+                    buttonType="accent"
+                    text="Speichern"
+                    type="submit"
+                    [disabled]="editForm.invalid"
+                ></app-custom-button>
+            </div>
+        </form>
+    </div>
+}

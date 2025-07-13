@@ -6,6 +6,8 @@ import { callCreateItemFailedAction } from '../../../domain/create-item/actions/
 import { initialItemsState, ItemsState } from '../models/items.state';
 import { categoryCollapsedAction } from '../actions/category-collapsed.action';
 import { createItemFormSubmittedAction } from '../actions/create-item-form-submitted.action';
+import { itemQuantityEditModalOpenedAction } from '../actions/item-quantity-edit-modal-opened.action';
+import { itemQuantityEditModalClosedAction } from '../actions/item-quantity-edit-modal-closed.action';
 
 export const itemsReducer = createReducer<ItemsState>(
     initialItemsState,
@@ -59,6 +61,23 @@ export const itemsReducer = createReducer<ItemsState>(
             activeCategoryFormsIds: state.activeCategoryFormsIds.filter(
                 id => id !== action.categoryId
             ),
+        };
+    }),
+    on(itemQuantityEditModalOpenedAction, (state, action) => {
+        return {
+            ...state,
+            quantityEditModalItem: {
+                itemId: action.itemId,
+                itemName: action.itemName,
+                quantity: action.quantity,
+                quantityType: action.quantityType,
+            },
+        };
+    }),
+    on(itemQuantityEditModalClosedAction, (state) => {
+        return {
+            ...state,
+            quantityEditModalItem: null,
         };
     })
 );

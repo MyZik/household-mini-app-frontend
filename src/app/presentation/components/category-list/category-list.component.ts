@@ -17,8 +17,17 @@ import {
 import { CategoryCreateFormComponent } from '../category-create-form';
 import { categoryCollapsedAction } from '../../../application/items';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
+import { ItemQuantityEditFormComponent } from '../item-quantity-edit-form/item-quantity-edit-form.component';
 import { callDeleteCategoryRequestedAction } from '../../../domain/delete-category';
 import { callUpdateCategoryDataRequestedAction } from '../../../domain/update-category-data';
+import { callUpdateItemQuantityRequestedAction } from '../../../domain/update-item-quantity';
+import { 
+    itemQuantityEditModalOpenedAction, 
+    itemQuantityEditModalClosedAction,
+    quantityEditModalItemSelector,
+    isQuantityEditModalOpenSelector
+} from '../../../application/items';
 
 @Component({
     selector: 'app-category-list',
@@ -33,6 +42,8 @@ import { callUpdateCategoryDataRequestedAction } from '../../../domain/update-ca
         ErrorMessageComponent,
         CustomButtonComponent,
         CategoryCreateFormComponent,
+        ModalWrapperComponent,
+        ItemQuantityEditFormComponent,
     ],
     templateUrl: './category-list.component.html',
     styleUrl: './category-list.component.less',
@@ -49,6 +60,8 @@ export class CategoryListComponent {
     protected isDeleteCategoryLoading = computed(() =>
         this.store.selectSignal(isDeleteCategoryLoadingSelector)()
     );
+    protected quantityEditModalItem = this.store.selectSignal(quantityEditModalItemSelector);
+    protected isQuantityEditModalOpen = this.store.selectSignal(isQuantityEditModalOpenSelector);
 
     constructor(private store: Store) {}
 
@@ -90,5 +103,31 @@ export class CategoryListComponent {
                 emoji: data.emoji,
             })
         );
+    }
+
+    protected onEditItemQuantity(data: { itemId: number; itemName: string; quantity: number; quantityType: string }): void {
+        this.store.dispatch(
+            itemQuantityEditModalOpenedAction({
+                itemId: data.itemId,
+                itemName: data.itemName,
+                quantity: data.quantity,
+                quantityType: data.quantityType,
+            })
+        );
+    }
+
+    protected closeQuantityEditModal(): void {
+        this.store.dispatch(itemQuantityEditModalClosedAction());
+    }
+
+    protected confirmQuantityEdit(data: { id: number; quantity: number; quantityType: string }): void {
+        this.store.dispatch(
+            callUpdateItemQuantityRequestedAction({
+                itemId: data.id,
+                quantity: data.quantity,
+                quantityType: data.quantityType,
+            })
+        );
+        this.closeQuantityEditModal();
     }
 }

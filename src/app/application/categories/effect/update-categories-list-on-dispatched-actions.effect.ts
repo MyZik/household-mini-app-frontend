@@ -7,6 +7,7 @@ import { filterNullValues } from '../../../infrastructure/operators/src';
 import { callCreateCategorySucceededAction } from '../../../domain/create-category/actions/call-create-category.succeeded.action';
 import { callGetHouseholdCategoriesRequestedAction } from '../../../domain/get-household-categories';
 import { callDeleteCategorySucceededAction } from '../../../domain/delete-category/actions/call-delete-category.succeeded.action';
+import { callUpdateItemQuantitySucceededAction } from '../../../domain/update-item-quantity/actions/call-update-item-quantity.succeeded.action';
 
 @Injectable()
 export class UpdateCategoriesListOnDispatchedActionsEffect {
@@ -17,7 +18,7 @@ export class UpdateCategoriesListOnDispatchedActionsEffect {
 
     public readonly effect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(callCreateCategorySucceededAction, callDeleteCategorySucceededAction),
+            ofType(callCreateCategorySucceededAction, callDeleteCategorySucceededAction, callUpdateItemQuantitySucceededAction),
             // Sammle alle Actions innerhalb von 300ms
             bufferTime(300),
             filter(actions => actions.length > 0),

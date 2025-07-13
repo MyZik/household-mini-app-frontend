@@ -33,6 +33,7 @@
                             (toggleExpand)="togglePanel($event)"
                             (deleteCategory)="onDeleteCategory($event)"
                             (editCategory)="onEditCategory($event)"
+                            (editItemQuantity)="onEditItemQuantity($event)"
                         />
                     }
                 </div>
@@ -50,3 +51,20 @@
         }
     }
 </div>
+
+<!-- Global Item Quantity Edit Modal -->
+@let modalItemData = quantityEditModalItem();
+@if (modalItemData) {
+    <app-modal-wrapper [isOpen]="isQuantityEditModalOpen()" (close)="closeQuantityEditModal()">
+        <app-item-quantity-edit-form
+            [itemData]="{
+                itemName: modalItemData.itemName,
+                itemId: modalItemData.itemId,
+                quantity: modalItemData.quantity,
+                quantityType: modalItemData.quantityType
+            }"
+            (confirmEdit)="confirmQuantityEdit($event)"
+            (cancelEdit)="closeQuantityEditModal()"
+        />
+    </app-modal-wrapper>
+}
