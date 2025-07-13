@@ -20,6 +20,7 @@ export * from './getUserByTelegramIdResponseBodySettings';
 export * from './updateCategoryRequest';
 export * from './updateCategoryVisibility200Response';
 export * from './updateCategoryVisibilityRequest';
+export * from './updateItemDataRequest';
 export * from './updateItemQuantityRequest';
 export * from './updateUserSettingsRequest';
 export * from './updateUserSettingsResponse';

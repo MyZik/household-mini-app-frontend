@@ -33,6 +33,7 @@ model/models.ts
 model/updateCategoryRequest.ts
 model/updateCategoryVisibility200Response.ts
 model/updateCategoryVisibilityRequest.ts
+model/updateItemDataRequest.ts
 model/updateItemQuantityRequest.ts
 model/updateUserSettingsRequest.ts
 model/updateUserSettingsResponse.ts
